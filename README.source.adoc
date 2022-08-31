@@ -33,6 +33,12 @@ include::data/github-topics.hxl.csv[]
 
 === General concepts
 
+[%header,format=csv]
+|===
+include::data/general-concepts.hxl.csv[]
+|===
+
+
 ==== Disease diffusion (Q5282121)
 
 ____

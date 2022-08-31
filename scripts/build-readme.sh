@@ -72,3 +72,14 @@ pandoc \
   README.source.xml
 
 set +x
+
+
+# frictionless describe --json data/github-topics.hxl.csv
+# frictionless describe --json data/general-concepts.hxl.csv
+# frictionless describe --json data/software.hxl.csv
+
+# frictionless validate datapackage.json
+
+# @TODO - https://github.com/sindresorhus/awesome/issues/2242
+#       - https://github.com/danielecook/Awesome-Bioinformatics/blob/master/.github/workflows/url-check.yml
+#       - https://github.com/peter-evans/link-checker

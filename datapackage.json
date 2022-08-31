@@ -1,0 +1,87 @@
+{
+  "name": "awesome-spatial-epidemiology",
+  "title": "Curated list of awesome spatial epidemiology data exchange concepts, data reference and tooling",
+  "format": "csv",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fititnt/awesome-spatial-epidemiology"
+  },
+  "resources": [
+    {
+      "path": "data/github-topics.hxl.csv",
+      "name": "github-topics",
+      "profile": "tabular-data-resource",
+      "scheme": "file",
+      "format": "csv",
+      "encoding": "utf-8",
+      "schema": {
+        "fields": [
+          {
+            "type": "string",
+            "name": "#item+tier"
+          },
+          {
+            "type": "string",
+            "name": "#item+github_topic"
+          },
+          {
+            "type": "string",
+            "name": "#item+url"
+          }
+        ]
+      }
+    },
+    {
+      "path": "data/general-concepts.hxl.csv",
+      "name": "general-concepts",
+      "profile": "tabular-data-resource",
+      "scheme": "file",
+      "format": "csv",
+      "encoding": "utf-8",
+      "schema": {
+        "fields": [
+          {
+            "type": "string",
+            "name": "#item+wikidata+id"
+          },
+          {
+            "type": "string",
+            "name": "#item+i_eng+is_latn+label"
+          },
+          {
+            "type": "string",
+            "name": "#item+i_eng+is_latn+desc"
+          }
+        ]
+      }
+    },
+    {
+      "path": "data/software.hxl.csv",
+      "name": "software",
+      "profile": "tabular-data-resource",
+      "scheme": "file",
+      "format": "csv",
+      "encoding": "utf-8",
+      "schema": {
+        "fields": [
+          {
+            "type": "string",
+            "name": "#item+group"
+          },
+          {
+            "type": "string",
+            "name": "#item+programming_language"
+          },
+          {
+            "type": "string",
+            "name": "#item+repository+url"
+          },
+          {
+            "type": "string",
+            "name": "#item+install"
+          }
+        ]
+      }
+    }
+  ]
+}
