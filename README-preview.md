@@ -32,15 +32,70 @@ data reference and tooling. Contributions are welcomed\!**
     
       - [geospatial-analysis](https://github.com/topics/geospatial-analysis)
 
-| \#item+tier | \#item+github\_topic | \#item+url                                 |
-| ----------- | -------------------- | ------------------------------------------ |
-| Tier 1      | bioinformatics       | <https://github.com/topics/bioinformatics> |
+| \#item+group | \#item+github\_topic | \#item+url                                       |
+| ------------ | -------------------- | ------------------------------------------------ |
+| 1            | bioinformatics       | <https://github.com/topics/bioinformatics>       |
+| 1            | disease-mapping      | <https://github.com/topics/disease-mapping>      |
+| 1            | epidemic-simulations | <https://github.com/topics/epidemic-simulations> |
+| 1            | spatial-epidemiology | <https://github.com/topics/spatial-epidemiology> |
+| 2            | epidemiology         | <https://github.com/topics/epidemiology>         |
+| 2            | genomics             | <https://github.com/topics/genomics>             |
+| 2            | infectious-diseases  | <https://github.com/topics/infectious-diseases>  |
+| 3            | spatial-analysis     | <https://github.com/topics/spatial-analysis>     |
+| 3            | geospatial-analysis  | <https://github.com/topics/geospatial-analysis>  |
+
+### bioinformatics
+
+`['1', 'bioinformatics', 'https://github.com/topics/bioinformatics']`
+
+### disease-mapping
+
+`['1', 'disease-mapping', 'https://github.com/topics/disease-mapping']`
+
+### epidemic-simulations
+
+`['1', 'epidemic-simulations',
+'https://github.com/topics/epidemic-simulations']`
+
+### spatial-epidemiology
+
+`['1', 'spatial-epidemiology',
+'https://github.com/topics/spatial-epidemiology']`
+
+### epidemiology
+
+`['2', 'epidemiology', 'https://github.com/topics/epidemiology']`
+
+### genomics
+
+`['2', 'genomics', 'https://github.com/topics/genomics']`
+
+### infectious-diseases
+
+`['2', 'infectious-diseases',
+'https://github.com/topics/infectious-diseases']`
+
+### spatial-analysis
+
+`['3', 'spatial-analysis',
+'https://github.com/topics/spatial-analysis']`
+
+### geospatial-analysis
+
+`['3', 'geospatial-analysis',
+'https://github.com/topics/geospatial-analysis']`
 
 ## General concepts
 
 | \#item+wikidata+id | \#item+i\_eng+is\_latn+label | \#item+i\_eng+is\_latn+desc                                                                                                                       |
 | ------------------ | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Q5282121           | disease diffusion mapping    | Disease diffusion occurs when a disease is transmitted to a new location. It implies that a disease spreads, or pours out, from a central source. |
+
+### disease diffusion mapping
+
+`['Q5282121', 'disease diffusion mapping', 'Disease diffusion occurs
+when a disease is transmitted to a new location. It implies that a
+disease spreads, or pours out, from a central source.']`
 
 ### Disease diffusion (Q5282121)
 
@@ -124,9 +179,37 @@ data reference and tooling. Contributions are welcomed\!**
 
 ## Installable packages
 
-| \#item+group   | \#item+programming\_language | \#item+repository+url                                | \#item+install              |
-| -------------- | ---------------------------- | ---------------------------------------------------- | --------------------------- |
-| synthetic-data | python                       | <https://github.com/DataResponsibly/DataSynthesizer> | pip install DataSynthesizer |
+| \#item+group   | \#item+title    | \#item+programming\_language | \#item+repository+url                                | \#item+install              |
+| -------------- | --------------- | ---------------------------- | ---------------------------------------------------- | --------------------------- |
+| synthetic-data | DataSynthesizer | python                       | <https://github.com/DataResponsibly/DataSynthesizer> | pip install DataSynthesizer |
+| synthetic-data | pydbgen         | python                       | <https://github.com/DataResponsibly/pydbgen>         | pip install pydbgen         |
+| synthetic-data | mimesis         | python                       | <https://github.com/DataResponsibly/mimesis>         | pip install mimesis         |
+| synthetic-data | SDV             | python                       | <https://github.com/DataResponsibly/SDV>             | pip install SDV             |
+
+before software
+
+### DataSynthesizer
+
+`['synthetic-data', 'DataSynthesizer', 'python',
+'https://github.com/DataResponsibly/DataSynthesizer', 'pip install
+DataSynthesizer']`
+
+### pydbgen
+
+`['synthetic-data', 'pydbgen', 'python',
+'https://github.com/DataResponsibly/pydbgen', 'pip install pydbgen']`
+
+### mimesis
+
+`['synthetic-data', 'mimesis', 'python',
+'https://github.com/DataResponsibly/mimesis', 'pip install mimesis']`
+
+### SDV
+
+`['synthetic-data', 'SDV', 'python',
+'https://github.com/DataResponsibly/SDV', 'pip install SDV']`
+
+after software
 
 ### Synthetic Data
 

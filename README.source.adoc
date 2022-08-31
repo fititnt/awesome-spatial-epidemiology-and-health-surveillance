@@ -31,12 +31,19 @@ https://docs.asciidoctor.org/asciidoc/latest/tables/data-format/
 include::data/github-topics.hxl.csv[]
 |===
 
+include::partials/github-topics.adoc[]
+
 === General concepts
 
 [%header,format=csv]
 |===
 include::data/general-concepts.hxl.csv[]
 |===
+
+
+
+
+include::partials/general-concepts.adoc[]
 
 
 ==== Disease diffusion (Q5282121)
@@ -142,6 +149,12 @@ ____
 include::data/software.hxl.csv[]
 |===
 
+
+before software
+
+include::partials/software.adoc[]
+
+after software
 
 ==== Synthetic Data
 

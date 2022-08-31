@@ -1,5 +1,5 @@
-#item+group,#item+programming_language,#item+repository+url,#item+install
-synthetic-data,python,https://github.com/DataResponsibly/DataSynthesizer,"pip install DataSynthesizer"
-synthetic-data,python,https://github.com/DataResponsibly/pydbgen,"pip install pydbgen"
-synthetic-data,python,https://github.com/DataResponsibly/mimesis,"pip install mimesis"
-synthetic-data,python,https://github.com/DataResponsibly/SDV,"pip install SDV"
+#item+group,#item+title,#item+programming_language,#item+repository+url,#item+install
+synthetic-data,DataSynthesizer,python,https://github.com/DataResponsibly/DataSynthesizer,"pip install DataSynthesizer"
+synthetic-data,pydbgen,python,https://github.com/DataResponsibly/pydbgen,"pip install pydbgen"
+synthetic-data,mimesis,python,https://github.com/DataResponsibly/mimesis,"pip install mimesis"
+synthetic-data,SDV,python,https://github.com/DataResponsibly/SDV,"pip install SDV"

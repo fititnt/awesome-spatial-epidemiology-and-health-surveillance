@@ -1,2 +1,10 @@
-#item+tier,#item+github_topic,#item+url
-Tier 1,bioinformatics,https://github.com/topics/bioinformatics
+#item+group,#item+github_topic,#item+url
+1,bioinformatics,https://github.com/topics/bioinformatics
+1,disease-mapping,https://github.com/topics/disease-mapping
+1,epidemic-simulations,https://github.com/topics/epidemic-simulations
+1,spatial-epidemiology,https://github.com/topics/spatial-epidemiology
+2,epidemiology,https://github.com/topics/epidemiology
+2,genomics,https://github.com/topics/genomics
+2,infectious-diseases,https://github.com/topics/infectious-diseases
+3,spatial-analysis,https://github.com/topics/spatial-analysis
+3,geospatial-analysis,https://github.com/topics/geospatial-analysis

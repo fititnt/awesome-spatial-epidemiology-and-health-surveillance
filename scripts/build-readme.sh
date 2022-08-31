@@ -20,7 +20,7 @@
 #       LICENSE:  Public Domain dedication
 #                 SPDX-License-Identifier: Unlicense
 #       VERSION:  v1.0
-#       CREATED:  2022-08-31 03:08 UTC 
+#       CREATED:  2022-08-31 03:08 UTC
 #      REVISION:  ---
 #===============================================================================
 set -e
@@ -57,6 +57,35 @@ set -e
 #     README-preview.md
 
 set -x
+
+./scripts/csv-to-readme.py \
+  data/general-concepts.hxl.csv \
+  --line-formatter='==== {raw_line[1]}\n`{raw_line}`\n' \
+  >partials/general-concepts.adoc
+
+./scripts/csv-to-readme.py \
+  data/github-topics.hxl.csv \
+  --line-formatter='==== {raw_line[1]}\n`{raw_line}`\n' \
+  --line-select='{raw_line[0]}==1' \
+  >partials/github-topics_1.adoc
+
+./scripts/csv-to-readme.py \
+  data/github-topics.hxl.csv \
+  --line-formatter='==== {raw_line[1]}\n`{raw_line}`\n' \
+  --line-select='{raw_line[0]}==2' \
+  >partials/github-topics_2.adoc
+
+./scripts/csv-to-readme.py \
+  data/github-topics.hxl.csv \
+  --line-formatter='==== {raw_line[1]}\n`{raw_line}`\n' \
+  --line-select='{raw_line[0]}==3' \
+  >partials/github-topics_3.adoc
+
+./scripts/csv-to-readme.py \
+  data/software.hxl.csv \
+  --line-formatter='==== {raw_line[1]}\n`{raw_line}`\n' \
+  >partials/software.adoc
+
 asciidoctor --backend docbook README.source.adoc --out-file README.source.xml
 
 # pandoc \
@@ -72,7 +101,6 @@ pandoc \
   README.source.xml
 
 set +x
-
 
 # frictionless describe --json data/github-topics.hxl.csv
 # frictionless describe --json data/general-concepts.hxl.csv
