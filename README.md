@@ -1,10 +1,14 @@
-# spatial-epidemiology-data-concepts
-**[draft] Spatial epidemiology data concepts; Check https://github.com/EticaAI/lexicographi-sine-finibus**
+# Awesome Spatial Epidemiology
+![Awesome Spatial Epidemiology Banner](img/awesome-spatial-epidemiology.jpg)
+
+**Curated list of awesome spatial epidemiology data exchange concepts, data reference and tooling. Contributions are welcomed!**
+
 
 ---
 
 <!-- TOC depthfrom:2 orderedlist:false -->
 
+- [GitHub topics](#github-topics)
 - [General concepts](#general-concepts)
     - [Disease diffusion Q5282121](#disease-diffusion-q5282121)
     - [Disease ecology Q60703450](#disease-ecology-q60703450)
@@ -14,10 +18,10 @@
     - [Synthetic data Q7662746](#synthetic-data-q7662746)
     - [Tobler's first law of geography](#toblers-first-law-of-geography)
     - [Zoonosis Q182672](#zoonosis-q182672)
+    - [Concepts reference from software or APIs](#concepts-reference-from-software-or-apis)
+        - [OpenStreetMap](#openstreetmap)
 - [Data](#data)
     - [UN WPP - World Population Prospects](#un-wpp---world-population-prospects)
-- [Concepts reference from software or APIs](#concepts-reference-from-software-or-apis)
-    - [OpenStreetMap](#openstreetmap)
 - [Installable packages](#installable-packages)
     - [Synthetic Data](#synthetic-data)
         - [DataSynthesizer](#datasynthesizer)
@@ -36,6 +40,21 @@
 <!-- /TOC -->
 
 ---
+
+## GitHub topics
+
+- **Tier 1**:
+  - [bioinformatics](https://github.com/topics/bioinformatics)
+  - [disease-mapping](https://github.com/topics/disease-mapping)
+  - [epidemic-simulations](https://github.com/topics/epidemic-simulations)
+  - [spatial-epidemiology](https://github.com/topics/spatial-epidemiology)
+- **Tier 2 (scientific area)**:  
+  - [epidemiology](https://github.com/topics/epidemiology)
+  - [genomics](https://github.com/topics/genomics)
+  - [infectious-diseases](https://github.com/topics/infectious-diseases)
+- **Tier 2 (generic tooling)**:  
+  - [spatial-analysis](https://github.com/topics/spatial-analysis)
+  - [geospatial-analysis](https://github.com/topics/geospatial-analysis)
 
 ## General concepts
 
@@ -65,6 +84,13 @@
 ### Zoonosis (Q182672)
 > _A zoonosis or zoonotic disease is an infectious disease of humans caused by a pathogen (an infectious agent, such as a bacterium, virus, parasite or prion) that has jumped from an animal (usually a vertebrate) to a human._ -- https://en.wikipedia.org/wiki/Zoonosis
 
+### Concepts reference from software or APIs
+
+#### OpenStreetMap
+- https://www.openstreetmap.org/key
+- https://wiki.openstreetmap.org/wiki/Map_features
+  - https://wiki.openstreetmap.org/wiki/Map_features#Healthcare_2
+
 ## Data
 
 > Note: at the moment, most data here are references to be used as reference for Synthetic Data.
@@ -72,13 +98,6 @@
 ### UN WPP - World Population Prospects
 
 - https://population.un.org/wpp/Download/Standard/Population/
-
-## Concepts reference from software or APIs
-
-### OpenStreetMap
-- https://www.openstreetmap.org/key
-- https://wiki.openstreetmap.org/wiki/Map_features
-  - https://wiki.openstreetmap.org/wiki/Map_features#Healthcare_2
 
 ## Installable packages
 
@@ -140,6 +159,3 @@
 To the extent possible under law, [Emerson Rocha](https://github.com/fititnt)
 has waived all copyright and related or neighboring rights to this work to
 [Public Domain](UNLICENSE).
-
-Optionally, you can choose to use the [MIT License](https://opensource.org/licenses/MIT)
-instead of Public Domain unlicense.
