@@ -1,0 +1,2 @@
+#item+group,#item+programming_language,#item+repository+url,#item+install
+synthetic-data,python,https://github.com/DataResponsibly/DataSynthesizer,"pip install DataSynthesizer"
