@@ -296,9 +296,43 @@ class CSVtoReadme:
             new_data.append(line)
 
         self.data_lines = new_data
-        # raise NotImplementedError(
-        #     '_prepare_filter22', self.line_select, self.line_exclude)
-        # pass
+
+    def _prepare_sort(self):
+
+        _data_new = []
+        header = []
+        line_select = None
+        line_exclude = None
+        new_data = []
+        for line in self.data_lines:
+            # print('loop')
+            if len(header) == 0:
+                header = line
+                new_data.append(header)
+                continue
+
+            line_variables = dict(zip(header, line))
+            # print('oi', self.line_select, line)
+            line_variables['raw_line'] = line
+            if self.line_select is not None:
+                parsed_line_select = self.line_select.format(**line_variables)
+                # print('parsed_line_select', parsed_line_select)
+                evaluated_line_select = evaluate(parsed_line_select)
+                # print('result_line_select', result_line_select)
+                if not evaluated_line_select:
+                    continue
+
+            if self.line_exclude is not None:
+                parsed_line_exclude = self.line_exclude.format(
+                    **line_variables)
+                evaluated_line_exclude = evaluate(parsed_line_exclude)
+                if evaluated_line_exclude:
+                    continue
+
+            new_data.append(line)
+
+        self.data_lines = new_data
+
 
     def prepare(self):
         with open(self.infile) as csv_file:

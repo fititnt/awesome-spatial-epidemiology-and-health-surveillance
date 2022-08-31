@@ -7,31 +7,28 @@ image::img/awesome-spatial-epidemiology.jpg["Awesome Spatial Epidemiology Banner
 data reference and tooling. Contributions are welcomed!*
 
 === GitHub topics
+* Reasoning behind tiers:
+** Tier 1: very related to our main subject
+** Tier 2: related with scientific area, but not necessary the use of spatial tecnology.
+** Tier 3: related to the technology, but not not exclusive to epidemiology.
 
-* *Tier 1*:
-** https://github.com/topics/bioinformatics[bioinformatics]
-** https://github.com/topics/disease-mapping[disease-mapping]
-** https://github.com/topics/epidemic-simulations[epidemic-simulations]
-** https://github.com/topics/spatial-epidemiology[spatial-epidemiology]
-* *Tier 2 (scientific area)*:
-** https://github.com/topics/epidemiology[epidemiology]
-** https://github.com/topics/genomics[genomics]
-** https://github.com/topics/infectious-diseases[infectious-diseases]
-* *Tier 2 (generic tooling)*:
-** https://github.com/topics/spatial-analysis[spatial-analysis]
-** https://github.com/topics/geospatial-analysis[geospatial-analysis]
+==== Tier 1
 
+include::partials/github-topics_1.adoc[]
+
+==== Tier 2
+Reasonging: these topics are 
+
+include::partials/github-topics_2.adoc[]
+
+==== Tier 3
+
+include::partials/github-topics_2.adoc[]
 
 ////
 https://docs.asciidoctor.org/asciidoc/latest/tables/data-format/
 ////
 
-[%header,format=csv]
-|===
-include::data/github-topics.hxl.csv[]
-|===
-
-include::partials/github-topics.adoc[]
 
 === General concepts
 
@@ -39,7 +36,6 @@ include::partials/github-topics.adoc[]
 |===
 include::data/general-concepts.hxl.csv[]
 |===
-
 
 
 
