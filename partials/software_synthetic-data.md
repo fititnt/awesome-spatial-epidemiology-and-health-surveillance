@@ -3,17 +3,17 @@
 ```
 pip install DataSynthesizer
 ```
-#### [pydbgen (python)](https://github.com/DataResponsibly/pydbgen)
+#### [pydbgen (python)](https://github.com/tirthajyoti/pydbgen)
 
 ```
 pip install pydbgen
 ```
-#### [mimesis (python)](https://github.com/DataResponsibly/mimesis)
+#### [mimesis (python)](https://github.com/lk-geimfari/mimesis)
 
 ```
 pip install mimesis
 ```
-#### [SDV (python)](https://github.com/DataResponsibly/SDV)
+#### [SDV (python)](https://github.com/sdv-dev/SDV)
 
 ```
 pip install SDV

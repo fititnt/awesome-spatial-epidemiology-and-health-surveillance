@@ -3,86 +3,50 @@
 
 **Curated list of awesome spatial epidemiology data exchange concepts, data reference and tooling. Contributions are welcomed!**
 
-
----
-
-<!-- TOC depthfrom:2 orderedlist:false -->
-
-- [GitHub topics](#github-topics)
-- [General concepts](#general-concepts)
-    - [Disease diffusion Q5282121](#disease-diffusion-q5282121)
-    - [Disease ecology Q60703450](#disease-ecology-q60703450)
-    - [Health geography Q3286542](#health-geography-q3286542)
-    - [Reverse zoonosis Q1049711](#reverse-zoonosis-q1049711)
-    - [Spatial epidemiology Q7574064](#spatial-epidemiology-q7574064)
-    - [Synthetic data Q7662746](#synthetic-data-q7662746)
-    - [Tobler's first law of geography](#toblers-first-law-of-geography)
-    - [Zoonosis Q182672](#zoonosis-q182672)
-    - [Concepts reference from software or APIs](#concepts-reference-from-software-or-apis)
-        - [OpenStreetMap](#openstreetmap)
-- [Data](#data)
-    - [UN WPP - World Population Prospects](#un-wpp---world-population-prospects)
-- [Installable packages](#installable-packages)
-    - [Synthetic Data](#synthetic-data)
-        - [DataSynthesizer](#datasynthesizer)
-        - [pydbgen](#pydbgen)
-        - [mimesis](#mimesis)
-        - [SDV](#sdv)
-        - [plaitpy](#plaitpy)
-        - [timeseries-generator](#timeseries-generator)
-        - [gretel-synthetics](#gretel-synthetics)
-        - [scikit-learn](#scikit-learn)
-        - [Mesa](#mesa)
-        - [zpy](#zpy)
-- [To dos](#to-dos)
-- [License](#license)
-
-<!-- /TOC -->
-
----
-
 ## GitHub topics
+> **Resoning behind 3 tiers**: Tier 1 is directly related to main topic of our list of recommendations.
+> Tier 2 is is related to the scientific area (but not strictly the tooling).
+> Tier 3 are related to the tooling (but not restricted to the scientific application).
 
 - **Tier 1**:
-  - [bioinformatics](https://github.com/topics/bioinformatics)
-  - [disease-mapping](https://github.com/topics/disease-mapping)
-  - [epidemic-simulations](https://github.com/topics/epidemic-simulations)
-  - [spatial-epidemiology](https://github.com/topics/spatial-epidemiology)
-- **Tier 2 (scientific area)**:  
-  - [epidemiology](https://github.com/topics/epidemiology)
-  - [genomics](https://github.com/topics/genomics)
-  - [infectious-diseases](https://github.com/topics/infectious-diseases)
-- **Tier 2 (generic tooling)**:  
-  - [spatial-analysis](https://github.com/topics/spatial-analysis)
-  - [geospatial-analysis](https://github.com/topics/geospatial-analysis)
+  - [disease-mapping](https://github.com/topics/3): 3 repositories
+  - [epidemic-simulations](https://github.com/topics/75): 75 repositories
+  - [spatial-epidemiology](https://github.com/topics/4): 4 repositories
+- **Tier 2**:
+  - [bioinformatics](https://github.com/topics/6942): 6942 repositories
+  - [epidemiology](https://github.com/topics/578): 578 repositories
+  - [genomics](https://github.com/topics/1869): 1869 repositories
+  - [infectious-diseases](https://github.com/topics/94): 94 repositories
+- **Tier 3**:
+  - [spatial-analysis](https://github.com/topics/470): 470 repositories
+  - [geospatial-analysis](https://github.com/topics/227): 227 repositories
 
 ## General concepts
 
-### Disease diffusion (Q5282121)
-> _Disease diffusion occurs when a disease is transmitted to a new location.[1] It implies that a disease spreads, or pours out, from a central source._ - https://en.wikipedia.org/wiki/Disease_diffusion_mapping
+### [disease diffusion mapping (Q5282121)](https://www.wikidata.org/wiki/Q5282121)
+Disease diffusion occurs when a disease is transmitted to a new location. It implies that a disease spreads, or pours out, from a central source.
 
-### Disease ecology (Q60703450)
-> _Disease ecology is a sub-discipline of ecology concerned with the mechanisms, patterns, and effects of host-pathogen interactions, particularly those of infectious diseases._ -- https://en.wikipedia.org/wiki/Disease_ecology
+### [disease ecology (Q60703450)](https://www.wikidata.org/wiki/Q60703450)
+Disease ecology is a sub-discipline of ecology concerned with the mechanisms, patterns, and effects of host-pathogen interactions, particularly those of infectious diseases
 
-### Health geography (Q3286542)
+### [health geography (Q3286542)](https://www.wikidata.org/wiki/Q3286542)
+Health geography is the application of geographical information, perspectives, and methods to the study of health, disease, and health care.
 
-> _Health geography is the application of geographical information, perspectives, and methods to the study of health, disease, and health care._ -- https://en.wikipedia.org/wiki/Health_geography
+### [reverse zoonosis (Q1049711)](https://www.wikidata.org/wiki/Q1049711)
+A reverse zoonosis, also known as a zooanthroponosis (Greek zoon "animal", anthropos "man", nosos "disease") or anthroponosis, is a pathogen reservoired in humans that is capable of being transmitted to non-human animals.
 
-### Reverse zoonosis (Q1049711)
-> _A reverse zoonosis, also known as a zooanthroponosis (Greek zoon "animal", anthropos "man", nosos "disease") or anthroponosis,[1] is a pathogen reservoired in humans that is capable of being transmitted to non-human animals._ -- https://en.wikipedia.org/wiki/Reverse_zoonosis
+### [spatial epidemiology (Q7574064)](https://www.wikidata.org/wiki/Q7574064)
+Spatial epidemiology is a subfield of epidemiology focused on the study of the spatial distribution of health outcomes; it is closely related to health geography.
 
-### Spatial epidemiology (Q7574064)
-> _Spatial epidemiology is a subfield of epidemiology focused on the study of the spatial distribution of health outcomes; it is closely related to health geography. Specifically, spatial epidemiology is concerned with the description and examination of disease and its geographic variations. This is done in consideration of “demographic, environmental, behavioral, socioeconomic, genetic, and infections risk factors._ -- https://en.wikipedia.org/wiki/Spatial_epidemiology
+### [synthetic data (Q7662746)](https://www.wikidata.org/wiki/Q7662746)
+Synthetic data is any production data applicable to a given situation that are not obtained by direct measurement
 
-### Synthetic data (Q7662746)
+### [Tobler's first law of geography (Q3436744)](https://www.wikidata.org/wiki/Q3436744)
+the principle that, even though everything relates to everything else, nearby things are more related than distant things
 
-> _Synthetic data is "any production data applicable to a given situation that are not obtained by direct measurement" according to the McGraw-Hill Dictionary of Scientific and Technical Terms;[1] where Craig S. Mullins, an expert in data management, defines production data as "information that is persistently stored and used by professionals to conduct business processes."_ -- https://en.wikipedia.org/wiki/Synthetic_data
+### [zoonosis (Q182672)](https://www.wikidata.org/wiki/Q182672)
+A zoonosis or zoonotic disease is an infectious disease of humans caused by a pathogen (an infectious agent, such as a bacterium, virus, parasite or prion) that has jumped from an animal (usually a vertebrate) to a human.
 
-### Tobler's first law of geography
-> _"Everything is related to everything else, but near things are more related than distant things."_ -- [Tobler's first law of geography](https://en.wikipedia.org/wiki/Tobler%27s_first_law_of_geography)
-
-### Zoonosis (Q182672)
-> _A zoonosis or zoonotic disease is an infectious disease of humans caused by a pathogen (an infectious agent, such as a bacterium, virus, parasite or prion) that has jumped from an animal (usually a vertebrate) to a human._ -- https://en.wikipedia.org/wiki/Zoonosis
 
 ### Concepts reference from software or APIs
 
@@ -104,48 +68,56 @@
 ### Synthetic Data
 > Trivia: the initial reference here is based on [Top 10 Python Packages For Creating Synthetic Data](https://www.activestate.com/blog/top-10-python-packages-for-creating-synthetic-data/)
 
+#### [DataSynthesizer (python)](https://github.com/DataResponsibly/DataSynthesizer)
 
-#### DataSynthesizer
+```
+pip install DataSynthesizer
+```
+#### [pydbgen (python)](https://github.com/tirthajyoti/pydbgen)
 
-- https://github.com/DataResponsibly/DataSynthesizer
-- https://pypi.org/project/DataSynthesizer
+```
+pip install pydbgen
+```
+#### [mimesis (python)](https://github.com/lk-geimfari/mimesis)
 
-#### pydbgen
-- https://github.com/tirthajyoti/pydbgen
-- https://pypi.org/project/pydbgen
+```
+pip install mimesis
+```
+#### [SDV (python)](https://github.com/sdv-dev/SDV)
 
-#### mimesis
+```
+pip install SDV
+```
+#### [plaitpy (python)](https://github.com/plaitpy/plaitpy)
 
-- https://github.com/lk-geimfari/mimesis
-- https://pypi.org/project/mimesis/
+```
+pip install plaitpy
+```
+#### [timeseries-generator (python)](https://github.com/Nike-Inc/timeseries-generator)
 
-#### SDV
-- https://github.com/sdv-dev/SDV
-- https://sdv.dev/SDV/index.html
+```
+pip install timeseries-generator
+```
+#### [gretel-synthetics (python)](https://github.com/gretelai/gretel-synthetics)
 
-#### plaitpy
-- https://github.com/plaitpy/plaitpy
-- https://pypi.org/project/plaitpy
+```
+pip install gretel-synthetics
+```
+#### [scikit-learn (python)](https://github.com/scikit-learn/scikit-learn)
 
-#### timeseries-generator
-- https://github.com/Nike-Inc/timeseries-generator
-- https://pypi.org/project/timeseries-generator
+```
+pip install scikit-learn
+```
+#### [Mesa (python)](https://github.com/projectmesa/mesa)
 
-#### gretel-synthetics
-- https://github.com/gretelai/gretel-synthetics
-- https://pypi.org/project/gretel-synthetics/
+```
+pip install Mesa
+```
+#### [zpy (python)](https://github.com/ZumoLabs/zpy)
 
-#### scikit-learn
-- https://github.com/scikit-learn/scikit-learn
-- https://pypi.org/project/scikit-learn/
-
-#### Mesa
-- https://github.com/projectmesa/mesa
-- https://pypi.org/project/Mesa/
-
-#### zpy
-- https://github.com/ZumoLabs/zpy
-- https://pypi.org/project/zpy-zumo/
+```
+pip install zpy-zumo
+```
 
 ## To dos
 

@@ -58,6 +58,19 @@ set -e
 
 set -x
 
+
+./scripts/readme-from-csv.py \
+  --method=extract-github-url 'data/*.csv' \
+  > partials/raw/github-projects-list.txt
+
+./scripts/readme-from-csv.py \
+  --method=extract-generic-url 'data/*.csv' \
+  > partials/raw/generic-url-list.txt
+
+./scripts/readme-from-csv.py \
+  --method=extract-wikidata-q 'data/*.csv' \
+  > partials/raw/wikidata-q-list.txt
+
 ./scripts/readme-from-csv.py \
   data/general-concepts.hxl.csv \
   --line-formatter='### [{raw_line[1]} ({raw_line[0]})](https://www.wikidata.org/wiki/{raw_line[0]})\n{raw_line[2]}\n' \
@@ -101,7 +114,7 @@ set -x
 ./scripts/readme-from-csv.py \
   --method=compile-readme \
   README.template.md \
-  >README-preview.md
+  >README.md
 
 # asciidoctor --backend docbook5 README.source.adoc --out-file README.source.xml
 

@@ -1,0 +1,10 @@
+https://github.com/DataResponsibly/DataSynthesizer
+https://github.com/Nike-Inc/timeseries-generator
+https://github.com/ZumoLabs/zpy
+https://github.com/gretelai/gretel-synthetics
+https://github.com/lk-geimfari/mimesis
+https://github.com/plaitpy/plaitpy
+https://github.com/projectmesa/mesa
+https://github.com/scikit-learn/scikit-learn
+https://github.com/sdv-dev/SDV
+https://github.com/tirthajyoti/pydbgen

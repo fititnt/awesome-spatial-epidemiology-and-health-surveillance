@@ -22,6 +22,7 @@
 #      REVISION:  2022-09-01 01:27 UTC csv-to-readme.py -> readme-from-csv.py
 # ===============================================================================
 
+import glob
 import os
 import argparse
 import csv
@@ -46,6 +47,16 @@ __EPILOGUM__ = f"""
     {__file__} data/software.hxl.csv --output-format='markdown'
 
     {__file__} --method=compile-readme README.template.md
+
+Extract unique Wikidata Q items . . . . . . . . . . . . . . . . . . . . . . . .
+    {__file__} --method=extract-wikidata-q 'data/*.csv'
+
+Extract unique URLs, Except know patterns . . . . . . . . . . . . . . . . . . .
+    {__file__} --method=extract-generic-url 'data/*.csv'
+
+Extract unique URLs, Except know patterns . . . . . . . . . . . . . . . . . . .
+    {__file__} --method=extract-generic-url 'data/*.csv'
+
 ------------------------------------------------------------------------------
                             EXEMPLŌRUM GRATIĀ
 ------------------------------------------------------------------------------
@@ -108,6 +119,9 @@ class Cli:
             choices=[
                 'table-processing',
                 'compile-readme',
+                'extract-generic-url',
+                'extract-github-url',
+                'extract-wikidata-q',
             ],
             required=False,
             default='table-processing'
@@ -240,6 +254,20 @@ class Cli:
             csv2r.prepare()
             return csv2r.print()
 
+        if pyargs.method in [
+            'extract-url',
+            'extract-generic-url',
+            'extract-github-url',
+            'extract-wikidata-q',
+        ]:
+            edff = ExtractDataFromFiles(
+                _infile,
+                mode=pyargs.method
+            )
+
+            edff.prepare()
+            return edff.print()
+
         # # go = owlready2.get_ontology("http://purl.obolibrary.org/obo/go.owl").load()
         # # obo = owlready2.get_namespace("http://purl.obolibrary.org/obo/")
         # # print(obo.GO_0000001.label)
@@ -312,10 +340,6 @@ class CompileReadme:
                     self.data_compiled.append("IMPORT ERROR END")
             else:
                 self.data_compiled.append(line)
-
-        # with open(self.infile, 'r') as _file:
-        #     # self.data_template = _file.readlines()
-        #     self.data_template = _file.read().splitlines()
 
     def print(self):
         # for line in self.data_template:
@@ -480,6 +504,83 @@ class CSVtoReadme:
 
         if self.group_suffix:
             print(self.group_suffix)
+
+
+class ExtractDataFromFiles:
+
+    data_template: List[list] = []
+    data_compiled: List[list] = []
+    mode: str = None
+    data_mined = List = []
+    _base = ROOT_PATH
+
+    know_modes = {
+        'extract-url': r'(https?://[www\.]?\S+)',
+        'extract-generic-url': r'(https?://[www\.]?[^github]\S+)',
+        'extract-github-url': r'(https?://[www\.]?[github]\S+)',
+
+        # This needs more testing
+        'extract-wikidata-q': r'(Q[1-9]\S+)',
+    }
+
+    def __init__(
+        self, file_pattern,
+        mode: str = 'extract-generic-url',
+        regex: str = None,
+    ):
+        self.file_pattern = file_pattern
+        self.mode = mode
+
+        if not regex:
+            self.regex = self.know_modes[mode]
+        else:
+            self.regex = regex
+
+    def _load_file(self, file, strict: bool = True) -> List:
+        delimiters = {
+            '.csv': ',',
+            '.tsv': "\t",
+            '.tab': "\t"
+        }
+
+        if not exists(file):
+            if not strict:
+                return None
+            else:
+                raise IOError(f'[{file} not found]')
+
+        # If is tabular, this clean up delimiters
+        if file.endswith(tuple(delimiters.keys())):
+            # raise NotImplementedError('todo')
+            items = set()
+            with open(file, 'r') as csvfile:
+                spamreader = csv.reader(csvfile, delimiter=',')
+                for row in spamreader:
+                    [items.add(item) for item in row]
+            return items
+
+        with open(file, 'r') as _file:
+            lines = set(_file.read().splitlines())
+            return lines
+
+    def prepare(self):
+        _data_mined = set()
+        for name in glob.glob(self.file_pattern):
+            # print(name)
+            file_now = self._load_file(name)
+            for line in file_now:
+                results = re.findall(self.regex, line)
+                if results:
+                    for item in results:
+                        _data_mined.add(item)
+        self.data_mined = sorted(_data_mined)
+
+    def print(self):
+        # for line in self.data_template:
+        #     print(line)
+        for line in self.data_mined:
+            print(line)
+            pass
 
 
 def evaluate(textoperation: str) -> bool:

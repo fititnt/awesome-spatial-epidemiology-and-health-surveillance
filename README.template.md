@@ -3,7 +3,6 @@
 
 **Curated list of awesome spatial epidemiology data exchange concepts, data reference and tooling. Contributions are welcomed!**
 
-
 ## GitHub topics
 > **Resoning behind 3 tiers**: Tier 1 is directly related to main topic of our list of recommendations.
 > Tier 2 is is related to the scientific area (but not strictly the tooling).

@@ -1,8 +1,8 @@
 #item+group,#item+title,#item+programming_language,#item+repository+url,#item+install
 synthetic-data,DataSynthesizer,python,https://github.com/DataResponsibly/DataSynthesizer,"pip install DataSynthesizer"
-synthetic-data,pydbgen,python,https://github.com/DataResponsibly/pydbgen,"pip install pydbgen"
-synthetic-data,mimesis,python,https://github.com/DataResponsibly/mimesis,"pip install mimesis"
-synthetic-data,SDV,python,https://github.com/DataResponsibly/SDV,"pip install SDV"
+synthetic-data,pydbgen,python,https://github.com/tirthajyoti/pydbgen,"pip install pydbgen"
+synthetic-data,mimesis,python,https://github.com/lk-geimfari/mimesis,"pip install mimesis"
+synthetic-data,SDV,python,https://github.com/sdv-dev/SDV,"pip install SDV"
 synthetic-data,plaitpy,python,https://github.com/plaitpy/plaitpy,"pip install plaitpy"
 synthetic-data,timeseries-generator,python,https://github.com/Nike-Inc/timeseries-generator,"pip install timeseries-generator"
 synthetic-data,gretel-synthetics,python,https://github.com/gretelai/gretel-synthetics,"pip install gretel-synthetics"
