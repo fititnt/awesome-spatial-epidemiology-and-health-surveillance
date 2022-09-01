@@ -121,6 +121,7 @@ class Cli:
                 'compile-readme',
                 'extract-generic-url',
                 'extract-github-url',
+                'extract-github-topic-url',
                 'extract-wikidata-q',
             ],
             required=False,
@@ -258,6 +259,7 @@ class Cli:
             'extract-url',
             'extract-generic-url',
             'extract-github-url',
+            'extract-github-topic-url',
             'extract-wikidata-q',
         ]:
             edff = ExtractDataFromFiles(
@@ -517,8 +519,10 @@ class ExtractDataFromFiles:
     know_modes = {
         'extract-url': r'(https?://[www\.]?\S+)',
         'extract-generic-url': r'(https?://[www\.]?[^github]\S+)',
-        'extract-github-url': r'(https?://[www\.]?[github]\S+)',
-
+        'extract-github-url':
+        r'(https?://[www\.]?(github\.com/)(?!topics/)\S+)',
+        'extract-github-topic-url':
+        r'(https?://[www\.]?(github\.com/)(topics/)\S+)',
         # This needs more testing
         'extract-wikidata-q': r'(Q[1-9]\S+)',
     }
@@ -572,6 +576,8 @@ class ExtractDataFromFiles:
                 results = re.findall(self.regex, line)
                 if results:
                     for item in results:
+                        if not isinstance(item, str):
+                            item = item[0]
                         _data_mined.add(item)
         self.data_mined = sorted(_data_mined)
 

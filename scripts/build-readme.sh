@@ -62,10 +62,11 @@ gh_repo_statistics() {
     sed -e '/_url/d' \
       >"${fullsavepath}"
   # exit 1
+  sleep 3
 }
 
 #######################################
-# Iterate all cached repositories and call gh_repo_statistics()
+# Iterate list with all repositories and call gh_repo_statistics()
 #
 # Globals:
 #
@@ -83,6 +84,61 @@ gh_repo_statistics_list() {
   done <"$repositories_file"
 }
 
+#######################################
+# Fetch repo statistics of one repository
+#
+# Globals:
+#
+# Arguments:
+#   repo        Repository to fetch the data
+#   savepath    (optional) Path to store the metadata
+# Returns
+#   None
+#######################################
+gh_topic_statistics() {
+  topic="${1}"
+  topic="${topic//https:\/\/github.com\/topics\/''/}" # Remove full url, if exist
+  savepath="${2-"partials/raw"}"
+  fullsavepath="${savepath}/github-topic/${topic}.json"
+
+  # echo "TODO gh_topic_statistics topic[$topic] savepath[$savepath] fullsavepath [$fullsavepath]"
+  # exit 1
+  if [ -f "${fullsavepath}" ]; then
+    echo "Cached file [${fullsavepath}]. Skiping"
+    echo "@TODO implement better stale-cache system"
+    return 0
+  fi
+
+  # set -x
+  # Here we delete only items (which would return the repositories for this topic)
+  gh api \
+    -H "Accept: application/vnd.github+json" \
+    "/search/repositories?q=topic:${topic}" |
+    jq 'del(.items)' \
+      >"${fullsavepath}"
+  # exit 1
+  sleep 3
+}
+
+#######################################
+# Iterate list with all topics and call gh_topic_statistics()
+#
+# Globals:
+#
+# Arguments:
+#   topics_file  (optional)  File with list of topics
+# Returns
+#   None
+#######################################
+gh_topics_statistics_list() {
+  topics_file="${1-'partials/raw/github-topic-list.txt'}"
+
+  while read -r line; do
+    echo "gh_topics_statistics_list [$line]"
+    gh_topic_statistics "$line"
+  done <"$topics_file"
+}
+
 #### Main ______________________________________________________________________
 
 set -x
@@ -90,6 +146,10 @@ set -x
 ./scripts/readme-from-csv.py \
   --method=extract-github-url 'data/*.csv' \
   >partials/raw/github-projects-list.txt
+
+./scripts/readme-from-csv.py \
+  --method=extract-github-topic-url 'data/*.csv' \
+  >partials/raw/github-topic-list.txt
 
 ./scripts/readme-from-csv.py \
   --method=extract-generic-url 'data/*.csv' \
@@ -101,6 +161,8 @@ set -x
 
 set +x
 gh_repo_statistics_list "partials/raw/github-projects-list.txt"
+gh_topics_statistics_list "partials/raw/github-topic-list.txt"
+# exit 1
 set -x
 
 ./scripts/readme-from-csv.py \
@@ -147,67 +209,6 @@ set -x
   --method=compile-readme \
   README.template.md \
   >README.md
-
-# asciidoctor --backend docbook5 README.source.adoc --out-file README.source.xml
-
-# NOTE: asciidoctor does not support itemizedlist spacing="compact"
-# configuration so we edit the intermediary format to enforce it.
-# @see https://discuss.asciidoctor.org
-# /Not-finding-my-way-in-trying-to-produce-a-quot-compact-list-quot-td1210.html
-# sed -i 's/<itemizedlist>/<itemizedlist spacing="compact">/g' README.source.xml
-
-# @TODO maybe update pandoc version to > 2.17
-#       see https://github.com/jgm/pandoc/issues/7799
-
-# <itemizedlist spacing="compact">
-
-# pandoc \
-#   --read=docbook \
-#   --write=markdown+smart \
-#   --output=README-preview.md \
-#   README.source.xml
-
-# pandoc \
-#   --wrap=none \
-#   --read=docbook \
-#   --write=gfm \
-#   --output=README-preview.md \
-#   README.source.xml
-
-# About issues with too much spaces on lists
-# - https://github.com/jgm/pandoc/issues/7172
-
-# pandoc \
-#   --wrap=none \
-#   --read=docbook \
-#   --write=markdown_strict \
-#   --output=README-preview.md \
-#   README.source.xml
-
-# pandoc \
-#   --atx-headers \
-#   --wrap=none \
-#   --read=docbook \
-#   --write=gfm \
-#   --output=README-preview.md \
-#   README.source.xml
-
-# pandoc \
-#   --atx-headers \
-#   --wrap=none \
-#   --write=gfm \
-#   --output=README-preview.md \
-#   README.source.xml
-
-# pandoc \
-#   --wrap=none \
-#   --write=gfm \
-#   --read=docbook \
-#   --output=README-preview.md \
-#   README.source.xml
-
-# sed -i '/^    $/d' README-preview.md
-# sed -i '/^    $/d' README-preview.md
 
 set +x
 
