@@ -1,5 +1,5 @@
 # Awesome Spatial Epidemiology
-![Awesome Spatial Epidemiology Banner](img/awesome-spatial-epidemiology.jpg)
+![Awesome Spatial Epidemiology Banner](partials/awesome-spatial-epidemiology.jpg)
 
 **Curated list of awesome spatial epidemiology data exchange concepts, data reference and tooling. Contributions are welcomed!**
 
@@ -9,17 +9,17 @@
 > Tier 3 are related to the tooling (but not restricted to the scientific application).
 
 - **Tier 1**:
-  - [disease-mapping](https://github.com/topics/3): 3 repositories
-  - [epidemic-simulations](https://github.com/topics/75): 75 repositories
-  - [spatial-epidemiology](https://github.com/topics/4): 4 repositories
+  - [disease-mapping](https://github.com/topics/disease-mapping): 3 repositories
+  - [epidemic-simulations](https://github.com/topics/epidemic-simulations): 75 repositories
+  - [spatial-epidemiology](https://github.com/topics/spatial-epidemiology): 4 repositories
 - **Tier 2**:
-  - [bioinformatics](https://github.com/topics/6942): 6942 repositories
-  - [epidemiology](https://github.com/topics/578): 578 repositories
-  - [genomics](https://github.com/topics/1869): 1869 repositories
-  - [infectious-diseases](https://github.com/topics/94): 94 repositories
+  - [bioinformatics](https://github.com/topics/bioinformatics): 6942 repositories
+  - [epidemiology](https://github.com/topics/epidemiology): 578 repositories
+  - [genomics](https://github.com/topics/genomics): 1869 repositories
+  - [infectious-diseases](https://github.com/topics/infectious-diseases): 94 repositories
 - **Tier 3**:
-  - [spatial-analysis](https://github.com/topics/470): 470 repositories
-  - [geospatial-analysis](https://github.com/topics/227): 227 repositories
+  - [spatial-analysis](https://github.com/topics/spatial-analysis): 470 repositories
+  - [geospatial-analysis](https://github.com/topics/geospatial-analysis): 227 repositories
 
 ## General concepts
 
@@ -126,7 +126,7 @@ pip install zpy-zumo
 
 ## License
 
-[![Public Domain](https://i.creativecommons.org/p/zero/1.0/88x31.png)](UNLICENSE)
+[![Public Domain](partials/public-domain.png)](UNLICENSE)
 
 To the extent possible under law, [Emerson Rocha](https://github.com/fititnt)
 has waived all copyright and related or neighboring rights to this work to

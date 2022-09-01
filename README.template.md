@@ -1,5 +1,5 @@
 # Awesome Spatial Epidemiology
-![Awesome Spatial Epidemiology Banner](img/awesome-spatial-epidemiology.jpg)
+![Awesome Spatial Epidemiology Banner](partials/awesome-spatial-epidemiology.jpg)
 
 **Curated list of awesome spatial epidemiology data exchange concepts, data reference and tooling. Contributions are welcomed!**
 
@@ -48,7 +48,7 @@
 
 ## License
 
-[![Public Domain](https://i.creativecommons.org/p/zero/1.0/88x31.png)](UNLICENSE)
+[![Public Domain](partials/public-domain.png)](UNLICENSE)
 
 To the extent possible under law, [Emerson Rocha](https://github.com/fititnt)
 has waived all copyright and related or neighboring rights to this work to

@@ -1,3 +1,3 @@
-  - [disease-mapping](https://github.com/topics/3): 3 repositories
-  - [epidemic-simulations](https://github.com/topics/75): 75 repositories
-  - [spatial-epidemiology](https://github.com/topics/4): 4 repositories
+  - [disease-mapping](https://github.com/topics/disease-mapping): 3 repositories
+  - [epidemic-simulations](https://github.com/topics/epidemic-simulations): 75 repositories
+  - [spatial-epidemiology](https://github.com/topics/spatial-epidemiology): 4 repositories

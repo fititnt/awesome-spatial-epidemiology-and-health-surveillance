@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #===============================================================================
 #
 #          FILE:  build-readme.sh
@@ -9,10 +9,10 @@
 #
 #       OPTIONS:  ---
 #
-#  REQUIREMENTS:  - asciidoc
-#                   - sudo apt install asciidoc
-#                 - pandoc (version 2.17 or higher; very important)
-#                   - sudo apt install pandoc
+#  REQUIREMENTS:  - bash
+#                 - python3 (used by readme-from-csv.py)
+#                 - jq
+#                 - github cli
 #          BUGS:  ---
 #         NOTES:  ---
 #        AUTHOR:  Emerson Rocha <rocha[at]ieee.org>
@@ -25,51 +25,83 @@
 #===============================================================================
 set -e
 
-# asciidoctor --backend docbook README.source.adoc --out-file README.source.xml
+#### Functions _________________________________________________________________
 
-# @see https://matthewsetter.com/convert-markdown-to-asciidoc-withpandoc/
+#######################################
+# Fetch repo statistics of one repository
+#
+# Globals:
+#
+# Arguments:
+#   repo        Repository to fetch the data
+#   savepath    (optional) Path to store the metadata
+# Returns
+#   None
+#######################################
+gh_repo_statistics() {
+  repo="${1}"
+  repo="${repo//https:\/\/github.com\/''/}" # Remove full url, if exist
+  savepath="${2-"partials/raw"}"
+  fullsavepath="${savepath}/github-repo/${repo//\//'__'}.json"
 
-# pandoc --atx-headers \
-#     --normalize \
-#     --verbose \
-#     --wrap=none \
-#     --toc \
-#     --reference-links \
-#     -s -S -o -t asciidoc path/to/your/asciidoc/file.adoc \
-#     path/to/your/markdown/file.md
+  # echo "TODO repo[$repo] savepath[$savepath] fullsavepath [$fullsavepath]"
 
-# pandoc --atx-headers \
-#     --normalize \
-#     --verbose \
-#     --wrap=none \
-#     --toc \
-#     --reference-links \
-#     -s -S -o -t asciidoc README.source.adoc \
-#     README-preview.md
-# pandoc --atx-headers \
-#     --verbose \
-#     --wrap=none \
-#     --toc \
-#     --reference-links \
-#     --from=asciidoc \
-#     --to=markdown+smart \
-#     -s README.source.adoc \
-#     README-preview.md
+  if [ -f "${fullsavepath}" ]; then
+    echo "Cached file [${fullsavepath}]. Skiping"
+    echo "@TODO implement better stale-cache system"
+    return 0
+  fi
+
+  # We delete some verbose fields such as .owner and .organization with jq
+  # Then, sed is used to delete lots of something_url field
+  gh api \
+    -H "Accept: application/vnd.github+json" \
+    "/repos/${repo}" |
+    jq 'del(.owner)' |
+    jq 'del(.organization)' |
+    sed -e '/_url/d' \
+      >"${fullsavepath}"
+  # exit 1
+}
+
+#######################################
+# Iterate all cached repositories and call gh_repo_statistics()
+#
+# Globals:
+#
+# Arguments:
+#   repositories_file  (optional)  File with list of repositories
+# Returns
+#   None
+#######################################
+gh_repo_statistics_list() {
+  repositories_file="${1-'partials/raw/github-projects-list.txt'}"
+
+  while read -r line; do
+    # echo "$line"
+    gh_repo_statistics "$line"
+  done <"$repositories_file"
+}
+
+#### Main ______________________________________________________________________
 
 set -x
 
-
 ./scripts/readme-from-csv.py \
   --method=extract-github-url 'data/*.csv' \
-  > partials/raw/github-projects-list.txt
+  >partials/raw/github-projects-list.txt
 
 ./scripts/readme-from-csv.py \
   --method=extract-generic-url 'data/*.csv' \
-  > partials/raw/generic-url-list.txt
+  >partials/raw/generic-url-list.txt
 
 ./scripts/readme-from-csv.py \
   --method=extract-wikidata-q 'data/*.csv' \
-  > partials/raw/wikidata-q-list.txt
+  >partials/raw/wikidata-q-list.txt
+
+set +x
+gh_repo_statistics_list "partials/raw/github-projects-list.txt"
+set -x
 
 ./scripts/readme-from-csv.py \
   data/general-concepts.hxl.csv \
@@ -88,19 +120,19 @@ set -x
 
 ./scripts/readme-from-csv.py \
   data/github-topics.hxl.csv \
-  --line-formatter='  - [{raw_line[1]}](https://github.com/topics/{raw_line[2]}): {raw_line[2]} repositories' \
+  --line-formatter='  - [{raw_line[1]}](https://github.com/topics/{raw_line[1]}): {raw_line[2]} repositories' \
   --line-select='{raw_line[0]}==1' \
   >partials/github-topics_1.md
 
 ./scripts/readme-from-csv.py \
   data/github-topics.hxl.csv \
-  --line-formatter='  - [{raw_line[1]}](https://github.com/topics/{raw_line[2]}): {raw_line[2]} repositories' \
+  --line-formatter='  - [{raw_line[1]}](https://github.com/topics/{raw_line[1]}): {raw_line[2]} repositories' \
   --line-select='{raw_line[0]}==2' \
   >partials/github-topics_2.md
 
 ./scripts/readme-from-csv.py \
   data/github-topics.hxl.csv \
-  --line-formatter='  - [{raw_line[1]}](https://github.com/topics/{raw_line[2]}): {raw_line[2]} repositories' \
+  --line-formatter='  - [{raw_line[1]}](https://github.com/topics/{raw_line[1]}): {raw_line[2]} repositories' \
   --line-select='{raw_line[0]}==3' \
   >partials/github-topics_3.md
 

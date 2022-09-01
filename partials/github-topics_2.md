@@ -1,4 +1,4 @@
-  - [bioinformatics](https://github.com/topics/6942): 6942 repositories
-  - [epidemiology](https://github.com/topics/578): 578 repositories
-  - [genomics](https://github.com/topics/1869): 1869 repositories
-  - [infectious-diseases](https://github.com/topics/94): 94 repositories
+  - [bioinformatics](https://github.com/topics/bioinformatics): 6942 repositories
+  - [epidemiology](https://github.com/topics/epidemiology): 578 repositories
+  - [genomics](https://github.com/topics/genomics): 1869 repositories
+  - [infectious-diseases](https://github.com/topics/infectious-diseases): 94 repositories
