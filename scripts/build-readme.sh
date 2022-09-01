@@ -58,12 +58,12 @@ set -e
 
 set -x
 
-./scripts/csv-to-readme.py \
+./scripts/readme-from-csv.py \
   data/general-concepts.hxl.csv \
   --line-formatter='==== {raw_line[1]}\n`{raw_line}`\n' \
   >partials/general-concepts.adoc
 
-./scripts/csv-to-readme.py \
+./scripts/readme-from-csv.py \
   data/github-topics.hxl.csv \
   --line-formatter='==== {raw_line[1]}\n`{raw_line}`\n' \
   --line-select='{raw_line[0]}==1' \
@@ -73,25 +73,25 @@ set -x
 #       https://docs.github.com/en/rest/search#search-topics
 # @TODO https://gist.github.com/usametov/af8f13a351a66fb05a9895f11417dd9d
 
-./scripts/csv-to-readme.py \
+./scripts/readme-from-csv.py \
   data/github-topics.hxl.csv \
   --line-formatter='* https://github.com/topics/{raw_line[2]}[{raw_line[1]}]: {raw_line[2]} repositories' \
   --line-select='{raw_line[0]}==1' \
   >partials/github-topics_1.adoc
 
-./scripts/csv-to-readme.py \
+./scripts/readme-from-csv.py \
   data/github-topics.hxl.csv \
   --line-formatter='* https://github.com/topics/{raw_line[2]}[{raw_line[1]}]: {raw_line[2]} repositories' \
   --line-select='{raw_line[0]}==2' \
   >partials/github-topics_2.adoc
 
-./scripts/csv-to-readme.py \
+./scripts/readme-from-csv.py \
   data/github-topics.hxl.csv \
   --line-formatter='* https://github.com/topics/{raw_line[2]}[{raw_line[1]}]: {raw_line[2]} repositories' \
   --line-select='{raw_line[0]}==3' \
   >partials/github-topics_3.adoc
 
-./scripts/csv-to-readme.py \
+./scripts/readme-from-csv.py \
   data/software.hxl.csv \
   --line-formatter='==== {raw_line[1]}\n`{raw_line}`\n' \
   >partials/software.adoc

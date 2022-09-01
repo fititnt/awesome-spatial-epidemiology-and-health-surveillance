@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 # ===============================================================================
 #
-#          FILE:  csv-to-readme.py
-#                 scripts/csv-to-readme.py
+#          FILE:  readme-from-csv.py
+#                 scripts/readme-from-csv.py
 #
-#         USAGE:  ./scripts/csv-to-readme.py
+#         USAGE:  ./scripts/readme-from-csv.py
 #
 #   DESCRIPTION:  ---
 #
@@ -17,9 +17,9 @@
 #       COMPANY:  EticaAI
 #       LICENSE:  Public Domain dedication
 #                 SPDX-License-Identifier: Unlicense
-#       VERSION:  v1.0
+#       VERSION:  v1.1
 #       CREATED:  2022-08-31 05:09 UTC
-#      REVISION:  ---
+#      REVISION:  2022-09-01 01:27 UTC csv-to-readme.py -> readme-from-csv.py
 # ===============================================================================
 
 
@@ -51,6 +51,7 @@ STDIN = sys.stdin.buffer
 
 # print("todo")
 
+# @TODO implement jekyll includes https://jekyllrb.com/docs/includes/
 
 class Cli:
 
