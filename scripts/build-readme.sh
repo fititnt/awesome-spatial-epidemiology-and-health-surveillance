@@ -184,8 +184,8 @@ gh_topics_statistics_list() {
 #   None
 #######################################
 gh_topics_statistics_consolidate() {
-  topics_current="${1-"partials/raw/github-topic.csv"}"
-  topics_history="${1-"data/github-topics-evolution.csv"}"
+  #topics_current="${1-"partials/raw/github-topic.csv"}"
+  #topics_history="${1-"data/github-topics-evolution.csv"}"
 
   echo "@TODO gh_topics_statistics_consolidate"
 
@@ -234,13 +234,13 @@ set -x
 
 ./scripts/readme-from-csv.py \
   data/general-concepts.hxl.csv \
-  --line-formatter='### [{raw_line[1]} ({raw_line[0]})](https://www.wikidata.org/wiki/{raw_line[0]})\n{raw_line[2]}\n' \
+  --line-formatter='### [{{raw_line.1}} ({{raw_line.0}})](https://www.wikidata.org/wiki/{{raw_line.0}})\n{{raw_line.2}}\n' \
   >partials/general-concepts.md
 
 # ./scripts/readme-from-csv.py \
 #   data/github-topics.hxl.csv \
-#   --line-formatter='==== {raw_line[1]}\n`{raw_line}`\n' \
-#   --line-select='{raw_line[0]}==1' \
+#   --line-formatter='==== {{raw_line.1}}\n`{raw_line}`\n' \
+#   --line-select='{{raw_line.0}}==1' \
 #   >partials/github-topics_1.md
 
 # @TODO implement checking how many repos are in a topic
@@ -249,27 +249,27 @@ set -x
 
 ./scripts/readme-from-csv.py \
   data/github-topics.hxl.csv \
-  --line-formatter='  - [{raw_line[1]}](https://github.com/topics/{raw_line[1]}): {raw_line[2]} repositories' \
-  --line-select='{raw_line[0]}==1' \
+  --line-formatter='  - [{{raw_line.1}}](https://github.com/topics/{{raw_line.1}}): {{raw_line.2}} repositories' \
+  --line-select='{{raw_line.0}}==1' \
   >partials/github-topics_1.md
 
 ./scripts/readme-from-csv.py \
   data/github-topics.hxl.csv \
-  --line-formatter='  - [{raw_line[1]}](https://github.com/topics/{raw_line[1]}): {raw_line[2]} repositories' \
-  --line-select='{raw_line[0]}==2' \
+  --line-formatter='  - [{{raw_line.1}}](https://github.com/topics/{{raw_line.1}}): {{raw_line.2}} repositories' \
+  --line-select='{{raw_line.0}}==2' \
   >partials/github-topics_2.md
 
 ./scripts/readme-from-csv.py \
   data/github-topics.hxl.csv \
-  --line-formatter='  - [{raw_line[1]}](https://github.com/topics/{raw_line[1]}): {raw_line[2]} repositories' \
-  --line-select='{raw_line[0]}==3' \
+  --line-formatter='  - [{{raw_line.1}}](https://github.com/topics/{{raw_line.1}}): {{raw_line.2}} repositories' \
+  --line-select='{{raw_line.0}}==3' \
   >partials/github-topics_3.md
 
 # shellcheck disable=SC2016
 ./scripts/readme-from-csv.py \
   data/software.hxl.csv \
-  --line-formatter='#### [{raw_line[1]} ({raw_line[2]})]({raw_line[3]})\n\n```\n{raw_line[4]}\n```' \
-  --line-select='{raw_line[0]}=="synthetic-data"' \
+  --line-formatter='#### [{{raw_line.1}} ({{raw_line.2}})]({{raw_line.3}})\n\n```\n{{raw_line.4}}\n```' \
+  --line-select='{{raw_line.0}}=="synthetic-data"' \
   >partials/software_synthetic-data.md
 
 ./scripts/readme-from-csv.py \

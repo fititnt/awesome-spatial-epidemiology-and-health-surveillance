@@ -11,6 +11,7 @@
 #       OPTIONS:  ---
 #
 #  REQUIREMENTS:  - python3
+#                   - chevron (pip install chevron)
 #          BUGS:  ---
 #         NOTES:  ---
 #        AUTHOR:  Emerson Rocha <rocha[at]ieee.org>
@@ -32,10 +33,16 @@ import sys
 from typing import List
 from ast import literal_eval
 
+# import pystache
+import chevron
+
 DESCRIPTION = f"""
 {__file__} provide some conventinent functions to convert tabular data
 into output formats which could be used as partial for be injected into
 README files. A common use case is generate READMEs for awesome-list.
+
+The template engine uses Mustache https://mustache.github.io/ \
+(Demo here https://mustache.github.io/#demo)
 """
 
 __EPILOGUM__ = f"""
@@ -43,8 +50,6 @@ __EPILOGUM__ = f"""
                             EXEMPLŌRUM GRATIĀ
 ------------------------------------------------------------------------------
     {__file__} data/software.hxl.csv
-
-    {__file__} data/software.hxl.csv --output-format='markdown'
 
     {__file__} --method=compile-readme README.template.md
 
@@ -70,7 +75,10 @@ ROOT_PATH = os.environ.get('ROOT_PATH', os.getcwd())
 
 # print("todo")
 
-# @TODO implement jekyll includes https://jekyllrb.com/docs/includes/
+# @TODO use mustache as template engine http://mustache.github.io/
+#       - https://github.com/PennyDreadfulMTG/pystache/
+#       - https://github.com/noahmorrison/chevron
+#       - https://pypi.org/project/pystache/
 
 
 class Cli:
@@ -135,14 +143,27 @@ class Cli:
         # https://stackoverflow.com/questions/54351740/how-can-i-use-f-string-with-a-variable-not-with-a-string-literal
         parser_table.add_argument(
             '--line-formatter',
-            help='Line formatter (python f-string). Headers are converted'
-            'to variables, and linear format is avalible as "raw_line"'
-            'Default: "{raw_line}"',
+            help='Line formatter using mustache formatter.'
+            'Headers are converted to variables, and linear format is '
+            'avalible as "raw_line"'
+            'Default: "{{.}}" (print every option)',
             dest='line_formatter',
             nargs='?',
             # required=True
-            default='{raw_line}'
+            default='{{.}}'
         )
+
+        # parser_table.add_argument(
+        #     '--line-formatter-mustache',
+        #     help='Line formatter (python f-string). Headers are converted'
+        #     'to variables, and linear format is avalible as "raw_line"'
+        #     'Default: "{raw_line}"',
+        #     dest='line_formatter_mustache',
+        #     nargs='?',
+        #     # required=True
+        #     default='{raw_line}'
+        #     # default=None
+        # )
 
         # https://stackoverflow.com/questions/54351740/how-can-i-use-f-string-with-a-variable-not-with-a-string-literal
         parser_table.add_argument(
@@ -196,6 +217,36 @@ class Cli:
             default=None
         )
 
+        parser_table.add_argument(
+            '--data-merge-file-2',
+            help='Path to a file to merge additiona columns with the main file',
+            dest='merge_file_2',
+            nargs='?',
+            # required=True
+            default=None
+        )
+
+        parser_table.add_argument(
+            '--data-merge-key-2',
+            help='When --data-merge-file-2 is used, this allow explicity '
+            'say which is reference key to search on main table.',
+            dest='merge_key_2',
+            nargs='?',
+            # required=True
+            default=None
+        )
+
+        parser_table.add_argument(
+            '--data-merge-foreignkey-2',
+            help='When --data-merge-file-2 is used, this allow explicity '
+            'say which is reference foreign key to search on the merged'
+            'table.',
+            dest='merge_foreignkey_2',
+            nargs='?',
+            # required=True
+            default=None
+        )
+
         parser.add_argument(
             # '--venandum-insectum-est, --debug',
             '--debug',
@@ -240,6 +291,9 @@ class Cli:
                 pyargs.group_prefix,
                 pyargs.group_suffix,
                 pyargs.output_sort,
+                pyargs.merge_file_2,
+                pyargs.merge_key_2,
+                pyargs.merge_foreignkey_2,
                 pyargs.input_delimiter,
                 # pyargs.output_format,
             )
@@ -295,15 +349,18 @@ class CompileReadme:
     _base = ROOT_PATH
 
     def __init__(
-        self, infile,
+        self,
+        infile,
+        verbose: bool = False
     ):
         self.infile = infile
+        self.verbose = verbose
 
     def _load_file(self, file, strict: bool = True) -> List[list]:
 
         if not exists(file):
             if not strict:
-                return None
+                return False
             else:
                 raise IOError(f'[{file} not found]')
 
@@ -336,6 +393,11 @@ class CompileReadme:
                 if extra_lines:
                     # self.data_compiled.append("IMPORTED: ")
                     self.data_compiled.extend(extra_lines)
+                elif extra_lines is not False:
+                    # This means file exist, but empty
+                    if self.verbose:
+                        self.data_compiled.append(
+                            f'<!-- Empty file {line} -->')
                 else:
                     self.data_compiled.append("IMPORT ERROR START")
                     self.data_compiled.append(line)
@@ -363,6 +425,9 @@ class CSVtoReadme:
         group_prefix: str = None,
         group_suffix: str = None,
         output_sort: list = None,
+        merge_file_2: str = None,
+        merge_key_2: str = None,
+        merge_foreignkey_2: str = None,
         input_delimiter=','
     ):
         """
@@ -375,6 +440,9 @@ class CSVtoReadme:
         self.group_prefix = group_prefix
         self.group_suffix = group_suffix
         self.output_sort = output_sort
+        self.merge_file_2 = merge_file_2
+        self.merge_key_2 = merge_key_2
+        self.merge_foreignkey_2 = merge_foreignkey_2
         self.input_delimiter = input_delimiter
         # self.output_format = output_format
 
@@ -404,6 +472,9 @@ class CSVtoReadme:
             if self.line_select is not None:
                 parsed_line_select = self.line_select.format(**line_variables)
                 # print('parsed_line_select', parsed_line_select)
+                parsed_line_select = chevron.render(
+                    self.line_select,
+                    line_variables)
                 evaluated_line_select = evaluate(parsed_line_select)
                 # print('result_line_select', result_line_select)
                 if not evaluated_line_select:
@@ -412,6 +483,9 @@ class CSVtoReadme:
             if self.line_exclude is not None:
                 parsed_line_exclude = self.line_exclude.format(
                     **line_variables)
+                parsed_line_exclude = chevron.render(
+                    self.line_exclude,
+                    line_variables)
                 evaluated_line_exclude = evaluate(parsed_line_exclude)
                 if evaluated_line_exclude:
                     continue
@@ -421,46 +495,13 @@ class CSVtoReadme:
         self.data_lines = new_data
 
     def _prepare_sort(self):
-
-        _data_new = []
-        header = []
-        line_select = None
-        line_exclude = None
-        new_data = []
-        for line in self.data_lines:
-            # print('loop')
-            if len(header) == 0:
-                header = line
-                new_data.append(header)
-                continue
-
-            line_variables = dict(zip(header, line))
-            # print('oi', self.line_select, line)
-            line_variables['raw_line'] = line
-            if self.line_select is not None:
-                parsed_line_select = self.line_select.format(**line_variables)
-                # print('parsed_line_select', parsed_line_select)
-                evaluated_line_select = evaluate(parsed_line_select)
-                # print('result_line_select', result_line_select)
-                if not evaluated_line_select:
-                    continue
-
-            if self.line_exclude is not None:
-                parsed_line_exclude = self.line_exclude.format(
-                    **line_variables)
-                evaluated_line_exclude = evaluate(parsed_line_exclude)
-                if evaluated_line_exclude:
-                    continue
-
-            new_data.append(line)
-
-        self.data_lines = new_data
+        raise NotImplementedError('@TODO _prepare_sort')
 
     def prepare(self):
         with open(self.infile) as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=self.input_delimiter)
-            csv_dictreader = csv.reader(
-                csv_file, delimiter=self.input_delimiter)
+            # csv_dictreader = csv.reader(
+            #     csv_file, delimiter=self.input_delimiter)
             # line_count = 0
             self.data_lines = []
             self.data_dict = []
@@ -494,15 +535,18 @@ class CSVtoReadme:
                 header = line
                 continue
 
-            url = self._get_url(line)
-            headline = line[0]
-            summary = line[1]
+            # url = self._get_url(line)
+            # headline = line[0]
+            # summary = line[1]
 
             line_variables = dict(zip(header, line))
             line_variables['raw_line'] = line
 
-            print(self.line_formatter.format(
-                **line_variables).replace('\\n', "\n"))
+            # print(self.line_formatter.format(
+            #     **line_variables).replace('\\n', "\n"))
+            print(chevron.render(
+                self.line_formatter,
+                line_variables).replace('\\n', "\n"))
 
         if self.group_suffix:
             print(self.group_suffix)
