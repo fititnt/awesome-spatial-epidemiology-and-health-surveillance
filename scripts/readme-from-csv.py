@@ -22,9 +22,11 @@
 #      REVISION:  2022-09-01 01:27 UTC csv-to-readme.py -> readme-from-csv.py
 # ===============================================================================
 
-
+import os
 import argparse
 import csv
+from genericpath import exists
+import re
 import sys
 from typing import List
 from ast import literal_eval
@@ -42,6 +44,8 @@ __EPILOGUM__ = f"""
     {__file__} data/software.hxl.csv
 
     {__file__} data/software.hxl.csv --output-format='markdown'
+
+    {__file__} --method=compile-readme README.template.md
 ------------------------------------------------------------------------------
                             EXEMPLŌRUM GRATIĀ
 ------------------------------------------------------------------------------
@@ -49,9 +53,14 @@ __EPILOGUM__ = f"""
 
 STDIN = sys.stdin.buffer
 
+cwd = os.getcwd()
+
+ROOT_PATH = os.environ.get('ROOT_PATH', os.getcwd())
+
 # print("todo")
 
 # @TODO implement jekyll includes https://jekyllrb.com/docs/includes/
+
 
 class Cli:
 
@@ -98,7 +107,7 @@ class Cli:
             nargs='?',
             choices=[
                 'table-processing',
-                # 'asciidoctor',
+                'compile-readme',
             ],
             required=False,
             default='table-processing'
@@ -202,30 +211,117 @@ class Cli:
             _infile = None
             _stdin = True
 
-        csv2r = CSVtoReadme(
-            _infile,
-            pyargs.line_formatter,
-            pyargs.line_select,
-            pyargs.line_exclude,
-            pyargs.group_prefix,
-            pyargs.group_suffix,
-            pyargs.output_sort,
-            pyargs.input_delimiter,
-            # pyargs.output_format,
-        )
+        if not _infile and not _stdin:
+            print('ERROR! Try:')
+            print(f'    {__file__} --help')
+            return self.EXIT_ERROR
 
-        csv2r.prepare()
-        return csv2r.print()
+        if pyargs.method == 'table-processing':
+            csv2r = CSVtoReadme(
+                _infile,
+                pyargs.line_formatter,
+                pyargs.line_select,
+                pyargs.line_exclude,
+                pyargs.group_prefix,
+                pyargs.group_suffix,
+                pyargs.output_sort,
+                pyargs.input_delimiter,
+                # pyargs.output_format,
+            )
 
-        # go = owlready2.get_ontology("http://purl.obolibrary.org/obo/go.owl").load()
-        # obo = owlready2.get_namespace("http://purl.obolibrary.org/obo/")
-        # print(obo.GO_0000001.label)
-        print("TODO")
+            csv2r.prepare()
+            return csv2r.print()
 
-        return self.EXIT_OK
+        if pyargs.method == 'compile-readme':
+            csv2r = CompileReadme(
+                _infile,
+            )
 
-        print('Unknow option.')
+            csv2r.prepare()
+            return csv2r.print()
+
+        # # go = owlready2.get_ontology("http://purl.obolibrary.org/obo/go.owl").load()
+        # # obo = owlready2.get_namespace("http://purl.obolibrary.org/obo/")
+        # # print(obo.GO_0000001.label)
+        # print("TODO")
+
+        # return self.EXIT_OK
+
+        print(f'Unknow option. [{pyargs.method}]')
         return self.EXIT_ERROR
+
+
+class CompileReadme:
+    """ Parse a README file and import partials
+
+    Syntaxes allowed:
+        - {% include_relative somedir/footer.html %}
+            - https://jekyllrb.com/docs/includes/
+
+    """
+
+    data_template: List[list] = []
+    data_compiled: List[list] = []
+    _base = ROOT_PATH
+
+    def __init__(
+        self, infile,
+    ):
+        self.infile = infile
+
+    def _load_file(self, file, strict: bool = True) -> List[list]:
+
+        if not exists(file):
+            if not strict:
+                return None
+            else:
+                raise IOError(f'[{file} not found]')
+
+        with open(file, 'r') as _file:
+            # self.data_template = _file.readlines()
+            lines = _file.read().splitlines()
+            return lines
+
+    def _get_import(self, line) -> str:
+        if not line or len(line.strip()) == 0:
+            return None
+        if line.find('{% include_relative') == -1:
+            return None
+
+        rule_1 = r'.*{% include_relative (.*) %}.*'
+        rule_1_result = re.match(rule_1, line)
+        if rule_1_result and rule_1_result.group(1):
+            file_path = rule_1_result.group(1)
+            from pathlib import Path
+            filename = Path(file_path).resolve()
+            # raise NotImplementedError(filename)
+            return filename
+
+    def prepare(self):
+        self.data_template = self._load_file(self.infile)
+        for line in self.data_template:
+            import_file = self._get_import(line)
+            if import_file:
+                extra_lines = self._load_file(import_file, strict=False)
+                if extra_lines:
+                    self.data_compiled.append("IMPORTED: ")
+                    self.data_compiled.extend(extra_lines)
+                else:
+                    self.data_compiled.append("IMPORT ERROR START")
+                    self.data_compiled.append(line)
+                    self.data_compiled.append("IMPORT ERROR END")
+            else:
+                self.data_compiled.append(line)
+
+        # with open(self.infile, 'r') as _file:
+        #     # self.data_template = _file.readlines()
+        #     self.data_template = _file.read().splitlines()
+
+    def print(self):
+        # for line in self.data_template:
+        #     print(line)
+        for line in self.data_compiled:
+            print(line)
 
 
 class CSVtoReadme:
@@ -333,7 +429,6 @@ class CSVtoReadme:
             new_data.append(line)
 
         self.data_lines = new_data
-
 
     def prepare(self):
         with open(self.infile) as csv_file:

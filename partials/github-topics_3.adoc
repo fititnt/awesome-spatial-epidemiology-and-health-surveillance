@@ -1,2 +1,0 @@
-* https://github.com/topics/470[spatial-analysis]: 470 repositories
-* https://github.com/topics/227[geospatial-analysis]: 227 repositories

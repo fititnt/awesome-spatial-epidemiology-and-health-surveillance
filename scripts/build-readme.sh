@@ -61,13 +61,13 @@ set -x
 ./scripts/readme-from-csv.py \
   data/general-concepts.hxl.csv \
   --line-formatter='==== {raw_line[1]}\n`{raw_line}`\n' \
-  >partials/general-concepts.adoc
+  >partials/general-concepts.md
 
 ./scripts/readme-from-csv.py \
   data/github-topics.hxl.csv \
   --line-formatter='==== {raw_line[1]}\n`{raw_line}`\n' \
   --line-select='{raw_line[0]}==1' \
-  >partials/github-topics_1.adoc
+  >partials/github-topics_1.md
 
 # @TODO implement checking how many repos are in a topic
 #       https://docs.github.com/en/rest/search#search-topics
@@ -75,33 +75,38 @@ set -x
 
 ./scripts/readme-from-csv.py \
   data/github-topics.hxl.csv \
-  --line-formatter='* https://github.com/topics/{raw_line[2]}[{raw_line[1]}]: {raw_line[2]} repositories' \
+  --line-formatter='- [{raw_line[1]}](https://github.com/topics/{raw_line[2]}): {raw_line[2]} repositories' \
   --line-select='{raw_line[0]}==1' \
-  >partials/github-topics_1.adoc
+  >partials/github-topics_1.md
 
 ./scripts/readme-from-csv.py \
   data/github-topics.hxl.csv \
-  --line-formatter='* https://github.com/topics/{raw_line[2]}[{raw_line[1]}]: {raw_line[2]} repositories' \
+  --line-formatter='- [{raw_line[1]}](https://github.com/topics/{raw_line[2]}): {raw_line[2]} repositories' \
   --line-select='{raw_line[0]}==2' \
-  >partials/github-topics_2.adoc
+  >partials/github-topics_2.md
 
 ./scripts/readme-from-csv.py \
   data/github-topics.hxl.csv \
-  --line-formatter='* https://github.com/topics/{raw_line[2]}[{raw_line[1]}]: {raw_line[2]} repositories' \
+  --line-formatter='- [{raw_line[1]}](https://github.com/topics/{raw_line[2]}): {raw_line[2]} repositories' \
   --line-select='{raw_line[0]}==3' \
-  >partials/github-topics_3.adoc
+  >partials/github-topics_3.md
 
 ./scripts/readme-from-csv.py \
   data/software.hxl.csv \
-  --line-formatter='==== {raw_line[1]}\n`{raw_line}`\n' \
-  >partials/software.adoc
+  --line-formatter='==== {raw_line[1]}\n{raw_line}\n' \
+  >partials/software.md
 
-asciidoctor --backend docbook5 README.source.adoc --out-file README.source.xml
+./scripts/readme-from-csv.py \
+  --method=compile-readme \
+  README.template.md \
+  >README-preview.md
+
+# asciidoctor --backend docbook5 README.source.adoc --out-file README.source.xml
 
 # NOTE: asciidoctor does not support itemizedlist spacing="compact"
 # configuration so we edit the intermediary format to enforce it.
 # @see https://discuss.asciidoctor.org
-# /Not-finding-my-way-in-trying-to-produce-a-quot-compact-list-quot-td1210.html 
+# /Not-finding-my-way-in-trying-to-produce-a-quot-compact-list-quot-td1210.html
 # sed -i 's/<itemizedlist>/<itemizedlist spacing="compact">/g' README.source.xml
 
 # @TODO maybe update pandoc version to > 2.17
@@ -147,17 +152,15 @@ asciidoctor --backend docbook5 README.source.adoc --out-file README.source.xml
 #   --output=README-preview.md \
 #   README.source.xml
 
-pandoc \
-  --wrap=none \
-  --write=gfm \
-   --read=docbook \
-  --output=README-preview.md \
-  README.source.xml
+# pandoc \
+#   --wrap=none \
+#   --write=gfm \
+#   --read=docbook \
+#   --output=README-preview.md \
+#   README.source.xml
 
-
-sed -i '/^    $/d' README-preview.md
-sed -i '/^    $/d' README-preview.md
-
+# sed -i '/^    $/d' README-preview.md
+# sed -i '/^    $/d' README-preview.md
 
 set +x
 

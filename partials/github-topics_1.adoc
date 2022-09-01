@@ -1,3 +1,0 @@
-* https://github.com/topics/3[disease-mapping]: 3 repositories
-* https://github.com/topics/75[epidemic-simulations]: 75 repositories
-* https://github.com/topics/4[spatial-epidemiology]: 4 repositories

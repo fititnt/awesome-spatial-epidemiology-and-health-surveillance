@@ -1,4 +1,0 @@
-* https://github.com/topics/6942[bioinformatics]: 6942 repositories
-* https://github.com/topics/578[epidemiology]: 578 repositories
-* https://github.com/topics/1869[genomics]: 1869 repositories
-* https://github.com/topics/94[infectious-diseases]: 94 repositories

@@ -27,32 +27,20 @@
 
 ### github-topics_1.md
 
-IMPORTED: 
-- [disease-mapping](https://github.com/topics/3): 3 repositories
-- [epidemic-simulations](https://github.com/topics/75): 75 repositories
-- [spatial-epidemiology](https://github.com/topics/4): 4 repositories
+{% include_relative partials/github-topics_1.md %}
 
 ### github-topics_2.md
 
-IMPORTED: 
-- [bioinformatics](https://github.com/topics/6942): 6942 repositories
-- [epidemiology](https://github.com/topics/578): 578 repositories
-- [genomics](https://github.com/topics/1869): 1869 repositories
-- [infectious-diseases](https://github.com/topics/94): 94 repositories
+{% include_relative partials/github-topics_2.md %}
 
 ### github-topics_3.md
 
 
-IMPORTED: 
-- [spatial-analysis](https://github.com/topics/470): 470 repositories
-- [geospatial-analysis](https://github.com/topics/227): 227 repositories
+{% include_relative partials/github-topics_3.md %}
 
 ## General concepts
 
-IMPORTED: 
-==== disease diffusion mapping
-`['Q5282121', 'disease diffusion mapping', 'Disease diffusion occurs when a disease is transmitted to a new location. It implies that a disease spreads, or pours out, from a central source.']`
-
+{% include_relative partials/general-concepts.md %}
 
 ### Disease diffusion (Q5282121)
 > _Disease diffusion occurs when a disease is transmitted to a new location.[1] It implies that a disease spreads, or pours out, from a central source._ - https://en.wikipedia.org/wiki/Disease_diffusion_mapping
@@ -97,19 +85,7 @@ IMPORTED:
 
 ## Installable packages
 
-IMPORTED: 
-==== DataSynthesizer
-['synthetic-data', 'DataSynthesizer', 'python', 'https://github.com/DataResponsibly/DataSynthesizer', 'pip install DataSynthesizer']
-
-==== pydbgen
-['synthetic-data', 'pydbgen', 'python', 'https://github.com/DataResponsibly/pydbgen', 'pip install pydbgen']
-
-==== mimesis
-['synthetic-data', 'mimesis', 'python', 'https://github.com/DataResponsibly/mimesis', 'pip install mimesis']
-
-==== SDV
-['synthetic-data', 'SDV', 'python', 'https://github.com/DataResponsibly/SDV', 'pip install SDV']
-
+{% include_relative partials/software.md %}
 
 ### Synthetic Data
 > Trivia: the initial reference here is based on [Top 10 Python Packages For Creating Synthetic Data](https://www.activestate.com/blog/top-10-python-packages-for-creating-synthetic-data/)
