@@ -1,12 +1,30 @@
-==== DataSynthesizer
-['synthetic-data', 'DataSynthesizer', 'python', 'https://github.com/DataResponsibly/DataSynthesizer', 'pip install DataSynthesizer']
+### [DataSynthesizer (synthetic-data)](https://www.wikidata.org/wiki/synthetic-data)
+python
 
-==== pydbgen
-['synthetic-data', 'pydbgen', 'python', 'https://github.com/DataResponsibly/pydbgen', 'pip install pydbgen']
+### [pydbgen (synthetic-data)](https://www.wikidata.org/wiki/synthetic-data)
+python
 
-==== mimesis
-['synthetic-data', 'mimesis', 'python', 'https://github.com/DataResponsibly/mimesis', 'pip install mimesis']
+### [mimesis (synthetic-data)](https://www.wikidata.org/wiki/synthetic-data)
+python
 
-==== SDV
-['synthetic-data', 'SDV', 'python', 'https://github.com/DataResponsibly/SDV', 'pip install SDV']
+### [SDV (synthetic-data)](https://www.wikidata.org/wiki/synthetic-data)
+python
+
+### [plaitpy (synthetic-data)](https://www.wikidata.org/wiki/synthetic-data)
+python
+
+### [timeseries-generator (synthetic-data)](https://www.wikidata.org/wiki/synthetic-data)
+python
+
+### [gretel-synthetics (synthetic-data)](https://www.wikidata.org/wiki/synthetic-data)
+python
+
+### [scikit-learn (synthetic-data)](https://www.wikidata.org/wiki/synthetic-data)
+python
+
+### [Mesa (synthetic-data)](https://www.wikidata.org/wiki/synthetic-data)
+python
+
+### [zpy (synthetic-data)](https://www.wikidata.org/wiki/synthetic-data)
+python
 

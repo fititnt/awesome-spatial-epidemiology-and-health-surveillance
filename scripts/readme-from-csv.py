@@ -304,7 +304,7 @@ class CompileReadme:
             if import_file:
                 extra_lines = self._load_file(import_file, strict=False)
                 if extra_lines:
-                    self.data_compiled.append("IMPORTED: ")
+                    # self.data_compiled.append("IMPORTED: ")
                     self.data_compiled.extend(extra_lines)
                 else:
                     self.data_compiled.append("IMPORT ERROR START")
