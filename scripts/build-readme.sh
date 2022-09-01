@@ -71,17 +71,37 @@ gh_repo_statistics() {
 # Globals:
 #
 # Arguments:
-#   repositories_file  (optional)  File with list of repositories
+#   repo_list  (optional)  File with list of repositories
 # Returns
 #   None
 #######################################
 gh_repo_statistics_list() {
-  repositories_file="${1-'partials/raw/github-projects-list.txt'}"
+  repo_list="${1-"partials/raw/github-projects-list.txt"}"
+  repo_summary="${2-"partials/raw/github-projects.tsv"}"
 
   while read -r line; do
     # echo "$line"
     gh_repo_statistics "$line"
-  done <"$repositories_file"
+  done <"$repo_list"
+
+  touch "$repo_summary"
+  printf "%s\n" "repo	created_at	updated_at	pushed_at	stargazers_count	watchers_count	forks_count	open_issues_count	language	license	homepage	description" >"$repo_summary"
+  for fullpath in partials/raw/github-repo/*.json; do
+    full_name=$(jq --raw-output '.full_name' <"$fullpath")
+    created_at=$(jq --raw-output '.created_at' <"$fullpath")
+    updated_at=$(jq --raw-output '.updated_at' <"$fullpath")
+    pushed_at=$(jq --raw-output '.pushed_at' <"$fullpath")
+    stargazers_count=$(jq '.stargazers_count' <"$fullpath")
+    watchers_count=$(jq '.watchers_count' <"$fullpath")
+    forks_count=$(jq '.forks_count' <"$fullpath")
+    open_issues_count=$(jq '.open_issues_count' <"$fullpath")
+    language=$(jq --raw-output '.language ' <"$fullpath")
+    license=$(jq --raw-output '.license.spdx_id ' <"$fullpath")
+    homepage=$(jq --raw-output '.homepage ' <"$fullpath")
+    description=$(jq --raw-output '.description' <"$fullpath")
+    repo="https://github.com/$full_name"
+    printf "%s\n" "$repo	$created_at	$updated_at	$pushed_at	$stargazers_count	$watchers_count	$forks_count	$open_issues_count	$language	$license	$homepage	$description" >>"$repo_summary"
+  done
 }
 
 #######################################
@@ -126,17 +146,64 @@ gh_topic_statistics() {
 # Globals:
 #
 # Arguments:
-#   topics_file  (optional)  File with list of topics
+#   topics_list     (optional)  File with list of topics
+#   topics_summary  (optional)  File with list of topics
 # Returns
 #   None
 #######################################
 gh_topics_statistics_list() {
-  topics_file="${1-'partials/raw/github-topic-list.txt'}"
+  topics_list="${1-"partials/raw/github-topic-list.txt"}"
+  topics_summary="${2-"partials/raw/github-topic.tsv"}"
 
   while read -r line; do
-    echo "gh_topics_statistics_list [$line]"
+    # echo "gh_topics_statistics_list [$line]"
     gh_topic_statistics "$line"
-  done <"$topics_file"
+  done <"$topics_list"
+
+  touch "$topics_summary"
+  echo "topic	url	total_count" >"$topics_summary"
+  for fullpath in partials/raw/github-topic/*.json; do
+    topic=$(basename "$fullpath" .json)
+    url="https://github.com/topics/$topic"
+    # echo "TODO filename[$fullpath]"
+    count=$(jq '.total_count' <"$fullpath")
+    # echo "topic[$topic] count[$count]"
+    echo "$topic	$url	$count" >>"$topics_summary"
+  done
+}
+
+#######################################
+# Iterate list with all topics and call gh_topic_statistics()
+#
+# Globals:
+#
+# Arguments:
+#   topics_current   (optional)  File with list of topics
+#   topics_summary   (optional)  File with list of topics
+# Returns
+#   None
+#######################################
+gh_topics_statistics_consolidate() {
+  topics_current="${1-"partials/raw/github-topic.csv"}"
+  topics_history="${1-"data/github-topics-evolution.csv"}"
+
+  echo "@TODO gh_topics_statistics_consolidate"
+
+  # while read -r line; do
+  #   # echo "gh_topics_statistics_list [$line]"
+  #   gh_topic_statistics "$line"
+  # done <"$topics_current"
+
+  # touch "$topics_summary"
+  # echo "topic,url,total_count" >"$topics_summary"
+  # for fullpath in partials/raw/github-topic/*.json; do
+  #   topic=$(basename "$fullpath" .json)
+  #   url="https://github.com/topics/$topic"
+  #   # echo "TODO filename[$fullpath]"
+  #   count=$(jq '.total_count' <"$fullpath")
+  #   # echo "topic[$topic] count[$count]"
+  #   echo "$topic,$url,$count" >>"$topics_summary"
+  # done
 }
 
 #### Main ______________________________________________________________________

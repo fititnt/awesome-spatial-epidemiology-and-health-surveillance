@@ -1,4 +1,4 @@
-#item+group,#item+github_topic,#item+repositories+total
+date,github_topic,repositories_count
 1,disease-mapping,3
 1,epidemic-simulations,75
 1,spatial-epidemiology,4
