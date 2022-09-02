@@ -10,16 +10,18 @@
 
 - **Tier 1**:
   - [disease-mapping](https://github.com/topics/disease-mapping): 3 repositories
-  - [epidemic-simulations](https://github.com/topics/epidemic-simulations): 75 repositories
+  - [epidemic-simulations](https://github.com/topics/epidemic-simulations): 74 repositories
   - [spatial-epidemiology](https://github.com/topics/spatial-epidemiology): 4 repositories
+  - [syndromic-surveillance](https://github.com/topics/syndromic-surveillance): 1 repositories
+  - [public-health-surveillance](https://github.com/topics/public-health-surveillance): 1 repositories
 - **Tier 2**:
-  - [bioinformatics](https://github.com/topics/bioinformatics): 6942 repositories
-  - [epidemiology](https://github.com/topics/epidemiology): 578 repositories
-  - [genomics](https://github.com/topics/genomics): 1869 repositories
-  - [infectious-diseases](https://github.com/topics/infectious-diseases): 94 repositories
+  - [bioinformatics](https://github.com/topics/bioinformatics): 6737 repositories
+  - [epidemiology](https://github.com/topics/epidemiology): 567 repositories
+  - [genomics](https://github.com/topics/genomics): 1809 repositories
+  - [infectious-diseases](https://github.com/topics/infectious-diseases): 92 repositories
 - **Tier 3**:
-  - [spatial-analysis](https://github.com/topics/spatial-analysis): 470 repositories
-  - [geospatial-analysis](https://github.com/topics/geospatial-analysis): 227 repositories
+  - [spatial-analysis](https://github.com/topics/spatial-analysis): 459 repositories
+  - [geospatial-analysis](https://github.com/topics/geospatial-analysis): 222 repositories
 
 ## General concepts
 
@@ -33,7 +35,7 @@ Disease ecology is a sub-discipline of ecology concerned with the mechanisms, pa
 Health geography is the application of geographical information, perspectives, and methods to the study of health, disease, and health care.
 
 ### [reverse zoonosis (Q1049711)](https://www.wikidata.org/wiki/Q1049711)
-A reverse zoonosis, also known as a zooanthroponosis (Greek zoon &quot;animal&quot;, anthropos &quot;man&quot;, nosos &quot;disease&quot;) or anthroponosis, is a pathogen reservoired in humans that is capable of being transmitted to non-human animals.
+A reverse zoonosis, also known as a zooanthroponosis (Greek zoon &quot;animal&quot;&quot;
 
 ### [spatial epidemiology (Q7574064)](https://www.wikidata.org/wiki/Q7574064)
 Spatial epidemiology is a subfield of epidemiology focused on the study of the spatial distribution of health outcomes; it is closely related to health geography.
@@ -69,52 +71,52 @@ A zoonosis or zoonotic disease is an infectious disease of humans caused by a pa
 > Trivia: the initial reference here is based on [Top 10 Python Packages For Creating Synthetic Data](https://www.activestate.com/blog/top-10-python-packages-for-creating-synthetic-data/)
 
 #### [DataSynthesizer (python)](https://github.com/DataResponsibly/DataSynthesizer)
-
+null
 ```
 pip install DataSynthesizer
 ```
 #### [pydbgen (python)](https://github.com/tirthajyoti/pydbgen)
-
+Random dataframe and database table generator
 ```
 pip install pydbgen
 ```
 #### [mimesis (python)](https://github.com/lk-geimfari/mimesis)
-
+Mimesis is a high-performance fake data generator for Python, which provides data for a variety of purposes in a variety of languages. 
 ```
 pip install mimesis
 ```
 #### [SDV (python)](https://github.com/sdv-dev/SDV)
-
+Synthetic Data Generation for tabular, relational and time series data.
 ```
 pip install SDV
 ```
 #### [plaitpy (python)](https://github.com/plaitpy/plaitpy)
-
+plait.py - a fake data modeler 
 ```
 pip install plaitpy
 ```
 #### [timeseries-generator (python)](https://github.com/Nike-Inc/timeseries-generator)
-
+A library to generate synthetic time series data by easy-to-use factors and generator
 ```
 pip install timeseries-generator
 ```
 #### [gretel-synthetics (python)](https://github.com/gretelai/gretel-synthetics)
-
+Synthetic data generators for structured and unstructured text, featuring differentially private learning.
 ```
 pip install gretel-synthetics
 ```
 #### [scikit-learn (python)](https://github.com/scikit-learn/scikit-learn)
-
+scikit-learn: machine learning in Python
 ```
 pip install scikit-learn
 ```
 #### [Mesa (python)](https://github.com/projectmesa/mesa)
-
+Mesa is an agent-based modeling framework in Python
 ```
 pip install Mesa
 ```
 #### [zpy (python)](https://github.com/ZumoLabs/zpy)
-
+Synthetic data for computer vision. An open source toolkit using Blender and Python.
 ```
 pip install zpy-zumo
 ```

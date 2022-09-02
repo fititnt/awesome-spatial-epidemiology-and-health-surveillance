@@ -249,27 +249,41 @@ set -x
 
 ./scripts/readme-from-csv.py \
   data/github-topics.hxl.csv \
-  --line-formatter='  - [{{raw_line.1}}](https://github.com/topics/{{raw_line.1}}): {{raw_line.2}} repositories' \
+  --line-formatter='  - [{{raw_line.1}}](https://github.com/topics/{{raw_line.1}}): {{total_count}} repositories' \
   --line-select='{{raw_line.0}}==1' \
+  --data-merge-file-2='partials/raw/github-topic.tsv' \
+  --data-merge-key-2='#item+github_topic' \
+  --data-merge-foreignkey-2='topic' \
   >partials/github-topics_1.md
+
+# ./scripts/readme-from-csv.py data/github-topics.hxl.csv --data-merge-file-2='partials/raw/github-topic.tsv' --data-merge-key-2='#item+github_topic' --data-merge-foreignkey-2='topic'
 
 ./scripts/readme-from-csv.py \
   data/github-topics.hxl.csv \
-  --line-formatter='  - [{{raw_line.1}}](https://github.com/topics/{{raw_line.1}}): {{raw_line.2}} repositories' \
+  --line-formatter='  - [{{raw_line.1}}](https://github.com/topics/{{raw_line.1}}): {{total_count}} repositories' \
   --line-select='{{raw_line.0}}==2' \
+  --data-merge-file-2='partials/raw/github-topic.tsv' \
+  --data-merge-key-2='#item+github_topic' \
+  --data-merge-foreignkey-2='topic' \
   >partials/github-topics_2.md
 
 ./scripts/readme-from-csv.py \
   data/github-topics.hxl.csv \
-  --line-formatter='  - [{{raw_line.1}}](https://github.com/topics/{{raw_line.1}}): {{raw_line.2}} repositories' \
+  --line-formatter='  - [{{raw_line.1}}](https://github.com/topics/{{raw_line.1}}): {{total_count}} repositories' \
   --line-select='{{raw_line.0}}==3' \
+  --data-merge-file-2='partials/raw/github-topic.tsv' \
+  --data-merge-key-2='#item+github_topic' \
+  --data-merge-foreignkey-2='topic' \
   >partials/github-topics_3.md
 
 # shellcheck disable=SC2016
 ./scripts/readme-from-csv.py \
   data/software.hxl.csv \
-  --line-formatter='#### [{{raw_line.1}} ({{raw_line.2}})]({{raw_line.3}})\n\n```\n{{raw_line.4}}\n```' \
+  --line-formatter='#### [{{raw_line.1}} ({{raw_line.2}})]({{raw_line.3}})\n{{description}}\n```\n{{raw_line.4}}\n```' \
   --line-select='{{raw_line.0}}=="synthetic-data"' \
+  --data-merge-file-2='partials/raw/github-projects.tsv' \
+  --data-merge-key-2='#item+repository+url' \
+  --data-merge-foreignkey-2='repo' \
   >partials/software_synthetic-data.md
 
 ./scripts/readme-from-csv.py \

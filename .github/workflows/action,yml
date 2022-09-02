@@ -1,0 +1,219 @@
+# SPDX-License-Identifier: Unlicense OR 0BSD
+
+
+name: "aN1603_16"
+
+on:
+  push:
+    branches:
+      - main
+
+# env:
+#   # Fix: 'tput: No value for $TERM and no -T specified'
+#   TERM: xterm
+#   AUTOMATON__1603_16__CPLP_UNICAE: "1"
+#   # AUTOMATON__1603_16__CPLP_UNICAE: "0"
+#   # When running too many git clones at once, the scripts will
+#   # default to ARTIFICIAL_THROTTLING=1 (1 second). Next part force higher time.
+#   ARTIFICIAL_THROTTLING: 0
+#   # AUTOMATON__1603_16__CPLP_UNICAE="0", define range of UN M49 to operate
+#   # UNM49_INITIALI: 700
+#   # UNM49_FINALI: 999
+#   # UNM49_INITIALI: 400
+#   # UNM49_FINALI: 700
+#   # UNM49_INITIALI: 100
+#   # UNM49_FINALI: 400
+
+# defaults:
+#   run:
+#     working-directory: ./officina
+
+jobs:
+  "aN1603_16":
+    name: aN1603_16
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      #### Low level ssh-agent _________________________________________________
+      # # @see https://github.com/marketplace/actions/webfactory-ssh-agent
+      # # REASONING: this is not necessary for read-only requests to public
+      # #            repositories, but for use GitHub Actions runner, we need
+      # #            something far more dynamic than write YAML for every
+      # #            repository we would create with shell scripting
+      # - name: ID_ED25519__GITHUBRUNNER2022
+      #   uses: webfactory/ssh-agent@v0.5.4
+      #   with:
+      #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY__ID_ED25519__GITHUBRUNNER2022 }}
+
+      # # - run: ssh -T git@github.com
+      # #   continue-on-error: true
+
+      #### Fetch data __________________________________________________________
+
+      - uses: actions/checkout@v3
+
+      # - name: EticaAI/lexicographi-sine-finibus
+      #   uses: actions/checkout@v3
+      #   with:
+      #     repository: EticaAI/lexicographi-sine-finibus
+      #     path: officina/999999/3133368/lexicographi-sine-finibus
+
+      # - name: MDCIII/999999_1603_16
+      #   uses: actions/checkout@v3
+      #   continue-on-error: true
+      #   with:
+      #     repository: MDCIII/999999_1603_16
+      #     path: officina/999999/3133368/999999_1603_16
+
+      # # Debug part, remove later, START
+      # - run: pwd
+      # - run: find * -type f
+      #   continue-on-error: true
+      # # Debug part, remove later, END
+
+      # - name: "Merge 999999 [MDCIII/999999_1603_16 -> EticaAI/lexicographi-sine-finibus]"
+      #   run: >
+      #     rsync --verbose --human-readable --checksum --recursive
+      #     999999/3133368/999999_1603_16/999999/
+      #     999999/3133368/lexicographi-sine-finibus/officina/999999
+      #   continue-on-error: true
+
+      # # - name: "Merge 999999 [MDCIII/999999_1603_16 -> EticaAI/lexicographi-sine-finibus]"
+      # #   run: rsync --dry-run --verbose --human-readable --checksum --recursive officina/999999/3133368/999999_1603_16/999999/ officina/999999/3133368/lexicographi-sine-finibus/officina/999999
+      # #   continue-on-error: true
+
+      # # Debug part, remove later, START
+      # - run: pwd
+      # - run: ls -lha
+      # - run: ls -lha 999999/
+      #   continue-on-error: true
+      # - run: ls -lha 999999/3133368/
+      #   continue-on-error: true
+      # - run: find * -type f
+      #   continue-on-error: true
+      # # Debug part, remove later, END
+
+      # ### Symlinks
+      # - name: officina/1603
+      #   run: >
+      #     ln --relative --symbolic
+      #     999999/3133368/lexicographi-sine-finibus/officina/1603
+      #     1603
+      #   continue-on-error: true
+
+      # - name: officina/999999/1603
+      #   run: >
+      #     ln --relative --symbolic
+      #     999999/3133368/lexicographi-sine-finibus/officina/999999/1603
+      #     999999/1603
+      #   continue-on-error: true
+
+      # - name: officina/999999999/0
+      #   run: >
+      #     ln --relative --symbolic
+      #     999999/3133368/lexicographi-sine-finibus/officina/999999999/0
+      #     999999999/0
+      #   continue-on-error: true
+
+      # # 1603_1_99 is not stored with main repository, but is required by
+      # # scripts that generate Codex. For now we're simply downloading
+      # # from the older EticaAI/lsf-cache/ repository
+      # - name: "Temporary fix [1603/1/99/1603_1_99.no1.tm.hxl.csv]"
+      #   run: >
+      #     curl --output 1603/1/99/1603_1_99.no1.tm.hxl.csv
+      #     https://raw.githubusercontent.com/EticaAI/lsf-cache/main/1603/1/99/1603_1_99.no1.tm.hxl.csv
+      #   continue-on-error: true
+
+      # - name: "Temporary fix [999999/1603/45/16/1603_45_16.index.hxl.csv]"
+      #   run: >
+      #     curl --output 999999/1603/45/16/1603_45_16.index.hxl.csv
+      #     https://raw.githubusercontent.com/EticaAI/lsf-cache/main/999999/1603/45/16/1603_45_16.index.hxl.csv
+      #   continue-on-error: true
+
+      # - run: ls -lha 1603/1/99/1603_1_99.no1.tm.hxl.csv
+      #   continue-on-error: true
+
+      # - run: ls -lha 999999/1603/45/16/1603_45_16.index.hxl.csv
+      #   continue-on-error: true
+
+      #### Python ______________________________________________________________
+      # @see https://github.com/actions/setup-python
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+          cache: "pip"
+      # - run: pip install libhxl hxltm-eticaai openpyxl frictionless csvkit
+      # - run: pip install -r .github/requirements.txt
+      - run: pip install -r ../.github/requirements.txt
+        continue-on-error: true
+
+      # #### Java Setup __________________________________________________________
+      # # @see https://github.com/marketplace/actions/setup-java-jdk
+      # - uses: actions/setup-java@v3
+      #   with:
+      #     distribution: temurin
+      #     java-version: 17
+
+      # ### Apache Jena ----------------------------------------------------------
+      # # @see https://github.com/foooomio/setup-jena
+      # - uses: foooomio/setup-jena@v2
+      # - run: sparql --version
+
+      # ### Rapper (tool for work with low level RDF) ----------------------------
+      # - run: sudo apt-get install -y raptor2-utils
+      #   continue-on-error: true
+
+      # #### Debug _______________________________________________________________
+      # _[por-Latn] Lista arquivos locais (útil para saber o que fazer upload [por-Latn]_
+      - run: ls -lha
+      # tree-like command for macos, @see https://superuser.com/questions/359723/mac-os-x-equivalent-of-the-ubuntu-tree-command
+      - run: find * -type f
+
+      - run: hxltmcli --version
+        continue-on-error: true
+
+      - run: ./scripts/readme-from-csv.py --help
+        continue-on-error: true
+
+      # - run: riot --version
+      #   continue-on-error: true
+
+      # - run: frictionless --version
+      #   continue-on-error: true
+
+      # - run: rsync --version
+      #   continue-on-error: true
+
+      # ### Debug, internal tools from lexicographi-sine-finibus
+      # - run: ./999999999/0/1603_1.py --help
+      #   continue-on-error: true
+
+      # - run: ./999999999/0/999999999_7200235.py --help
+      #   continue-on-error: true
+
+      # - run: ./999999999/0/1603_3_12.py --help
+      #   continue-on-error: true
+
+      # #### ssh keys
+      # # @see https://github.com/webfactory/ssh-agent
+      # # SSH_PRIVATE_KEY__ID_ED25519__GITHUBRUNNER2022
+
+      # # - run: ssh -T git@github.com
+      # #   continue-on-error: true
+
+      # # @TODO beyond bare 'git', also configure gh (GitHub CLI) to use the
+      # #       machine operator like @eticaaibot, not the human user. See
+      # # docs.github.com/pt/actions/using-workflows/using-github-cli-in-workflows
+
+      # ### 1603_16 ----------------------------------------------------------
+      # - run: ls -lha 999999/1603/45/16/
+      #   continue-on-error: true
+
+      # - run: ls -lha 999999/1603/45/16/1603_45_16.index.hxl.csv
+      #   continue-on-error: true
+
+      # - run: ./999999999/999999_1603_16.workflow.sh
+      #   continue-on-error: true
+
+      # - run: ./999999999/1603_16.workflow.sh
+      #   continue-on-error: true

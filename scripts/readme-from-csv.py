@@ -62,6 +62,13 @@ Extract unique URLs, Except know patterns . . . . . . . . . . . . . . . . . . .
 Extract unique URLs, Except know patterns . . . . . . . . . . . . . . . . . . .
     {__file__} --method=extract-generic-url 'data/*.csv'
 
+Merge data files in memory before render templated result . . . . . . . . . . .
+
+    {__file__} data/software.hxl.csv \
+--data-merge-file-2='partials/raw/github-projects.tsv' \
+--data-merge-key-2='#item+repository+url' \
+--data-merge-foreignkey-2='repo'
+
 ------------------------------------------------------------------------------
                             EXEMPLŌRUM GRATIĀ
 ------------------------------------------------------------------------------
@@ -468,7 +475,7 @@ class CSVtoReadme:
 
             line_variables = dict(zip(header, line))
             # print('oi', self.line_select, line)
-            line_variables['raw_line'] = line
+            line_variables['raw_line'] = list(line)
             if self.line_select is not None:
                 parsed_line_select = self.line_select.format(**line_variables)
                 # print('parsed_line_select', parsed_line_select)
@@ -498,25 +505,69 @@ class CSVtoReadme:
         raise NotImplementedError('@TODO _prepare_sort')
 
     def prepare(self):
+
+        # Loading main file
         with open(self.infile) as csv_file:
-            csv_reader = csv.reader(csv_file, delimiter=self.input_delimiter)
-            # csv_dictreader = csv.reader(
-            #     csv_file, delimiter=self.input_delimiter)
-            # line_count = 0
+            dialect = csv.Sniffer().sniff(csv_file.read(16384))
+            csv_file.seek(0)
+            csv_reader = csv.reader(csv_file, dialect)
             self.data_lines = []
             self.data_dict = []
 
             for row in csv_reader:
                 self.data_lines.append(row)
 
-            # for row in csv_dictreader:
-            #     self.data_dict.append(row)
-
         if self.line_select or self.line_exclude:
             self._prepare_filter()
 
         if self.output_sort:
             raise NotImplementedError('TODO output_sort')
+
+        # @TODO maybe create an autodetect
+        key_2 = self.merge_key_2
+        foreignkey_2 = self.merge_foreignkey_2
+
+        if self.merge_file_2:
+            main_dict = []
+            original_header = []
+            for line in self.data_lines:
+                if len(original_header) == 0:
+                    original_header = line
+                    continue
+                main_dict.append(dict(zip(original_header, line)))
+
+            merge_2_dict = {}
+            with open(self.merge_file_2) as csv_file22:
+                dialect = csv.Sniffer().sniff(csv_file22.read(16384))
+                csv_file22.seek(0)
+                # print('self.merge_file_2', self.merge_file_2)
+                csv_dicreader = csv.DictReader(csv_file22, dialect=dialect)
+                for merge_line in csv_dicreader:
+                    # print('merge_line', merge_line)
+                    merge_2_dict[merge_line[foreignkey_2]] = merge_line
+
+            # print('merge_2_dict.keys()', merge_2_dict.keys())
+            _keys = list(merge_2_dict.keys())[0]
+            not_found_dict = dict(
+                zip(_keys, [''] * len(_keys)))
+
+            # now we try to merge
+            new_main = []
+            for main_line in main_dict:
+                if main_line[key_2] in merge_2_dict:
+                    merged_item_now = {**main_line,
+                                       **merge_2_dict[main_line[key_2]]}
+                else:
+                    merged_item_now = {**main_line,
+                                       **not_found_dict}
+
+                if len(new_main) == 0:
+                    new_main.append(merged_item_now.keys())
+
+                new_main.append(merged_item_now.values())
+
+            self.data_lines = new_main
+        # Load merge 2 file (if any)
 
     def print(self):
 
@@ -540,7 +591,7 @@ class CSVtoReadme:
             # summary = line[1]
 
             line_variables = dict(zip(header, line))
-            line_variables['raw_line'] = line
+            line_variables['raw_line'] = list(line)
 
             # print(self.line_formatter.format(
             #     **line_variables).replace('\\n', "\n"))
@@ -601,9 +652,12 @@ class ExtractDataFromFiles:
         if file.endswith(tuple(delimiters.keys())):
             # raise NotImplementedError('todo')
             items = set()
-            with open(file, 'r') as csvfile:
-                spamreader = csv.reader(csvfile, delimiter=',')
-                for row in spamreader:
+            with open(file, 'r') as csv_file:
+                dialect = csv.Sniffer().sniff(csv_file.read(16384))
+                csv_file.seek(0)
+                csv_reader = csv.reader(csv_file, dialect)
+                # spamreader = csv.reader(csvfile, delimiter=',')
+                for row in csv_reader:
                     [items.add(item) for item in row]
             return items
 

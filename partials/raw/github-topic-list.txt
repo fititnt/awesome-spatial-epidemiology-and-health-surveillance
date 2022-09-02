@@ -5,5 +5,7 @@ https://github.com/topics/epidemiology
 https://github.com/topics/genomics
 https://github.com/topics/geospatial-analysis
 https://github.com/topics/infectious-diseases
+https://github.com/topics/public-health-surveillance
 https://github.com/topics/spatial-analysis
 https://github.com/topics/spatial-epidemiology
+https://github.com/topics/syndromic-surveillance
