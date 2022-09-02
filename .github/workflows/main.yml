@@ -8,6 +8,9 @@ on:
     branches:
       - main
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
 # env:
 #   # Fix: 'tput: No value for $TERM and no -T specified'
 #   TERM: xterm
@@ -169,10 +172,13 @@ jobs:
       # tree-like command for macos, @see https://superuser.com/questions/359723/mac-os-x-equivalent-of-the-ubuntu-tree-command
       - run: find * -type f
 
-      - run: hxltmcli --version
-        continue-on-error: true
+      # - run: hxltmcli --version
+      #   continue-on-error: true
 
       - run: ./scripts/readme-from-csv.py --help
+        continue-on-error: true
+
+      - run: frictionless validate datapackage.json
         continue-on-error: true
 
       # - run: riot --version

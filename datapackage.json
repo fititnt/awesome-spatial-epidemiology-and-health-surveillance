@@ -18,7 +18,7 @@
         "fields": [
           {
             "type": "string",
-            "name": "#item+tier"
+            "name": "#item+group"
           },
           {
             "type": "string",
@@ -67,6 +67,10 @@
           {
             "type": "string",
             "name": "#item+group"
+          },
+          {
+            "type": "string",
+            "name": "#item+title"
           },
           {
             "type": "string",
