@@ -11,7 +11,9 @@
 #       OPTIONS:  ---
 #
 #  REQUIREMENTS:  - python3
-#                   - chevron (pip install chevron)
+#                   - pyyaml
+#                   - python-liquid
+#                   - python-liquid-extra
 #          BUGS:  ---
 #         NOTES:  ---
 #        AUTHOR:  Emerson Rocha <rocha[at]ieee.org>
@@ -24,6 +26,8 @@
 # ===============================================================================
 
 
+import yaml
+import fnmatch
 import glob
 import os
 import argparse
@@ -166,7 +170,8 @@ class Cli:
             dest='line_formatter',
             nargs='?',
             # required=True
-            default='{{.}}'
+            # default='{{.}}'
+            default=None
         )
 
         # parser_table.add_argument(
@@ -612,10 +617,10 @@ class CSVtoReadme:
                 self.line_formatter,
                 line_variables).replace('\\n', "\n"))
 
-            # print(self.liquid.render(
-            #     self.line_formatter,
-            #     line_variables
-            # ))
+            print(self.liquid.render(
+                self.line_formatter,
+                line_variables
+            ))
 
         if self.group_suffix:
             print(self.group_suffix)
@@ -726,55 +731,40 @@ class LiquidRenderer:
     @see https://jg-rp.github.io/liquid/extra/filters#t-translate
     """
 
-    default_template: Type['Template'] = None
     env: Environment
+    i18n_data: dict = None
+    objective_bcp47: str = None
+    fallback_bcp47: str = None
 
-    def __init__(self) -> None:
+    def __init__(
+        self,
+        objective_bcp47: str = 'en',
+        fallback_bcp47: str = 'en',
+    ) -> None:
 
-        self.default_template = Template(
-            "Hello, {{ you }}!",
-            # tolerance=Mode.STRICT,
-            # undefined=StrictUndefined,
-        )
+        self.objective_bcp47 = objective_bcp47
+        self.fallback_bcp47 = fallback_bcp47
         # pass
         # self.env = Environment()
         # self.env.add_filter("json", filters.JSON())
+        globals = {'locale': self.objective_bcp47}
         self.env = Environment(
             tolerance=Mode.STRICT,
-            undefined=StrictUndefined,
+            # undefined=StrictUndefined,
             # loader=FileSystemLoader("./templates/"),
+            globals=globals
         )
         self.env.add_filter("json", filters.JSON())
+        tloader = TranslationLoader(
+            objective_bcp47=self.objective_bcp47,
+            fallback_bcp47=self.fallback_bcp47
+        )
+        self.i18n_data = tloader.get_data()
+        # print('self.i18n_data ', self.i18n_data)
 
-        some_locales = {
-            "default": {
-                "layout": {
-                    "greeting": r"Hello {{ name }}",
-                },
-                "cart": {
-                    "general": {
-                        "title": "Shopping Basket",
-                    },
-                },
-                "pagination": {
-                    "next": "Next Page",
-                },
-            },
-            "de": {
-                "layout": {
-                    "greeting": r"Hallo {{ name }}",
-                },
-                "cart": {
-                    "general": {
-                        "title": "Warenkorb",
-                    },
-                },
-                "pagination": {
-                    "next": "Nächste Seite",
-                },
-            },
-        }
-        self.env.add_filter(Translate.name, Translate(locales=some_locales))
+        # raise NotImplementedError
+
+        self.env.add_filter(Translate.name, Translate(locales=self.i18n_data))
 
     def render(self, template: str = None, context: dict = None) -> str:
 
@@ -799,9 +789,133 @@ class LiquidRenderer:
             compiled_template = self.env.from_string(template)
             extra_context = context
 
+        if 'locale' not in context:
+            context['locale'] = self.objective_bcp47
+
         result = compiled_template.render(extra_context)
         return result
 
+
+class TranslationLoader:
+    """ TranslationLoader abstract load translation files from disk into memory
+    """
+
+    data: dict = {
+        'default': {
+            'error': 'translations not loaded'
+        }
+    }
+
+    def __init__(
+        self,
+        objective_bcp47: str = 'pt',
+        fallback_bcp47: str = 'en',
+        base_namespace: str = 'translation',
+        locales_base: list = None,
+        file_extensions: list = None
+    ) -> None:
+        self.objective_bcp47 = objective_bcp47
+        self.fallback_bcp47 = fallback_bcp47
+        self.base_namespace = base_namespace
+        if not locales_base:
+            # public/locales/{lng}/translation.json
+            locales_base = [
+                'i18n',
+                'locales',
+            ]
+        if not file_extensions:
+            # public/locales/{lng}/translation.json
+            file_extensions = [
+                'yml',
+                'yaml',
+                'json',
+            ]
+
+        self.locales_base = locales_base
+        self.file_extensions = file_extensions
+        self.data[objective_bcp47] = {
+            'error': 'no single translation file loaded'
+        }
+        self.data[fallback_bcp47] = {
+            'error': 'no single translation file loaded'
+        }
+        self.load_all_from_disk()
+
+    def load_all_from_disk(self):
+        """load_all_from_disk load only files targeted for use now
+
+        """
+        _base = None
+        for attempted_bases in self.locales_base:
+            if exists(attempted_bases):
+                _base = attempted_bases
+                break
+        if not _base:
+            # Stop if directory does not exist
+            return None
+        file_extensions = ','.join(self.file_extensions)
+        file_pattern = f'{_base}/*/*.{{{file_extensions}}}'
+
+        matches = []
+        current_lang = None
+        current_namespace = None
+        for root, _dirnames, filenames in os.walk(_base):
+            for filename in fnmatch.filter(filenames, '*.*'):
+                root_parts = root.split('/')
+                if len(root_parts) != 2:
+                    # we expect something like 'i18n/en' not 'i18n/en/subdir'
+                    # for now.
+                    continue
+                current_lang = root_parts[1]
+                if current_lang not in [self.objective_bcp47,
+                                        self.fallback_bcp47, 'default']:
+                    # Also skiping languages user do not specified
+                    continue
+                filename_parts = filename.split('.')
+                current_namespace = filename_parts[0]
+                loaded_data = self.load_file(os.path.join(root, filename))
+                # _data_now = {
+                #     current_namespace: loaded_data
+                # }
+                if current_namespace == self.base_namespace:
+                    _data_now = loaded_data
+                else:
+                    _data_now = {
+                        current_namespace: loaded_data
+                    }
+
+                self.data[current_lang] = {
+                    **self.data[current_lang],
+                    **_data_now
+                }
+                if 'error' in self.data[current_lang]:
+                    del self.data[current_lang]['error']
+                if current_lang == self.fallback_bcp47:
+                    # self.data['default'] = {
+                    #     current_namespace: loaded_data
+                    # }
+                    self.data['default'] = {
+                        **self.data['default'],
+                        **_data_now
+                    }
+                    if 'error' in self.data['default']:
+                        del self.data['default']['error']
+
+    def load_file(self, file: str) -> dict:
+        """load_file
+
+        Args:
+            file (str): path to file
+
+        Returns:
+            dict: return content of file as python dictionary
+        """
+        with open(file) as _file:
+            data = yaml.load(_file, Loader=yaml.SafeLoader)
+            return data
+
+    def get_data(self):
+        return self.data
 
 # lrenderer = LiquidRenderer()
 # print(lrenderer.render("Hello, {{ you }}!", {'you': 'you value'}))

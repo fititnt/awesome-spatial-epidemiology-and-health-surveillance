@@ -1,6 +1,6 @@
 frictionless
 chevron
-
+pyyaml
 # Template engine
 python-liquid
 # Used by i18n

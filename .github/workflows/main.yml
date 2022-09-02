@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Unlicense OR 0BSD
 
 
-name: "aN1603_16"
+name: "main"
 
 on:
   push:
@@ -32,8 +32,8 @@ on:
 #     working-directory: ./officina
 
 jobs:
-  "aN1603_16":
-    name: aN1603_16
+  "main":
+    name: main
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
