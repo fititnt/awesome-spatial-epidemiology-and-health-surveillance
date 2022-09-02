@@ -3,3 +3,5 @@ scripts/temp/*
 !scripts/temp/.gitkeep
 README.source.xml
 .errors.log
+partials/temp/*
+!partials/temp/.gitkeep

@@ -38,16 +38,16 @@ import sys
 from typing import List, Type
 from ast import literal_eval
 
-from liquid import Template
-from liquid import FileSystemLoader
-from liquid import StrictUndefined
+# from liquid import Template
+# from liquid import FileSystemLoader
+from liquid import StrictDefaultUndefined
 from liquid import Mode
 from liquid_extra import filters
 from liquid import Environment
 from liquid_extra.filters import Translate
 
 # import pystache
-import chevron
+# import chevron
 
 DESCRIPTION = f"""
 {__file__} provide some conventinent functions to convert tabular data
@@ -151,6 +151,7 @@ class Cli:
                 'extract-github-url',
                 'extract-github-topic-url',
                 'extract-wikidata-q',
+                'extract-remote-html-table',
             ],
             required=False,
             default='table-processing'
@@ -390,6 +391,53 @@ class Cli:
 
             edff.prepare()
             return edff.print()
+
+        if pyargs.method in [
+            'extract-remote-html-table',
+        ]:
+
+            PANDAS_READ_HTML__INDEXTABLE = \
+                os.environ.get('PANDAS_READ_HTML__INDEXTABLE', '')
+
+            # match
+            PANDAS_READ_HTML__MATCH = \
+                os.environ.get('PANDAS_READ_HTML__MATCH', '')
+
+            # table_index = 0
+            # @see https://pbpython.com/pandas-html-table.html
+            from unicodedata import normalize
+            import pandas as pd
+
+            def clean_normalize_whitespace(x):
+                if isinstance(x, str):
+                    return normalize('NFKC', x).strip()
+                else:
+                    return x
+
+            if PANDAS_READ_HTML__MATCH:
+                tables_html = pd.read_html(
+                    _infile,
+                    match=PANDAS_READ_HTML__MATCH)
+            else:
+                tables_html = pd.read_html(_infile)
+            if not PANDAS_READ_HTML__INDEXTABLE:
+                # No option specified, print all
+                loop_now = -1
+                for df in tables_html:
+                    loop_now += 1
+                    if len(tables_html) > 1:
+                        print(f'=============== TABLE {loop_now}/' +
+                              f'{len(tables_html)} ===============')
+
+                    df = df.applymap(clean_normalize_whitespace)
+                    print(df.to_csv(index=False))
+            else:
+                the_index = int(PANDAS_READ_HTML__INDEXTABLE)
+                df = tables_html[the_index]
+                df = df.applymap(clean_normalize_whitespace)
+                print(df.to_csv(index=False).strip())
+
+            return self.EXIT_ERROR
 
         # # go = owlready2.get_ontology("http://purl.obolibrary.org/obo/go.owl").load()
         # # obo = owlready2.get_namespace("http://purl.obolibrary.org/obo/")
@@ -830,7 +878,7 @@ class LiquidRenderer:
         globals = {'locale': self.bcp47_objetive}
         self.env = Environment(
             tolerance=Mode.STRICT,
-            # undefined=StrictUndefined,
+            undefined=StrictDefaultUndefined,
             # loader=FileSystemLoader("./templates/"),
             globals=globals
         )

@@ -1,5 +1,5 @@
 frictionless
-chevron
+# chevron
 pyyaml
 # Template engine
 python-liquid
