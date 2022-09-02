@@ -1,5 +1,5 @@
 {
-  "name": "biosafety-level-laboratories",
+  "name": "biosafety-level-4-laboratories",
   "format": "csv",
   "sources": [
     {
@@ -9,8 +9,8 @@
   ],
   "resources": [
     {
-      "path": "biosafety-level-laboratories.csv",
-      "name": "biosafety-level-laboratories",
+      "path": "biosafety-level-4-laboratories.csv",
+      "name": "biosafety-level-4-laboratories",
       "profile": "tabular-data-resource",
       "scheme": "file",
       "format": "csv",

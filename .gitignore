@@ -5,3 +5,4 @@ README.source.xml
 .errors.log
 partials/temp/*
 !partials/temp/.gitkeep
+partials/raw/etc/whocc
