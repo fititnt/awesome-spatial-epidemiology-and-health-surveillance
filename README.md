@@ -1,4 +1,7 @@
 # Awesome Spatial Epidemiology and Public Health Surveillance
+[![Frictionless](https://github.com/fititnt/awesome-spatial-epidemiology-and-public-health-surveillance/actions/workflows/frictionless.yml/badge.svg)](https://repository.frictionlessdata.io/pages/dashboard.html?user=fititnt&repo=awesome-spatial-epidemiology-and-public-health-surveillance&flow=frictionless)
+[![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
+
 ![Awesome Spatial Epidemiology and Public Health Surveillance Banner](partials/awesome-spatial-epidemiology.jpg)
 
 **Curated list of awesome spatial epidemiology data exchange concepts, data reference and tooling. Contributions are welcomed!**

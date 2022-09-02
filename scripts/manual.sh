@@ -35,9 +35,21 @@ frictionless validate datapackage.json
 cat data/software.hxl.csv | p.df 'df.describe().T' -o table
 
 
-PANDAS_READ_HTML__INDEXTABLE=1 ./scripts/readme-from-csv.py --method='extract-remote-html-table' https://en.wikipedia.org/wiki/Biosafety_level > partials/temp/biosafety.csv
+PANDAS_READ_HTML__INDEXTABLE=1 ./scripts/readme-from-csv.py --method='extract-remote-html-table' https://en.wikipedia.org/wiki/Biosafety_level > partials/raw/wikipedia-table/biosafety-level-laboratories.csv
 
 PANDAS_READ_HTML__INDEXTABLE=0 ./scripts/readme-from-csv.py --method='extract-remote-html-table' https://en.wikipedia.org/wiki/List_of_infectious_diseases > partials/temp/List_of_infectious_diseases.csv
 
 
-./scripts/readme-from-csv.py --method='extract-remote-html-table' 'https://apps.who.int/whocc/List.aspx?UHfehFaaKUEdGSfqs%2fFGLg=%3d' > partials/temp/who-ccg.csv
+./scripts/readme-from-csv.py --method='extract-remote-html-table' 'https://apps.who.int/whocc/List.aspx?UHfehFaaKUEdGSfqs%2fFGLg=%3d' > partials/raw/who-ccg.csv
+
+./scripts/readme-from-csv.py --method='extract-remote-html-table' https://en.wikipedia.org/wiki/Infections_associated_with_diseases > partials/temp/Infections_associated_with_diseases.csv
+
+
+# wc -l partials/temp/who-ccg/*.tsv
+#     30 partials/temp/who-ccg/who-ccg-chrome-scrapper_AFRO.tsv
+#    181 partials/temp/who-ccg/who-ccg-chrome-scrapper_AMRO.tsv
+#     55 partials/temp/who-ccg/who-ccg-chrome-scrapper_EMRO.tsv
+#    265 partials/temp/who-ccg/who-ccg-chrome-scrapper_EURO.tsv
+#     99 partials/temp/who-ccg/who-ccg-chrome-scrapper_SEARO.tsv
+#    197 partials/temp/who-ccg/who-ccg-chrome-scrapper_WPRO.tsv
+#    827 total

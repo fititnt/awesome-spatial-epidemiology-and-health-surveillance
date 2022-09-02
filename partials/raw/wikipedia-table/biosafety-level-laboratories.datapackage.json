@@ -1,0 +1,60 @@
+{
+  "name": "biosafety-level-laboratories",
+  "format": "csv",
+  "sources": [
+    {
+      "title": "Biosafety_level",
+      "path": "https://en.wikipedia.org/wiki/Biosafety_level"
+    }
+  ],
+  "resources": [
+    {
+      "path": "biosafety-level-laboratories.csv",
+      "name": "biosafety-level-laboratories",
+      "profile": "tabular-data-resource",
+      "scheme": "file",
+      "format": "csv",
+      "hashing": "md5",
+      "encoding": "utf-8",
+      "schema": {
+        "fields": [
+          {
+            "type": "string",
+            "name": "Country",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "type": "string",
+            "name": "Location",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "type": "string",
+            "name": "Name",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "type": "string",
+            "name": "Dateestablished",
+            "constraints": {
+              "required": false
+            }
+          },
+          {
+            "type": "string",
+            "name": "Description",
+            "constraints": {
+              "required": false
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
