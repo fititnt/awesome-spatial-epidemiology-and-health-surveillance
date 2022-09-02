@@ -8,7 +8,7 @@ Disease ecology is a sub-discipline of ecology concerned with the mechanisms, pa
 Health geography is the application of geographical information, perspectives, and methods to the study of health, disease, and health care.
 
 ### [reverse zoonosis (Q1049711)](https://www.wikidata.org/wiki/Q1049711)
-A reverse zoonosis, also known as a zooanthroponosis (Greek zoon &quot;animal&quot;&quot;
+A reverse zoonosis, also known as a zooanthroponosis (Greek zoon "animal""
 
 ### [spatial epidemiology (Q7574064)](https://www.wikidata.org/wiki/Q7574064)
 Spatial epidemiology is a subfield of epidemiology focused on the study of the spatial distribution of health outcomes; it is closely related to health geography.

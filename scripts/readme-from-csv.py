@@ -156,6 +156,24 @@ class Cli:
             default='table-processing'
         )
 
+        parser.add_argument(
+            '--natural-language-objective',
+            help='BCP47 code (such as "ar", for Arabic) for objetive '
+            'natural language',
+            dest='bcp47_objetive',
+            nargs='?',
+            default=None
+        )
+
+        parser.add_argument(
+            '--natural-language-fallback',
+            help='BCP47 code (such as "la", for Latin) for fallback '
+            'natural language',
+            dest='bcp47_fallback',
+            nargs='?',
+            default=None
+        )
+
         parser_table = parser.add_argument_group(
             "table-processing",
             "Options exclusive to table processing")
@@ -272,18 +290,38 @@ class Cli:
             # '--venandum-insectum-est, --debug',
             '--debug',
             help='Enable debug',
-            metavar="venandum_insectum",
-            dest="venandum_insectum",
+            metavar="debug",
+            dest="debug",
             action='store_const',
             const=True,
             default=False
         )
 
-        # parser.add_argument(
-        #     'outfile',
-        #     help='Output file',
-        #     nargs='?'
-        # )
+        parser.add_argument(
+            '--strictness-level',
+            help='Strictness level',
+            dest='strictness_level',
+            nargs='?',
+            choices=[
+                -1,
+                0,
+                1,
+                2,
+            ],
+            required=False,
+            # default=0,
+            # type=int
+            default=0,
+            type=int
+        )
+
+        parser.add_argument(
+            '--logfile',
+            help='Path to a logfile. Defaults to .errors.log on current dir',
+            dest='logfile',
+            nargs='?',
+            default='.errors.log'
+        )
 
         return parser.parse_args()
 
@@ -316,6 +354,10 @@ class Cli:
                 pyargs.merge_key_2,
                 pyargs.merge_foreignkey_2,
                 pyargs.input_delimiter,
+                bcp47_objetive=pyargs.bcp47_objetive,
+                bcp47_fallback=pyargs.bcp47_fallback,
+                strictness_level=pyargs.strictness_level,
+                verbose=pyargs.debug,
                 # pyargs.output_format,
             )
 
@@ -325,6 +367,10 @@ class Cli:
         if pyargs.method == 'compile-readme':
             csv2r = CompileReadme(
                 _infile,
+                bcp47_objetive=pyargs.bcp47_objetive,
+                bcp47_fallback=pyargs.bcp47_fallback,
+                strictness_level=pyargs.strictness_level,
+                verbose=pyargs.debug,
             )
 
             csv2r.prepare()
@@ -367,15 +413,27 @@ class CompileReadme:
 
     data_template: List[list] = []
     data_compiled: List[list] = []
+    liquid: Type['LiquidRenderer'] = None
     _base = ROOT_PATH
 
     def __init__(
         self,
         infile,
+        bcp47_objetive: str = 'en',
+        bcp47_fallback: str = 'en',
+        strictness_level: int = 0,
         verbose: bool = False
     ):
         self.infile = infile
+        self.bcp47_objetive = bcp47_objetive
+        self.bcp47_fallback = bcp47_fallback
         self.verbose = verbose
+
+        self.liquid = LiquidRenderer(
+            bcp47_objetive=self.bcp47_objetive,
+            bcp47_fallback=self.bcp47_fallback,
+            strictness_level=strictness_level,
+        )
 
     def _load_file(self, file, strict: bool = True) -> List[list]:
 
@@ -429,8 +487,12 @@ class CompileReadme:
     def print(self):
         # for line in self.data_template:
         #     print(line)
-        for line in self.data_compiled:
-            print(line)
+        template_string = "\n".join(self.data_compiled)
+        print(self.liquid.render(
+            template_string
+        ).replace('\\n', "\n"))
+        # for line in self.data_compiled:
+        #     print(line)
 
 
 class CSVtoReadme:
@@ -451,7 +513,11 @@ class CSVtoReadme:
         merge_file_2: str = None,
         merge_key_2: str = None,
         merge_foreignkey_2: str = None,
-        input_delimiter=','
+        input_delimiter=',',
+        bcp47_objetive=None,
+        bcp47_fallback=None,
+        strictness_level: int = 0,
+        verbose: bool = False
     ):
         """
         Constructs all the necessary attributes for the Cli object.
@@ -469,7 +535,11 @@ class CSVtoReadme:
         self.input_delimiter = input_delimiter
         # self.output_format = output_format
 
-        self.liquid = LiquidRenderer()
+        self.liquid = LiquidRenderer(
+            bcp47_objetive=bcp47_objetive,
+            bcp47_fallback=bcp47_fallback,
+            strictness_level=strictness_level,
+        )
 
     def _get_url(self, line):
         for item in reversed(line):
@@ -497,9 +567,13 @@ class CSVtoReadme:
             if self.line_select is not None:
                 parsed_line_select = self.line_select.format(**line_variables)
                 # print('parsed_line_select', parsed_line_select)
-                parsed_line_select = chevron.render(
+                # parsed_line_select = chevron.render(
+                #     self.line_select,
+                #     line_variables)
+                parsed_line_select = self.liquid.render(
                     self.line_select,
-                    line_variables)
+                    line_variables
+                )
                 evaluated_line_select = evaluate(parsed_line_select)
                 # print('result_line_select', result_line_select)
                 if not evaluated_line_select:
@@ -508,9 +582,13 @@ class CSVtoReadme:
             if self.line_exclude is not None:
                 parsed_line_exclude = self.line_exclude.format(
                     **line_variables)
-                parsed_line_exclude = chevron.render(
+                # parsed_line_exclude = chevron.render(
+                #     self.line_exclude,
+                #     line_variables)
+                parsed_line_exclude = self.liquid.render(
                     self.line_exclude,
-                    line_variables)
+                    line_variables
+                )
                 evaluated_line_exclude = evaluate(parsed_line_exclude)
                 if evaluated_line_exclude:
                     continue
@@ -613,14 +691,14 @@ class CSVtoReadme:
 
             # print(self.line_formatter.format(
             #     **line_variables).replace('\\n', "\n"))
-            print(chevron.render(
-                self.line_formatter,
-                line_variables).replace('\\n', "\n"))
+            # print(chevron.render(
+            #     self.line_formatter,
+            #     line_variables).replace('\\n', "\n"))
 
             print(self.liquid.render(
                 self.line_formatter,
                 line_variables
-            ))
+            ).replace('\\n', "\n"))
 
         if self.group_suffix:
             print(self.group_suffix)
@@ -733,21 +811,23 @@ class LiquidRenderer:
 
     env: Environment
     i18n_data: dict = None
-    objective_bcp47: str = None
-    fallback_bcp47: str = None
+    bcp47_objetive: str = None
+    bcp47_fallback: str = None
 
     def __init__(
         self,
-        objective_bcp47: str = 'en',
-        fallback_bcp47: str = 'en',
+        bcp47_objetive: str = 'en',
+        bcp47_fallback: str = 'en',
+        strictness_level: int = 0,
+        verbose: bool = False
     ) -> None:
 
-        self.objective_bcp47 = objective_bcp47
-        self.fallback_bcp47 = fallback_bcp47
+        self.bcp47_objetive = bcp47_objetive
+        self.bcp47_fallback = bcp47_fallback
         # pass
         # self.env = Environment()
         # self.env.add_filter("json", filters.JSON())
-        globals = {'locale': self.objective_bcp47}
+        globals = {'locale': self.bcp47_objetive}
         self.env = Environment(
             tolerance=Mode.STRICT,
             # undefined=StrictUndefined,
@@ -756,8 +836,9 @@ class LiquidRenderer:
         )
         self.env.add_filter("json", filters.JSON())
         tloader = TranslationLoader(
-            objective_bcp47=self.objective_bcp47,
-            fallback_bcp47=self.fallback_bcp47
+            bcp47_objetive=self.bcp47_objetive,
+            bcp47_fallback=self.bcp47_fallback,
+            strictness_level=strictness_level
         )
         self.i18n_data = tloader.get_data()
         # print('self.i18n_data ', self.i18n_data)
@@ -767,19 +848,9 @@ class LiquidRenderer:
         self.env.add_filter(Translate.name, Translate(locales=self.i18n_data))
 
     def render(self, template: str = None, context: dict = None) -> str:
+        if not context:
+            context = {}
 
-        # env = Environment()
-        # env.add_filter("index", filters.index)
-        # env.add_filter("json", filters.JSON())
-        # if template is None:
-        #     compiled_template = self.default_template
-        # else:
-        #     compiled_template = Template(
-        #         # "Hello, {{ you }}!",
-        #         template,
-        #         # tolerance=Mode.STRICT,
-        #         # undefined=StrictUndefined,
-        #     )
         if template is None or template is False:
             extra_context = {'current_context': context}
             compiled_template = self.env.from_string(
@@ -790,7 +861,7 @@ class LiquidRenderer:
             extra_context = context
 
         if 'locale' not in context:
-            context['locale'] = self.objective_bcp47
+            context['locale'] = self.bcp47_objetive
 
         result = compiled_template.render(extra_context)
         return result
@@ -808,15 +879,22 @@ class TranslationLoader:
 
     def __init__(
         self,
-        objective_bcp47: str = 'pt',
-        fallback_bcp47: str = 'en',
+        bcp47_objetive: str = 'pt',
+        bcp47_fallback: str = 'en',
         base_namespace: str = 'translation',
         locales_base: list = None,
-        file_extensions: list = None
+        file_extensions: list = None,
+        strictness_level: int = -1
     ) -> None:
-        self.objective_bcp47 = objective_bcp47
-        self.fallback_bcp47 = fallback_bcp47
+
+        self.bcp47_objetive = bcp47_objetive
+        if bcp47_fallback:
+            self.bcp47_fallback = bcp47_fallback
+        else:
+            self.bcp47_fallback = 'en'
+
         self.base_namespace = base_namespace
+        self.strictness_level = strictness_level
         if not locales_base:
             # public/locales/{lng}/translation.json
             locales_base = [
@@ -833,12 +911,18 @@ class TranslationLoader:
 
         self.locales_base = locales_base
         self.file_extensions = file_extensions
-        self.data[objective_bcp47] = {
+        self.data[self.bcp47_objetive] = {
             'error': 'no single translation file loaded'
         }
-        self.data[fallback_bcp47] = {
+        self.data[self.bcp47_fallback] = {
             'error': 'no single translation file loaded'
         }
+
+        if not self.bcp47_objetive:
+            if strictness_level > 0:
+                raise SyntaxError('No bcp47_objetive selected')
+            # pass
+
         self.load_all_from_disk()
 
     def load_all_from_disk(self):
@@ -867,8 +951,8 @@ class TranslationLoader:
                     # for now.
                     continue
                 current_lang = root_parts[1]
-                if current_lang not in [self.objective_bcp47,
-                                        self.fallback_bcp47, 'default']:
+                if current_lang not in [self.bcp47_objetive,
+                                        self.bcp47_fallback, 'default']:
                     # Also skiping languages user do not specified
                     continue
                 filename_parts = filename.split('.')
@@ -890,7 +974,7 @@ class TranslationLoader:
                 }
                 if 'error' in self.data[current_lang]:
                     del self.data[current_lang]['error']
-                if current_lang == self.fallback_bcp47:
+                if current_lang == self.bcp47_fallback:
                     # self.data['default'] = {
                     #     current_namespace: loaded_data
                     # }
@@ -900,6 +984,15 @@ class TranslationLoader:
                     }
                     if 'error' in self.data['default']:
                         del self.data['default']['error']
+
+        for lang in self.data:
+            if 'error' in self.data[lang]:
+                if self.strictness_level == 1:
+                    raise FileNotFoundError(f'TranslationLoader [{lang}]')
+
+                if self.strictness_level == 2:
+                    raise FileNotFoundError(
+                        f'TranslationLoader [{lang}] [{self.data}]')
 
     def load_file(self, file: str) -> dict:
         """load_file

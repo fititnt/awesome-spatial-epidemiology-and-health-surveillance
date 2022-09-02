@@ -232,25 +232,34 @@ gh_topics_statistics_list "partials/raw/github-topic-list.txt"
 # exit 1
 set -x
 
+liquid_template_1="### [{{raw_line[1]}} ({{raw_line[0]}})](https://www.wikidata.org/wiki/{{raw_line[0]}})
+{{raw_line[2]}}
+"
+# ./scripts/readme-from-csv.py \
+#   data/general-concepts.hxl.csv \
+#   --line-formatter='### [{{raw_line[1]}} ({{raw_line[0]}})](https://www.wikidata.org/wiki/{{raw_line[0]}})\n{{raw_line[2]}}\n' \
+#   >partials/general-concepts.md
 ./scripts/readme-from-csv.py \
   data/general-concepts.hxl.csv \
-  --line-formatter='### [{{raw_line.1}} ({{raw_line.0}})](https://www.wikidata.org/wiki/{{raw_line.0}})\n{{raw_line.2}}\n' \
+  --line-formatter="$liquid_template_1" \
   >partials/general-concepts.md
 
 # ./scripts/readme-from-csv.py \
 #   data/github-topics.hxl.csv \
-#   --line-formatter='==== {{raw_line.1}}\n`{raw_line}`\n' \
-#   --line-select='{{raw_line.0}}==1' \
+#   --line-formatter='==== {{raw_line[1]}}\n`{raw_line}`\n' \
+#   --line-select='{{raw_line[0]}}==1' \
 #   >partials/github-topics_1.md
 
 # @TODO implement checking how many repos are in a topic
 #       https://docs.github.com/en/rest/search#search-topics
 # @TODO https://gist.github.com/usametov/af8f13a351a66fb05a9895f11417dd9d
 
+liquid_template_2='  - [{{raw_line[1]}}](https://github.com/topics/{{raw_line[1]}}): {{total_count}} repositories'
+
 ./scripts/readme-from-csv.py \
   data/github-topics.hxl.csv \
-  --line-formatter='  - [{{raw_line.1}}](https://github.com/topics/{{raw_line.1}}): {{total_count}} repositories' \
-  --line-select='{{raw_line.0}}==1' \
+  --line-formatter="$liquid_template_2" \
+  --line-select='{{raw_line[0]}}==1' \
   --data-merge-file-2='partials/raw/github-topic.tsv' \
   --data-merge-key-2='#item+github_topic' \
   --data-merge-foreignkey-2='topic' \
@@ -260,8 +269,8 @@ set -x
 
 ./scripts/readme-from-csv.py \
   data/github-topics.hxl.csv \
-  --line-formatter='  - [{{raw_line.1}}](https://github.com/topics/{{raw_line.1}}): {{total_count}} repositories' \
-  --line-select='{{raw_line.0}}==2' \
+  --line-formatter="$liquid_template_2" \
+  --line-select='{{raw_line[0]}}==2' \
   --data-merge-file-2='partials/raw/github-topic.tsv' \
   --data-merge-key-2='#item+github_topic' \
   --data-merge-foreignkey-2='topic' \
@@ -269,27 +278,47 @@ set -x
 
 ./scripts/readme-from-csv.py \
   data/github-topics.hxl.csv \
-  --line-formatter='  - [{{raw_line.1}}](https://github.com/topics/{{raw_line.1}}): {{total_count}} repositories' \
-  --line-select='{{raw_line.0}}==3' \
+  --line-formatter="$liquid_template_2" \
+  --line-select='{{raw_line[0]}}==3' \
   --data-merge-file-2='partials/raw/github-topic.tsv' \
   --data-merge-key-2='#item+github_topic' \
   --data-merge-foreignkey-2='topic' \
   >partials/github-topics_3.md
 
-# shellcheck disable=SC2016
+liquid_template_3='#### [{{ raw_line[1] }} ({{ raw_line[2] }})]({{ raw_line[3] }})
+{{ description }}
+```
+{{ raw_line[4] }}
+```'
+
 ./scripts/readme-from-csv.py \
   data/software.hxl.csv \
-  --line-formatter='#### [{{raw_line.1}} ({{raw_line.2}})]({{raw_line.3}})\n{{description}}\n```\n{{raw_line.4}}\n```' \
-  --line-select='{{raw_line.0}}=="synthetic-data"' \
+  --line-formatter="$liquid_template_3" \
+  --line-select='{{raw_line[0]}}=="synthetic-data"' \
   --data-merge-file-2='partials/raw/github-projects.tsv' \
   --data-merge-key-2='#item+repository+url' \
   --data-merge-foreignkey-2='repo' \
   >partials/software_synthetic-data.md
+# ./scripts/readme-from-csv.py \
+#   data/software.hxl.csv \
+#   --line-formatter='#### [{{raw_line[1]}} ({{raw_line[2]}})]({{raw_line[3]}})\n{{description}}\n```\n{{raw_line[4]}}\n```' \
+#   --line-select='{{raw_line[0]}}=="synthetic-data"' \
+#   --data-merge-file-2='partials/raw/github-projects.tsv' \
+#   --data-merge-key-2='#item+repository+url' \
+#   --data-merge-foreignkey-2='repo' \
+#   >partials/software_synthetic-data.md
 
 ./scripts/readme-from-csv.py \
   --method=compile-readme \
+  --natural-language-objective=en \
   README.template.md \
   >README.md
+
+./scripts/readme-from-csv.py \
+  --method=compile-readme \
+  --natural-language-objective=pt \
+  README.template.md \
+  >README.pt.md
 
 set +x
 

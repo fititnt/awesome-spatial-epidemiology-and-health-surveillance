@@ -1,9 +1,10 @@
-# Awesome Spatial Epidemiology
-![Awesome Spatial Epidemiology Banner](partials/awesome-spatial-epidemiology.jpg)
+# {{ 'project_title' | t }}
+![{{ 'project_title' | t }} Banner](partials/awesome-spatial-epidemiology.jpg)
 
-**Curated list of awesome spatial epidemiology data exchange concepts, data reference and tooling. Contributions are welcomed!**
+**{{ 'project_summary' | t }}**
 
-## GitHub topics
+
+## {{ 'section_github_topics_title' | t }}
 > **Resoning behind 3 tiers**: Tier 1 is directly related to main topic of our list of recommendations.
 > Tier 2 is is related to the scientific area (but not strictly the tooling).
 > Tier 3 are related to the tooling (but not restricted to the scientific application).
@@ -15,7 +16,7 @@
 - **Tier 3**:
 {% include_relative partials/github-topics_3.md %}
 
-## General concepts
+## {{ 'section_general_concepts_title' | t }}
 
 {% include_relative partials/general-concepts.md %}
 
@@ -26,7 +27,7 @@
 - https://wiki.openstreetmap.org/wiki/Map_features
   - https://wiki.openstreetmap.org/wiki/Map_features#Healthcare_2
 
-## Data
+## {{ 'section_data_title' | t }}
 
 > Note: at the moment, most data here are references to be used as reference for Synthetic Data.
 
@@ -34,7 +35,7 @@
 
 - https://population.un.org/wpp/Download/Standard/Population/
 
-## Installable packages
+## {{ 'section_software_title' | t }}
 
 ### Synthetic Data
 > Trivia: the initial reference here is based on [Top 10 Python Packages For Creating Synthetic Data](https://www.activestate.com/blog/top-10-python-packages-for-creating-synthetic-data/)

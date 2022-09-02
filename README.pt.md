@@ -1,10 +1,10 @@
-# Awesome Spatial Epidemiology and Public Health Surveillance
-![Awesome Spatial Epidemiology and Public Health Surveillance Banner](partials/awesome-spatial-epidemiology.jpg)
+# Incrível Epidemiologia Espacial e Vigilância em Saúde Pública
+![Incrível Epidemiologia Espacial e Vigilância em Saúde Pública Banner](partials/awesome-spatial-epidemiology.jpg)
 
-**Curated list of awesome spatial epidemiology data exchange concepts, data reference and tooling. Contributions are welcomed!**
+**project_summary**
 
 
-## GitHub topics
+## section_github_topics_title
 > **Resoning behind 3 tiers**: Tier 1 is directly related to main topic of our list of recommendations.
 > Tier 2 is is related to the scientific area (but not strictly the tooling).
 > Tier 3 are related to the tooling (but not restricted to the scientific application).
@@ -24,7 +24,7 @@
   - [spatial-analysis](https://github.com/topics/spatial-analysis): 459 repositories
   - [geospatial-analysis](https://github.com/topics/geospatial-analysis): 222 repositories
 
-## General concepts
+## section_general_concepts_title
 
 ### [disease diffusion mapping (Q5282121)](https://www.wikidata.org/wiki/Q5282121)
 Disease diffusion occurs when a disease is transmitted to a new location. It implies that a disease spreads, or pours out, from a central source.
@@ -58,7 +58,7 @@ A zoonosis or zoonotic disease is an infectious disease of humans caused by a pa
 - https://wiki.openstreetmap.org/wiki/Map_features
   - https://wiki.openstreetmap.org/wiki/Map_features#Healthcare_2
 
-## Data
+## section_data_title
 
 > Note: at the moment, most data here are references to be used as reference for Synthetic Data.
 
@@ -66,7 +66,7 @@ A zoonosis or zoonotic disease is an infectious disease of humans caused by a pa
 
 - https://population.un.org/wpp/Download/Standard/Population/
 
-## Software
+## section_software_title
 
 ### Synthetic Data
 > Trivia: the initial reference here is based on [Top 10 Python Packages For Creating Synthetic Data](https://www.activestate.com/blog/top-10-python-packages-for-creating-synthetic-data/)
