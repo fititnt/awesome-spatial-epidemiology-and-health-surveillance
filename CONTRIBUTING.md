@@ -1,12 +1,25 @@
 # Contribution Guidelines
 
-## Techincal aspects
+## Data contribution
 
 The primary way to store the content of this project is on the [data/](data/) folder.
 This means that if you want to propose new or an edit **for content**,
 very likely the edit will be on that folder.
 
-## Non techincal
+## Language localization contribution
+
+The translations are stored at [i18n/](i18n/).
+
+## Code internals contribution
+
+1. Give a look at our code. It mostly python, bash script and GitHub Action.
+2. We use Shopify Liquid template engine (same features as GitHub pages with Jekyll)
+   with common documentation at https://shopify.github.io/liquid/.
+   1. The _specific_ implementation is python-liquid maintaned coordinated by @jg-rp.
+      Check <https://jg-rp.github.io/liquid/>. `python -m pip install python-liquid`
+   2. We also use some extra filters `python -m pip install -U python-liquid-extra`
+
+## Other non techincal aspects
 
 ### Code of Conduct
 Please note that this project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md).

@@ -23,6 +23,7 @@
 #      REVISION:  2022-09-01 01:27 UTC csv-to-readme.py -> readme-from-csv.py
 # ===============================================================================
 
+
 import glob
 import os
 import argparse
@@ -30,8 +31,16 @@ import csv
 from genericpath import exists
 import re
 import sys
-from typing import List
+from typing import List, Type
 from ast import literal_eval
+
+from liquid import Template
+from liquid import FileSystemLoader
+from liquid import StrictUndefined
+from liquid import Mode
+from liquid_extra import filters
+from liquid import Environment
+from liquid_extra.filters import Translate
 
 # import pystache
 import chevron
@@ -424,6 +433,8 @@ class CSVtoReadme:
     data_lines: List[list] = None
     # data_dict: List[list] = None
 
+    liquid: Type['LiquidRenderer'] = None
+
     def __init__(
         self, infile,
         line_formatter,
@@ -452,6 +463,8 @@ class CSVtoReadme:
         self.merge_foreignkey_2 = merge_foreignkey_2
         self.input_delimiter = input_delimiter
         # self.output_format = output_format
+
+        self.liquid = LiquidRenderer()
 
     def _get_url(self, line):
         for item in reversed(line):
@@ -599,6 +612,11 @@ class CSVtoReadme:
                 self.line_formatter,
                 line_variables).replace('\\n', "\n"))
 
+            # print(self.liquid.render(
+            #     self.line_formatter,
+            #     line_variables
+            # ))
+
         if self.group_suffix:
             print(self.group_suffix)
 
@@ -685,6 +703,110 @@ class ExtractDataFromFiles:
         for line in self.data_mined:
             print(line)
             pass
+
+# @see https://shopify.github.io/liquid/
+# @see https://jg-rp.github.io/liquid/
+# @see https://jg-rp.github.io/liquid/extra/filters#t-translate
+
+
+# template = Template("Hello, {{ you }}!")
+# print(template.render(you="World"))  # Hello, World!
+# print(template.render(you="Liquid"))  # Hello, Liquid!
+
+
+# env = Environment()
+# env.add_filter("json", filters.JSON())
+
+
+class LiquidRenderer:
+    """LiquidRenderer
+
+    @see https://shopify.github.io/liquid/
+    @see https://jg-rp.github.io/liquid/
+    @see https://jg-rp.github.io/liquid/extra/filters#t-translate
+    """
+
+    default_template: Type['Template'] = None
+    env: Environment
+
+    def __init__(self) -> None:
+
+        self.default_template = Template(
+            "Hello, {{ you }}!",
+            # tolerance=Mode.STRICT,
+            # undefined=StrictUndefined,
+        )
+        # pass
+        # self.env = Environment()
+        # self.env.add_filter("json", filters.JSON())
+        self.env = Environment(
+            tolerance=Mode.STRICT,
+            undefined=StrictUndefined,
+            # loader=FileSystemLoader("./templates/"),
+        )
+        self.env.add_filter("json", filters.JSON())
+
+        some_locales = {
+            "default": {
+                "layout": {
+                    "greeting": r"Hello {{ name }}",
+                },
+                "cart": {
+                    "general": {
+                        "title": "Shopping Basket",
+                    },
+                },
+                "pagination": {
+                    "next": "Next Page",
+                },
+            },
+            "de": {
+                "layout": {
+                    "greeting": r"Hallo {{ name }}",
+                },
+                "cart": {
+                    "general": {
+                        "title": "Warenkorb",
+                    },
+                },
+                "pagination": {
+                    "next": "Nächste Seite",
+                },
+            },
+        }
+        self.env.add_filter(Translate.name, Translate(locales=some_locales))
+
+    def render(self, template: str = None, context: dict = None) -> str:
+
+        # env = Environment()
+        # env.add_filter("index", filters.index)
+        # env.add_filter("json", filters.JSON())
+        # if template is None:
+        #     compiled_template = self.default_template
+        # else:
+        #     compiled_template = Template(
+        #         # "Hello, {{ you }}!",
+        #         template,
+        #         # tolerance=Mode.STRICT,
+        #         # undefined=StrictUndefined,
+        #     )
+        if template is None or template is False:
+            extra_context = {'current_context': context}
+            compiled_template = self.env.from_string(
+                '{{ current_context | json }}'
+            )
+        else:
+            compiled_template = self.env.from_string(template)
+            extra_context = context
+
+        result = compiled_template.render(extra_context)
+        return result
+
+
+# lrenderer = LiquidRenderer()
+# print(lrenderer.render("Hello, {{ you }}!", {'you': 'you value'}))
+
+# sys.exit(1)
 
 
 def evaluate(textoperation: str) -> bool:

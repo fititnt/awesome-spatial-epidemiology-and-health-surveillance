@@ -26,7 +26,7 @@ jobs:
 
       - run: pip install frictionless
 
-      - name: frictionless validate datapackage.json
+      - run: frictionless validate datapackage.json
 
       # - name: Run linters
       #   uses: wearerequired/lint-action@v2

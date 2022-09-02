@@ -147,7 +147,7 @@ jobs:
           cache: "pip"
       # - run: pip install libhxl hxltm-eticaai openpyxl frictionless csvkit
       # - run: pip install -r .github/requirements.txt
-      - run: pip install -r ../.github/requirements.txt
+      - run: pip install -r .github/requirements.txt
         continue-on-error: true
 
       # #### Java Setup __________________________________________________________

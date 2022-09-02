@@ -1,2 +1,7 @@
-chevron
 frictionless
+chevron
+
+# Template engine
+python-liquid
+# Used by i18n
+python-liquid-extra
