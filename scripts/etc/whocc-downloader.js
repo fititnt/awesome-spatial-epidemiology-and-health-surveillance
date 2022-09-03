@@ -27,7 +27,7 @@
  *      REVISION:  2022-09-03 10:40 UTC v1.1 build-readme.sh -> common.lib.sh
 *******************************************************************************/
 
-// TL:DR: do this
+// > TL:DR: do this
 // node scripts/etc/whocc-downloader.js --who-region 'AFRO' --output 'partials/temp/AFRO.csv'
 // node scripts/etc/whocc-downloader.js --who-region 'AMRO' --output 'partials/temp/AMRO.csv'
 // node scripts/etc/whocc-downloader.js --who-region 'EMRO' --output 'partials/temp/EMRO.csv'
@@ -36,7 +36,12 @@
 // node scripts/etc/whocc-downloader.js --who-region 'SEARO' --output 'partials/temp/SEARO.csv'
 // node scripts/etc/whocc-downloader.js --who-region 'WPRO' --output 'partials/temp/WPRO.csv'
 
-const is_headless = true // Change this to force display chrome (for debug)
+// > To Debug:
+// node scripts/etc/whocc-downloader.js --who-region 'WPRO' --output 'partials/temp/WPRO.csv' --show-browser
+// > To check if is valid:
+// frictionless validate partials/temp/WPRO.csv
+
+// const is_headless = true // Change this to force display chrome (for debug)
 
 // node --trace-warnings scripts/etc/who_cc.js
 // yarn add i commander
@@ -55,6 +60,7 @@ program
   .description('Fetch cleaned CSV files from World Health Organization Collaborating Centres')
   .option('--who-region', 'WHO region. Example: "AFRO"')
   .option('--output', 'Path to output. Example: temp/AFRO.csv')
+  .option('--show-browser', 'If need show browser (use as last option)', false)
   // .option('--teste', 'Path to output. Defaults to region.csv')
   // .option('--tempdir', 'Path to a temporary dir', null)
   ;
@@ -67,6 +73,8 @@ const project_region = program.args[0];
 // const project_output = options.output ? options.output : project_region + '.csv'
 const project_output = program.args[1];
 // const project_tempdirdir = options.tempdir
+const show_browser = options.showBrowser;
+
 const project_page_start = 'https://apps.who.int/whocc/Search.aspx'
 const project_name = 'whocc'
 
@@ -144,7 +152,8 @@ async function clean_csv(project_tempdirdir, project_output) {
 
   const browser = await puppeteer.launch(
     {
-      headless: is_headless, // Here can enable/disable show the browser
+      // headless: is_headless, // Here can enable/disable show the browser
+      headless: !show_browser, // Here can enable/disable show the browser
     }
   );
 

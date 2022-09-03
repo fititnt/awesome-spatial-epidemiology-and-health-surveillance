@@ -1,0 +1,48 @@
+# @see https://apps.who.int/whocc/Search.aspx
+# @see whocc-reference.tsv
+
+# WHO_CSVFIELDS=(
+#   "textbox105|code"   # SOA-5 [AFRO]
+#   "textbox106|status" # Active,Pending
+#   "textbox113|name" # Active,Pending
+#   "textbox20|region" # Active,Pending
+#   "textbox19|country" # Active,Pending
+#   "textbox127|website" # Active,Pending
+# )
+
+textbox105:
+  csv: textbox105
+  csvnorm: code
+  hxl: '#item+code'
+textbox106:
+  csv: textbox106
+  csvnorm: status
+  hxl: '#status'
+textbox113:
+  csv: textbox113
+  csvnorm: title
+  hxl: '#org+title'
+textbox19:
+  csv: textbox19
+  csvnorm: country
+  hxl: '#country'
+textbox20:
+  csv: textbox20
+  csvnorm: who_region
+  hxl: '#region+who'
+textbox127:
+  csv: textbox127
+  csvnorm: website
+  hxl: '#org+site+url'
+textbox45:
+  csv: textbox45
+  csvnorm: designation_date
+  hxl: '#date+designation'
+textbox47:
+  csv: textbox47
+  csvnorm: redesignation_last_date
+  hxl: '#date+redesignation'
+textbox48:
+  csv: textbox48
+  csvnorm: designation_expiry_date
+  hxl: '#date+expiry'

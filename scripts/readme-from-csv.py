@@ -82,6 +82,12 @@ Merge data files in memory before render templated result . . . . . . . . . . .
 --data-merge-key-2='#item+repository+url' \
 --data-merge-foreignkey-2='repo'
 
+Rename CSV/Tabular data header . . . . . . . . . . . . . . . . . . . . . . . .
+    {__file__} --method=table-rename \
+--table-meta=i18n/mul/whocc.meta.yml \
+partials/temp/whocc.csv
+
+
 ------------------------------------------------------------------------------
                             EXEMPLŌRUM GRATIĀ
 ------------------------------------------------------------------------------
@@ -146,6 +152,7 @@ class Cli:
             nargs='?',
             choices=[
                 'table-processing',
+                'table-rename',
                 'compile-readme',
                 'extract-generic-url',
                 'extract-github-url',
@@ -287,6 +294,17 @@ class Cli:
             default=None
         )
 
+        parser_table.add_argument(
+            '--table-meta',
+            help='With --method=table-rename this explain which file '
+            'contains the metadata for conversion between formats. '
+            'Example: "i18n/mul/whocc.meta.yml"',
+            dest='table_meta',
+            nargs='?',
+            # required=True
+            default=None
+        )
+
         parser.add_argument(
             # '--venandum-insectum-est, --debug',
             '--debug',
@@ -364,6 +382,15 @@ class Cli:
 
             csv2r.prepare()
             return csv2r.print()
+
+        if pyargs.method == 'table-rename':
+            csvrename = CSVRename(
+                _infile,
+                # pyargs.output_format,
+            )
+
+            csvrename.prepare()
+            return csvrename.print()
 
         if pyargs.method == 'compile-readme':
             csv2r = CompileReadme(
@@ -751,6 +778,64 @@ class CSVtoReadme:
         if self.group_suffix:
             print(self.group_suffix)
 
+
+class CSVRename:
+
+    data: List[list] = None
+    # data_dict: List[list] = None
+
+    def __init__(
+        self, infile,
+        # line_formatter,
+        # line_select,
+        # line_exclude,
+        # group_prefix: str = None,
+        # group_suffix: str = None,
+        # output_sort: list = None,
+        # merge_file_2: str = None,
+        # merge_key_2: str = None,
+        # merge_foreignkey_2: str = None,
+        # input_delimiter=',',
+        # bcp47_objetive=None,
+        # bcp47_fallback=None,
+        # strictness_level: int = 0,
+        # verbose: bool = False
+    ):
+        self.infile = infile
+
+    def prepare(self):
+
+        # Loading main file
+        with open(self.infile) as csv_file:
+            dialect = csv.Sniffer().sniff(csv_file.read(16384))
+            csv_file.seek(0)
+            csv_reader = csv.reader(csv_file, dialect)
+            self.data = []
+            # self.data_dict = []
+
+            for row in csv_reader:
+                row_cleaned = []
+                for item in row:
+                    row_cleaned.append(item.strip())
+                self.data.append(row_cleaned)
+
+
+    def print(self):
+
+        # print("TODO print")
+        # print(self.data)
+        # print('')
+        # index = -1
+        # header = []
+
+        # if self.group_prefix:
+        #     print(self.group_prefix)
+        import sys
+        csvwriter = csv.writer(sys.stdout)
+        for line in self.data:
+            # index += 1
+            # print(line)
+            csvwriter.writerow(line)
 
 class ExtractDataFromFiles:
 
