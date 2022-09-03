@@ -23,6 +23,9 @@
 #===============================================================================
 set -e
 
+echo "README, not execute me"
+exit 1
+
 dos2unix partials/raw/etc/whocc/*.csv
 
 frictionless validate partials/raw/etc/whocc/AFRO.csv
@@ -51,9 +54,26 @@ cat partials/raw/etc/whocc/AFRO.csv | sed '/^tomcat\.util.*$/,/^.*[^\]$/d'
 WHO Collaborating Centres Global database
 
 # Replaces =========================================
-sed 's/foo/1\
-2\
-3/g'
+cat partials/raw/etc/whocc/AMRO.csv | sed 's/Centres\
+\
+Global/Centres Global/g'
+cat partials/raw/etc/whocc/AMRO.csv | sed 's/Centres\
+Global/Centres Global/g'
+
+expression='/Centres '\
+'Global/d'
+cat partials/raw/etc/whocc/AMRO.csv  | sed -E -e "$expression"
+
+sed -e '
+  /BEGIN/,/END/!b
+  //!d;/END/!b
+  r content.js
+  N
+' long.js
+
+sed -e '/Centres/,/Global/!b' -e '/end/!d;r file2.txt' -e 'd' file1.txt
+
+cat partials/raw/etc/whocc/AMRO.csv  | sed -n '1h;1!H;${g;s/search/replace/;p;}'
 
 
 source_1="WHO Collaborating Centres
@@ -68,8 +88,7 @@ source_1='.
 target_1='."'
 
 cat partials/raw/etc/whocc/AFRO.csv | tr -d '\r' | sed -e 's/Collaborating Centres\nGlobal database/Collaborating Centres\nGlobal database/g'
-echo "README, not execute me"
-exit 1
+
 
 # https://github.com/robdmc/pandashells
 
