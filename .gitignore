@@ -6,3 +6,5 @@ README.source.xml
 partials/temp/*
 !partials/temp/.gitkeep
 partials/raw/etc/whocc
+
+__pycache__
