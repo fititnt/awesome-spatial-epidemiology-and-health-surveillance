@@ -1,3 +1,4 @@
+from time import sleep
 from scrapy_playwright.page import PageMethod
 import scrapy
 
@@ -77,11 +78,24 @@ class Awesome3Spider(scrapy.Spider):
             self._start_url,
             meta={
                 "playwright": True,
+                'playwright_include_page': True,
                 "playwright_page_methods": [
                     PageMethod(
-                        "screenshot",
-                        path=self.name + "_initial.png",
-                        full_page=True),
+                        "evaluate",
+                        "document.querySelector('[value=cc_region]').setAttribute('selected', 'selected')"),
+                    PageMethod(
+                        "evaluate",
+                        "document.querySelector('input[type=submit]').click()"),
+                    PageMethod(
+                        "evaluate",
+                        "document.querySelector('select').dispatchEvent(new Event('change'))"),
+                    # PageMethod("wait_for_selector", "input[type=text]"),
+                    # PageMethod(
+                    #     "evaluate",
+                    #     "document.querySelector('input[type=text]').value = 'AFRO'"),
+                    # PageMethod(
+                    #     "evaluate",
+                    #     "document.querySelector('input[type=submit]').click()"),
                 ],
             }
         )
@@ -92,12 +106,17 @@ class Awesome3Spider(scrapy.Spider):
         #     meta={"playwright": True},
         # )
 
-    def parse(self, response):
-        # 'response' contains the page as seen by the browser
+    async def parse(self, response):
+        page = response.meta["playwright_page"]
         yield {"url": response.url}
 
-        page = response.url.split("/")[-2]
-        filename = f'whocc-v3-{page}.html'
-        with open(filename, 'wb') as f:
-            f.write(response.body)
-        self.log(f'Saved file {filename}')
+        # page = response.url.split("/")[-2]
+        # filename = f'whocc-v3-{page}.html'
+
+        sleep(5)
+
+        await page.screenshot(path=self.name + "_initial.png", full_page=True)
+
+        # with open(filename, 'wb') as f:
+        #     f.write(response.body)
+        # self.log(f'Saved file {filename}')

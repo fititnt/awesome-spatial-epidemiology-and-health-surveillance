@@ -8,3 +8,6 @@ partials/temp/*
 partials/raw/etc/whocc
 
 __pycache__
+node_modules
+package.json
+yarn.lock
