@@ -13,36 +13,76 @@
 textbox105:
   csv: textbox105
   csvnorm: code
-  hxl: '#item+code'
-textbox106:
-  csv: textbox106
-  csvnorm: status
-  hxl: '#status'
-textbox113:
-  csv: textbox113
-  csvnorm: title
-  hxl: '#org+title'
-textbox19:
-  csv: textbox19
-  csvnorm: country
-  hxl: '#country'
+  hxl: "#item+code"
 textbox20:
   csv: textbox20
   csvnorm: who_region
-  hxl: '#region+who'
-textbox127:
-  csv: textbox127
-  csvnorm: website
-  hxl: '#org+site+url'
+  hxl: "#region+who"
+textbox19:
+  csv: textbox19
+  csvnorm: country
+  hxl: "#country"
 textbox45:
   csv: textbox45
   csvnorm: designation_date
-  hxl: '#date+designation'
+  hxl: "#date+designation"
 textbox47:
   csv: textbox47
   csvnorm: redesignation_last_date
-  hxl: '#date+redesignation'
+  hxl: "#date+redesignation"
 textbox48:
   csv: textbox48
   csvnorm: designation_expiry_date
-  hxl: '#date+expiry'
+  hxl: "#date+expiry"
+textbox106:
+  csv: textbox106
+  csvnorm: status
+  hxl: "#status"
+textbox113:
+  csv: textbox113
+  csvnorm: centre_title
+  hxl: "#org+title"
+textbox127:
+  csv: textbox127
+  csvnorm: website
+  hxl: "#org+site+url"
+textbox40:
+  csv: textbox40
+  csvnorm: contact_director_name
+  hxl: "#contact+director+name"
+textbox116:
+  csv: textbox116
+  csvnorm: contact_head_name
+  hxl: "#contact+head+name"
+textbox110:
+  csv: textbox110
+  csvnorm: contact_director_email
+  hxl: "#contact+director+email"
+textbox111:
+  csv: textbox111
+  csvnorm: contact_head_email
+  hxl: "#contact+head+email"
+textbox73:
+  csv: textbox73
+  csvnorm: centre_terms_reference_1
+  hxl: "#meta+desc+centre_terms_reference_1"
+textbox77:
+  csv: textbox77
+  csvnorm: centre_terms_reference_2
+  hxl: "#meta+desc+centre_terms_reference_2"
+textbox75:
+  csv: textbox75
+  csvnorm: centre_terms_reference_3
+  hxl: "#meta+desc+centre_terms_reference_3"
+textbox72:
+  csv: textbox72
+  csvnorm: centre_types_activity_1
+  hxl: "#meta+desc+centre_types_activity_1"
+textbox121:
+  csv: textbox121
+  csvnorm: centre_types_activity_2
+  hxl: "#meta+desc+centre_types_activity_2"
+textbox125:
+  csv: textbox125
+  csvnorm: centre_types_activity_3
+  hxl: "#meta+desc+centre_types_activity_3"

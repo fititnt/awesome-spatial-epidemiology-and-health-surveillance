@@ -75,8 +75,11 @@ tty_normal=$(tput sgr0)
 #   None
 #######################################
 crawler_who_cc() {
-  echo "${FUNCNAME[0]} TODO"
+  # echo "${FUNCNAME[0]} TODO"
   printf "\n\t%40s\n" "${tty_blue}${FUNCNAME[0]} STARTED ${tty_normal}"
+
+  _data_published="$ROOTDIR/data/who-collaborating-centre.hxl.csv"
+
   outputs=()
   for region in "${WHO_REGIONS[@]}"; do
     output="$BUILDTEMPDIR/$region.csv"
@@ -88,9 +91,25 @@ crawler_who_cc() {
 
   set -x
   # shellcheck disable=SC2048,SC2086
-  csvstack ${outputs[*]} > "$BUILDTEMPDIR/whocc_all.csv"
+  csvstack ${outputs[*]} >"$BUILDTEMPDIR/whocc_all.csv"
   frictionless validate "$BUILDTEMPDIR/whocc_all.csv"
-  csvsort -c 1,2 "$BUILDTEMPDIR/whocc_all.csv" > "$BUILDTEMPDIR/whocc.csv"
+  csvsort -c 1,2 "$BUILDTEMPDIR/whocc_all.csv" >"$BUILDTEMPDIR/whocc.csv"
+
+  ./scripts/readme-from-csv.py \
+    --method=table-rename \
+    --table-meta=i18n/mul/whocc.meta.yml \
+    "$BUILDTEMPDIR/whocc.csv" \
+    >"$BUILDTEMPDIR/whocc.hxl.csv"
+
+  frictionless validate "$BUILDTEMPDIR/whocc.hxl.csv"
+
+  if [ -f "$_data_published" ]; then
+    echo "deleting old [$_data_published]"
+    # rm "$_data_published"
+  fi
+
+  cp "$BUILDTEMPDIR/whocc.hxl.csv" "$_data_published"
+
   set +x
   printf "\t%40s\n" "${tty_green}${FUNCNAME[0]} FINISHED OKAY ${tty_normal}"
 }

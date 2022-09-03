@@ -294,7 +294,11 @@ class Cli:
             default=None
         )
 
-        parser_table.add_argument(
+        parser_pivot = parser.add_argument_group(
+            "table-pivot",
+            "Options exclusive to table renaming")
+
+        parser_pivot.add_argument(
             '--table-meta',
             help='With --method=table-rename this explain which file '
             'contains the metadata for conversion between formats. '
@@ -303,6 +307,21 @@ class Cli:
             nargs='?',
             # required=True
             default=None
+        )
+
+        parser_pivot.add_argument(
+            '--table-objective',
+            help='With --method=table-rename this define the target '
+            'format',
+            dest='table_objective',
+            nargs='?',
+            choices=[
+                'csv',
+                'csvnorm',
+                'hxl',
+            ],
+            required=False,
+            default='hxl'
         )
 
         parser.add_argument(
@@ -384,8 +403,19 @@ class Cli:
             return csv2r.print()
 
         if pyargs.method == 'table-rename':
+            if not pyargs.table_meta:
+                raise SyntaxError('--table-meta option is required')
+
+            with open(pyargs.table_meta) as _file:
+                meta = yaml.load(_file, Loader=yaml.SafeLoader)
+                # return data
+
+            # raise ValueError(meta)
             csvrename = CSVRename(
                 _infile,
+                meta,
+                pyargs.table_objective,
+                skip_unknown=True
                 # pyargs.output_format,
             )
 
@@ -786,7 +816,8 @@ class CSVRename:
 
     def __init__(
         self, infile,
-        # line_formatter,
+        meta: dict,
+        table_objective: str,
         # line_select,
         # line_exclude,
         # group_prefix: str = None,
@@ -800,8 +831,48 @@ class CSVRename:
         # bcp47_fallback=None,
         # strictness_level: int = 0,
         # verbose: bool = False
+        skip_unknown: bool = True
     ):
         self.infile = infile
+        self.meta = meta
+        self.table_objective = table_objective
+        self.skip_unknown = skip_unknown
+        self._index_keep = []
+
+    def _prepare_header(self, header: list) -> list:
+        new_header = []
+
+        def _helper(item):
+            _ordering = -1
+            for _key, metaitem in self.meta.items():
+                _ordering += 1
+                if item in metaitem.values():
+                    if self.table_objective in metaitem and \
+                            metaitem[self.table_objective]:
+                        # return metaitem
+                        return metaitem[self.table_objective], _ordering
+            return None, None
+
+        _index_keep_with_order = []
+        for index, item in enumerate(header):
+            metaitem_newheader, _ordering = _helper(item)
+            # print('aa', index, item)
+            if metaitem_newheader:
+                # self._index_keep.append(index)
+                _index_keep_with_order.append(
+                    (_ordering, index, metaitem_newheader))
+                # new_header.append(metaitem_newheader)
+
+        _index_keep_with_order = sorted(_index_keep_with_order, reverse=False)
+        # sorted(_index_keep_with_order, reverse=False)
+        # print('_index_keep_with_order', _index_keep_with_order)
+        for item_and_order in _index_keep_with_order:
+            self._index_keep.append(item_and_order[1])
+            new_header.append(item_and_order[2])
+            # print(new_header[item_and_order[1]], item_and_order)
+        # print('new_header', new_header)
+        # print('self._index_keep', self._index_keep)
+        return new_header
 
     def prepare(self):
 
@@ -813,29 +884,30 @@ class CSVRename:
             self.data = []
             # self.data_dict = []
 
+            new_header = []
             for row in csv_reader:
                 row_cleaned = []
                 for item in row:
                     row_cleaned.append(item.strip())
-                self.data.append(row_cleaned)
 
+                if len(new_header) == 0:
+                    new_header = self._prepare_header(row_cleaned)
+                    self.data.append(new_header)
+                    # continue
+                else:
+                    row_cleaned_and_know = []
+                    # print(self._index_keep)
+                    for index in self._index_keep:
+                        row_cleaned_and_know.append(row_cleaned[index])
+                    self.data.append(row_cleaned_and_know)
 
     def print(self):
-
-        # print("TODO print")
-        # print(self.data)
-        # print('')
-        # index = -1
-        # header = []
-
-        # if self.group_prefix:
-        #     print(self.group_prefix)
-        import sys
         csvwriter = csv.writer(sys.stdout)
         for line in self.data:
             # index += 1
             # print(line)
             csvwriter.writerow(line)
+
 
 class ExtractDataFromFiles:
 
