@@ -7,3 +7,7 @@ insert_final_newline = true
 [*.json,*.sh]
 indent_style = space
 indent_size = 2
+
+[*.sh]
+indent_style = space
+indent_size = 2
