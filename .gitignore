@@ -12,3 +12,8 @@ node_modules
 package.json
 yarn.lock
 temp/
+
+
+# https://github.com/EticaAI/lexicographi-sine-finibus is cloned here
+# Reasoning: use some scripts related to Wikidata data pull
+scripts/lexicographi-sine-finibus

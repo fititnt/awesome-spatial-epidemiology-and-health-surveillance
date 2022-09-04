@@ -150,6 +150,9 @@ jobs:
       - run: pip install -r .github/requirements.txt
         continue-on-error: true
 
+      - run: pip list
+        continue-on-error: true
+
       # #### Java Setup __________________________________________________________
       # # @see https://github.com/marketplace/actions/setup-java-jdk
       # - uses: actions/setup-java@v3

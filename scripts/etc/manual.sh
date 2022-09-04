@@ -3,7 +3,7 @@
 #
 #          FILE:  manual.sh
 #
-#         USAGE:  ./scripts/manual.sh
+#         USAGE:  ./scripts/etc/manual.sh
 #
 #   DESCRIPTION:  Generic non automated commands.
 #

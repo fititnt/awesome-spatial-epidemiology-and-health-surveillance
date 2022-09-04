@@ -35,14 +35,10 @@ BUILDTEMPDIR="${BUILDTEMPDIR:-$__BUILDTEMPDIR}"
 #### Configurable variables  - - - - - - - - - - - - - - - - - - - - - - - - - -
 # from https://apps.who.int/whocc/Search.aspx
 WHO_REGIONS=("AFRO" "AMRO" "EMRO" "EURO" "SEARO" "WPRO")
-# WHO_CSVFIELDS=(
-#   "textbox105|code"   # SOA-5 [AFRO]
-#   "textbox106|status" # Active,Pending
-#   "textbox113|name" # Active,Pending
-#   "textbox20|region" # Active,Pending
-#   "textbox19|country" # Active,Pending
-#   "textbox127|website" # Active,Pending
-# )
+LSF_REMOTE_GIT="https://github.com/EticaAI/lexicographi-sine-finibus.git"
+LSF_LOCAL_CLONED="$ROOTDIR/scripts/lexicographi-sine-finibus"
+LSF_OFFICINA="$LSF_LOCAL_CLONED/officina"
+#NUMERORDINATIO_BASIM="$LSF_OFFICINA"
 
 #### Fancy colors constants - - - - - - - - - - - - - - - - - - - - - - - - - -
 # shellcheck disable=SC2034
@@ -137,6 +133,78 @@ crawler_who_cc_fech_region() {
     --output "$output"
   set +x
   printf "\t%40s\n" "${tty_green}${FUNCNAME[0]} FINISHED OKAY ${tty_normal}"
+}
+
+#######################################
+# Build local copy of crosswalk
+#
+# Globals:
+#   ROOTDIR
+#   BUILDTEMPDIR
+# Arguments:
+#   repo        Repository to fetch the data
+#   savepath    (optional) Path to store the metadata
+# Returns
+#   None
+#######################################
+crawler_wikidata_who_icd() {
+  # whoccregion="$1"
+  # output="$2"
+  printf "\n\t%40s\n" "${tty_blue}${FUNCNAME[0]} STARTED ${tty_normal}"
+  echo "TODO"
+
+  temporarium_hxltm="$BUILDTEMPDIR/P7329~P493+P494+P7329+P7807.tm.hxl.csv"
+  temporarium_hxltm_data="$ROOTDIR/data/who-icd-crosswalk.tm.hxl.csv"
+  set -x
+  # node "$ROOTDIR/scripts/etc/whocc-downloader.js" \
+  #   --who-region "$whoccregion" \
+  #   --output "$output"
+  printf "P7329\n" |
+    NUMERORDINATIO_BASIM="${LSF_OFFICINA}" "${LSF_OFFICINA}/999999999/0/1603_3_12.py" \
+      --actionem-sparql \
+      --de=P \
+      --query \
+      --ex-interlinguis \
+      --identitas-ex-wikiq \
+      --cum-interlinguis=P493,P494,P7329,P7807 |
+    NUMERORDINATIO_BASIM="${LSF_OFFICINA}" "${LSF_OFFICINA}/999999999/0/1603_3_12.py" \
+      --actionem-sparql \
+      --identitas-ex-wikiq \
+      --csv --hxltm \
+      >"$temporarium_hxltm"
+
+  frictionless validate "$temporarium_hxltm"
+
+  head -n 11 "$temporarium_hxltm" > "$temporarium_hxltm_data"
+
+  set +x
+  printf "\t%40s\n" "${tty_green}${FUNCNAME[0]} FINISHED OKAY ${tty_normal}"
+}
+
+#######################################
+# Clone remote LSF git to local path (for additional heavy build process)
+#
+# Globals:
+#   ROOTDIR
+#   LSF_REMOTE_GIT
+#   LSF_LOCAL_CLONED
+# Arguments:
+#
+# Returns
+#   None
+#######################################
+gh_clone_lsf_to_scripts() {
+  remote_git="$LSF_REMOTE_GIT"
+  local_dir="$LSF_LOCAL_CLONED"
+
+  if [ -f "${local_dir}" ]; then
+    echo "Already cached [${local_dir}]. Skiping"
+    return 0
+  fi
+
+  set -x
+  git clone "$remote_git" "$local_dir"
+  set +x
 }
 
 #######################################

@@ -43,5 +43,17 @@ if [ "$OPERATION" = "crawler_who_cc" ]; then
   crawler_who_cc
 fi
 
+# OPERATION=gh_clone_lsf_to_scripts ./scripts/via-github-action.sh
+if [ "$OPERATION" = "gh_clone_lsf_to_scripts" ]; then
+  gh_clone_lsf_to_scripts
+  exit 0
+fi
+
+# OPERATION=crawler_wikidata_who_icd ./scripts/via-github-action.sh
+if [ "$OPERATION" = "crawler_wikidata_who_icd" ]; then
+  crawler_wikidata_who_icd
+  exit 0
+fi
+
 echo "unknow operation [$OPERATION]"
 exit 1
