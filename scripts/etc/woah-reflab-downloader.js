@@ -62,8 +62,6 @@ program
   .option('--woah-language', 'Language. Example: "EN", "FR", "ES"')
   .option('--output', 'Path to output. Example: temp/AFRO.csv')
   .option('--show-browser', 'If need show browser (use as last option)', false)
-  // .option('--teste', 'Path to output. Defaults to region.csv')
-  // .option('--tempdir', 'Path to a temporary dir', null)
   ;
 
 program.parse(process.argv);
@@ -84,6 +82,65 @@ console.log(project_woahlang, project_woahlang_a3, project_output, program.args,
 // https://crm.oie.int/interconnexion/laboratoires.php?LANG=ES
 const project_page_start = `https://crm.oie.int/interconnexion/laboratoires.php?LANG=` + project_woahlang;
 const project_name = 'woah';
+
+
+function browser_whoa_reflabs(document) {
+  let data_obj = {}
+  let rl_focus = ''
+  let rl_email = ''
+  let rl_fulldesc = ''
+  let rl_group = {}
+  document.querySelectorAll('body > h3,ul').forEach(function (el) {
+    // console.log(el)
+    // rl_title = ''
+    // console.log(el)
+    if (el.nodeName == 'H3') {
+      // console.log('title', el.innerText)
+      rl_focus = el.innerText
+      if (!(rl_focus in data_obj)) {
+        data_obj[rl_focus] = []
+      }
+    }
+    if (el.nodeName == 'UL') {
+      // console.log('info', el.innerText)
+      // rl_fulldesc = el.innerText
+      el.querySelectorAll('li').forEach(function (el2) {
+        rl_group = {
+          'focus': rl_focus,
+          'emails': [],
+          'org_name': null,
+          'country': null,
+          'contact_name': null,
+          'fulldesc': el2.innerText,
+        }
+        // console.log('el2', el2)
+        // rl_email = el3.innerText
+        // data_obj[rl_title].push([rl_email, rl_fulldesc])
+        // Array.from(el2).forEach(function (el3) {
+        el2.querySelectorAll('*').forEach(function (el3) {
+          // console.log('el3', el3)
+
+          if (el3.nodeName == 'B') {
+            if (!rl_group['contact_name']) {
+              rl_group['contact_name'] = el3.innerText.trim()
+            } else if (!rl_group['country']) {
+              rl_group['country'] = el3.innerText.trim()
+            }
+          }
+          if (el3.nodeName == 'A') {
+            // if (!('emails' in rl_group)) {
+            //   rl_group['emails'] = []
+            // }
+            rl_group['emails'].push(el3.innerText)
+          }
+        });
+        // </li>
+        data_obj[rl_focus].push([rl_group])
+      });
+    }
+  })
+  return data_obj
+}
 
 (async () => {
   // console.log('started');
@@ -125,6 +182,15 @@ const project_name = 'woah';
     all_titles.push(await title.evaluate(node => node.innerText));
   };
 
+  // const result = await frame.evaluate(() => {
+  //   return Promise.resolve(8 * 7);
+  // });
+  // console.log(result); // prints "56"
+
+  // const bodyHandle = await page.$('body');
+  // const html = await page.evaluate(body => body.innerHTML, bodyHandle);
+  // await bodyHandle.dispose();
+
   // console.log(titles)
   // console.log(all_titles)
 
@@ -142,7 +208,7 @@ const project_name = 'woah';
     }
     line.forEach((item) => {
       item = item.trim()
-      if (item.indexOf(",") > -1){
+      if (item.indexOf(",") > -1) {
         line_items.push('"' + item + '"')
       } else {
         line_items.push(item)
