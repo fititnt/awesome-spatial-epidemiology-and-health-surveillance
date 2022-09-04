@@ -1,0 +1,71 @@
+# - Using:
+#   - https://github.com/EticaAI/lexicographi-sine-finibus
+#   - /workspace/git/EticaAI/lexicographi-sine-finibus/officina
+
+# printf "P7329\n" | ./999999999/0/1603_3_12.py --actionem-sparql --de=P --query --ex-interlinguis --cum-interlinguis=P493,P494,P7329,P7807 | ./999999999/0/1603_3_12.py --actionem-sparql --csv --hxltm > 999999/0/P7329~P493+P494+P7329+P7807.tm.hxl.csv
+
+# - From https://www.wikidata.org/wiki/Wikidata:Database_reports/List_of_properties/all
+#   - P493 ICD-9 https://www.wikidata.org/wiki/Property:P493
+#   - P494 ICD-10 https://www.wikidata.org/wiki/Property:P494
+#   - CD-11 (foundation) https://www.wikidata.org/wiki/Property:P7807
+#   - ID (MMS) (P7329) https://www.wikidata.org/wiki/Property:P7329
+#     - https://opendata.stackexchange.com/questions/5261/how-to-get-list-of-all-items-that-have-a-particular-property-in-wikidata
+#     - https://www.wikidata.org/w/api.php?action=query&list=backlinks&blnamespace=0&bllimit=500&&bltitle=Property:P7329
+#
+# - crosswalk
+#   - "Add ICD-9 / ICD-10 crosswalk" https://github.com/jackwasey/icd/pull/190
+
+#### ICD-9 _____________________________________________________________________
+P493:
+  exemplum:
+    - "487 | influenza (Q2840)"
+    - "995.81 | physical abuse (Q2827132)"
+    - "E950 | suicide (Q10737)"
+    - "V15.01 | food allergy (Q769815)"
+  nomen:
+    mul-Latn: ICD-9
+  url: https://www.wikidata.org/wiki/Property:P493
+
+#### ICD-10 ____________________________________________________________________
+P494:
+  exemplum:
+    - "J10 | influenza (Q2840)"
+    - "J11 | influenza (Q2840)"
+    - "R19.6 | halitosis (Q16408)"
+  nomen:
+    mul-Latn: ICD-10
+  url: https://www.wikidata.org/wiki/Property:P494
+
+#### SNOMED CT identifier ______________________________________________________
+P5806:
+  exemplum:
+    - "64859006 | osteoporosis (Q165328)"
+    - "267718000 | age related macular degeneration (Q830308)"
+    - "464035001 | orthokeratology (Q1571081)"
+  nomen:
+    mul-Latn: SNOMED CT identifier
+  url: https://www.wikidata.org/wiki/Property:P5806
+
+#### ID (MMS) __________________________________________________________________
+P7329:
+  descriptio:
+    mul-Latn: |
+      identifier in ICD terminology of diseases - Version 11 (foundation ID)
+      (not Mortality and Morbidity Statistics ID)
+  exemplum:
+    - "9B75.0 | age related macular degeneration (Q830308)"
+    - "EJ40.0 | sunburn (Q649717)"
+    - "9D00.0 | myopia (Q168403)"
+  nomen:
+    mul-Latn: ID (MMS)
+  url: https://www.wikidata.org/wiki/Property:P7329
+
+#### ICD-11 (foundation) _______________________________________________________
+P7807:
+  exemplum:
+    - "698285441 | acute pancreatitis (Q854573)"
+    - "784669405 | ulcerative colitis (Q1477)"
+    - "402558626 | astigmatism (Q177895)"
+  nomen:
+    mul-Latn: ICD-11 (foundation)
+  url: https://www.wikidata.org/wiki/Property:P7807

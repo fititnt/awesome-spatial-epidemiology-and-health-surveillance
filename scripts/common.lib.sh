@@ -153,7 +153,7 @@ crawler_wikidata_who_icd() {
   printf "\n\t%40s\n" "${tty_blue}${FUNCNAME[0]} STARTED ${tty_normal}"
   echo "TODO"
 
-  temporarium_hxltm="$BUILDTEMPDIR/P7329~P493+P494+P7329+P7807.tm.hxl.csv"
+  temporarium_hxltm="$BUILDTEMPDIR/P7329~P493+P494+P5806+P7329+P7807.tm.hxl.csv"
   temporarium_hxltm_data="$ROOTDIR/data/who-icd-crosswalk.tm.hxl.csv"
   set -x
   # node "$ROOTDIR/scripts/etc/whocc-downloader.js" \
@@ -166,16 +166,21 @@ crawler_wikidata_who_icd() {
       --query \
       --ex-interlinguis \
       --identitas-ex-wikiq \
-      --cum-interlinguis=P493,P494,P7329,P7807 |
+      --cum-interlinguis=P493,P494,P5806,P7329,P7807 |
     NUMERORDINATIO_BASIM="${LSF_OFFICINA}" "${LSF_OFFICINA}/999999999/0/1603_3_12.py" \
       --actionem-sparql \
       --identitas-ex-wikiq \
       --csv --hxltm \
       >"$temporarium_hxltm"
 
-  frictionless validate "$temporarium_hxltm"
+  # Reasoning for --skip-errors=type-error: SNOMED CT identifier is interpreted
+  # as integer (which is correct) but we can have joined values
+  # (such as 250102002|203597000) for the primary key
+  frictionless validate \
+    --skip-errors=type-error \
+    "$temporarium_hxltm"
 
-  head -n 11 "$temporarium_hxltm" > "$temporarium_hxltm_data"
+  head -n 11 "$temporarium_hxltm" >"$temporarium_hxltm_data"
 
   set +x
   printf "\t%40s\n" "${tty_green}${FUNCNAME[0]} FINISHED OKAY ${tty_normal}"

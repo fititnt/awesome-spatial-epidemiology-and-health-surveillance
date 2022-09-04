@@ -1,0 +1,25 @@
+# https://oie.int
+# https://www.woah.org/
+# https://wahis.woah.org/#/home
+
+# https://www.woah.org/en/what-we-do/animal-health-and-welfare/animal-diseases/old-classification-of-diseases-notifiable-to-the-oie-list-a/
+# https://www.woah.org/en/what-we-do/animal-health-and-welfare/animal-diseases/old-classification-of-diseases-notifiable-to-the-oie-list-b/
+
+# http://www.animalhealthsurveillance.agriculture.gov.ie/oielisteddiseases/
+
+
+# oie-cmn-a.tm.hxl.csv
+# Ancienne classification des maladies notifiables à l’OIE – Liste A
+
+## To clean extra '"' LibreOffice adds
+# csvformat data/oie-cmn-a.tm.hxl.csv > temp/oie-cmn-a.tm.hxl.csv
+# cat temp/oie-cmn-a.tm.hxl.csv > data/oie-cmn-a.tm.hxl.csv
+#
+# csvformat data/oie-cmn-b.tm.hxl.csv > temp/oie-cmn-b.tm.hxl.csv
+# cat temp/oie-cmn-b.tm.hxl.csv > data/oie-cmn-b.tm.hxl.csv
+
+# About tag classifiers
+# - class (P2308) https://www.wikidata.org/wiki/Property:P2308
+# - official name (P1448) https://www.wikidata.org/wiki/Property:P1448
+
+# >>> Multiple species diseases >>> Maladies communes à plusieurs espèces >>> Enfermedades comunes a varias especies

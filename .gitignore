@@ -12,6 +12,7 @@ node_modules
 package.json
 yarn.lock
 temp/
+.~lock*
 
 
 # https://github.com/EticaAI/lexicographi-sine-finibus is cloned here
