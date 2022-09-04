@@ -1,0 +1,12 @@
+# https://icd.who.int/browse11/l-m_st_infections/en#/http%3a%2f%2fid.who.int%2ficd%2fentity%2f2041383807
+
+# - From https://www.wikidata.org/wiki/Wikidata:Database_reports/List_of_properties/all
+#   - P493 ICD-9 https://www.wikidata.org/wiki/Property:P493
+#   - P494 ICD-10 https://www.wikidata.org/wiki/Property:P494
+#   - CD-11 (foundation) https://www.wikidata.org/wiki/Property:P7807
+#   - ID (MMS) (P7329) https://www.wikidata.org/wiki/Property:P7329
+#     - https://opendata.stackexchange.com/questions/5261/how-to-get-list-of-all-items-that-have-a-particular-property-in-wikidata
+#     - https://www.wikidata.org/w/api.php?action=query&list=backlinks&blnamespace=0&bllimit=500&&bltitle=Property:P7329
+#
+# - crosswalk
+#   - "Add ICD-9 / ICD-10 crosswalk" https://github.com/jackwasey/icd/pull/190

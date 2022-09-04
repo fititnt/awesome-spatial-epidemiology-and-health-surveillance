@@ -97,7 +97,7 @@ crawler_who_cc() {
 
   ./scripts/readme-from-csv.py \
     --method=table-rename \
-    --table-meta=i18n/mul/whocc.meta.yml \
+    --table-meta=i18n/zxx/who-cc.meta.yml \
     "$BUILDTEMPDIR/whocc.csv" \
     >"$BUILDTEMPDIR/whocc.hxl.csv"
 
