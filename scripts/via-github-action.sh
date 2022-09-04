@@ -54,6 +54,11 @@ if [ "$OPERATION" = "crawler_wikidata_who_icd" ]; then
   crawler_wikidata_who_icd
   exit 0
 fi
+# OPERATION=crawler_woah_reflab ./scripts/via-github-action.sh
+if [ "$OPERATION" = "crawler_woah_reflab" ]; then
+  crawler_woah_reflab
+  exit 0
+fi
 
 echo "unknow operation [$OPERATION]"
 exit 1

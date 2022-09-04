@@ -33,6 +33,8 @@ __BUILDTEMPDIR="$ROOTDIR/partials/temp"
 BUILDTEMPDIR="${BUILDTEMPDIR:-$__BUILDTEMPDIR}"
 
 #### Configurable variables  - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+WHOA_LANGS=("EN" "FR" "ES")
 # from https://apps.who.int/whocc/Search.aspx
 WHO_REGIONS=("AFRO" "AMRO" "EMRO" "EURO" "SEARO" "WPRO")
 LSF_REMOTE_GIT="https://github.com/EticaAI/lexicographi-sine-finibus.git"
@@ -58,6 +60,69 @@ tty_normal=$(tput sgr0)
 #### Fancy colors constants - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 #######################################
+# crawler_who_cc fetch reference laboratories from
+# World Organisation for Animal Health (WOAH, founded as OIE)
+#
+# Globals:
+#   ROOTDIR
+#   BUILDTEMPDIR
+#   WHOA_LANGS
+# Arguments:
+#   repo        Repository to fetch the data
+#   savepath    (optional) Path to store the metadata
+# Returns
+#   None
+#######################################
+crawler_woah_reflab() {
+  # echo "${FUNCNAME[0]} TODO"
+  printf "\n\t%40s\n" "${tty_blue}${FUNCNAME[0]} STARTED ${tty_normal}"
+
+  _data_published="$ROOTDIR/data/whoa-reference-laboratories.hxl.csv"
+
+  outputs=()
+  for lang in "${WHOA_LANGS[@]}"; do
+    output="$BUILDTEMPDIR/woah_reflab_$lang.csv"
+    outputs+=("$output")
+    # crawler_woah_reflab "$lang" "$output"
+    set -x
+    node "$ROOTDIR/scripts/etc/woah-reflab-downloader.js" \
+      --woah-language "$lang" \
+      --output "$output"
+    set +x
+    frictionless validate "$output"
+    sleep 10
+  done
+
+  set -x
+  # shellcheck disable=SC2048,SC2086
+  csvjoin ${outputs[*]} >"$BUILDTEMPDIR/woah_reflab_all.csv"
+  frictionless validate "$BUILDTEMPDIR/woah_reflab_all.csv"
+  csvsort -c 1,2 "$BUILDTEMPDIR/woah_reflab_all.csv" >"$BUILDTEMPDIR/woah_reflab.csv"
+  # csvsort -c 1,2 "$BUILDTEMPDIR/woah_reflab_.csv" >"$BUILDTEMPDIR/whocc.csv"
+
+  echo "@TODO"
+
+  exit 1
+  ./scripts/readme-from-csv.py \
+    --method=table-rename \
+    --table-meta=i18n/zxx/who-cc.meta.yml \
+    "$BUILDTEMPDIR/whoa-reference-laboratories.csv" \
+    >"$BUILDTEMPDIR/whoa-reference-laboratories.hxl.csv"
+
+  frictionless validate "$BUILDTEMPDIR/whocc.hxl.csv"
+
+  if [ -f "$_data_published" ]; then
+    echo "deleting old [$_data_published]"
+    # rm "$_data_published"
+  fi
+
+  cp "$BUILDTEMPDIR/whocc.hxl.csv" "$_data_published"
+
+  set +x
+  printf "\t%40s\n" "${tty_green}${FUNCNAME[0]} FINISHED OKAY ${tty_normal}"
+}
+
+#######################################
 # crawler_who_cc raw CSVs from WHO Collaborating Centres
 #
 # Globals:
@@ -80,9 +145,9 @@ crawler_who_cc() {
   for region in "${WHO_REGIONS[@]}"; do
     output="$BUILDTEMPDIR/$region.csv"
     outputs+=("$output")
-    # crawler_who_cc_fech_region "$region" "$output"
-    # frictionless validate "$output"
-    # sleep 10
+    crawler_who_cc_fech_region "$region" "$output"
+    frictionless validate "$output"
+    sleep 10
   done
 
   set -x

@@ -24,7 +24,7 @@
  *                 SPDX-License-Identifier: Unlicense
  *       VERSION:  v1.0
  *       CREATED:  2022-09-03 09:21 UTC
- *      REVISION:  2022-09-03 10:40 UTC v1.1 build-readme.sh -> common.lib.sh
+ *      REVISION:  ---
 *******************************************************************************/
 
 // > TL:DR: do this

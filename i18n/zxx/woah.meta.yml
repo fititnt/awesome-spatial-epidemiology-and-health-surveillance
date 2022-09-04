@@ -14,7 +14,6 @@
 
 # http://www.animalhealthsurveillance.agriculture.gov.ie/oielisteddiseases/
 
-
 # oie-cmn-a.tm.hxl.csv
 # Ancienne classification des maladies notifiables à l’OIE – Liste A
 
@@ -31,7 +30,12 @@
 
 # >>> Multiple species diseases >>> Maladies communes à plusieurs espèces >>> Enfermedades comunes a varias especies
 
-
 # Manually download the file https://web.oie.int/delegateweb/fr/manuels/Template_Reference_data_English_French_Spanish.xlsx
 # Manually download the file https://www.oie.int/fileadmin/Home/eng/Solidarity/Prioritisation_v5.8_locked.xls
 # Manually download the file https://www.woah.org/fileadmin/Home/eng/Health_standards/tahm/XX_LIST_LAB.pdf
+
+#### Reference Laboratories ____________________________________________________
+# - https://www.woah.org/en/what-we-offer/expertise-network/reference-laboratories/
+#   - https://crm.oie.int/interconnexion/laboratoires.php?LANG=EN
+#   - https://crm.oie.int/interconnexion/laboratoires.php?LANG=FR
+#   - https://crm.oie.int/interconnexion/laboratoires.php?LANG=ES
