@@ -4,7 +4,9 @@
 #          FILE:  readme-from-csv.py
 #                 scripts/readme-from-csv.py
 #
-#         USAGE:  ./scripts/readme-from-csv.py
+#         USAGE:  ./scripts/readme-from-csv.py --help
+#                 python ./scripts/readme-from-csv.py --help
+#                 python3 ./scripts/readme-from-csv.py --help
 #
 #   DESCRIPTION:  ---
 #

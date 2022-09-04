@@ -1,13 +1,13 @@
-#item+conceptum+codicem,#item+rem+i_qcc+is_zxxx+ix_wikiq,#item+rem+i_eng+is_latn+ix_wdatap2308,#item+rem+i_fra+is_latn+ix_wdatap2308,#item+rem+i_spa+is_latn+ix_wdatap2308,#item+rem+i_eng+is_latn+ix_wdatap1448,#item+rem+i_fra+is_latn+ix_wdatap1448,#item+rem+i_spa+is_latn+ix_wdatap1448
-1,,Multiple species diseases,Maladies communes à plusieurs espèces,Enfermedades comunes a varias especies,Anthrax,Cowdriose,Carbunco bacteridiano
-2,,Multiple species diseases,Maladies communes à plusieurs espèces,Enfermedades comunes a varias especies,Aujeszky’s disease,Echinococcose/hydatidose,Cowdriosis
-3,,Multiple species diseases,Maladies communes à plusieurs espèces,Enfermedades comunes a varias especies,Echinococcosis/hydatidosis,Fièvre charbonneuse,Enfermedad de Aujeszky
-4,,Multiple species diseases,Maladies communes à plusieurs espèces,Enfermedades comunes a varias especies,Heartwater,Fièvre Q,Equinococosis/hidatidosis
-5,,Multiple species diseases,Maladies communes à plusieurs espèces,Enfermedades comunes a varias especies,Leptospirosis,Leptospirose,Fiebre Q
-6,,Multiple species diseases,Maladies communes à plusieurs espèces,Enfermedades comunes a varias especies,New world screwworm (Cochliomyia hominivorax),Maladie d’Aujeszky,Leptospirosis
-7,,Multiple species diseases,Maladies communes à plusieurs espèces,Enfermedades comunes a varias especies,Old world screwworm (Chrysomya bezziana),Myiase à Chrysomya bezziana,Miasis por Chrysomya bezziana
-8,,Multiple species diseases,Maladies communes à plusieurs espèces,Enfermedades comunes a varias especies,Paratuberculosis,Myiase à Cochliomyia hominivorax,Miasis por Cochliomyia hominivorax
-9,,Multiple species diseases,Maladies communes à plusieurs espèces,Enfermedades comunes a varias especies,Q fever,Paratuberculose,Paratuberculosis
+#item+conceptum+codicem,#item+rem+i_qcc+is_zxxx+ix_wikiq,#item+rem+i_eng+is_latn+ix_wdatap2308,#item+rem+i_fra+is_latn+ix_wdatap2308,#item+rem+i_spa+is_latn+ix_wdatap2308,#meta+rem+i_eng+is_latn+ix_wdatap1448,#item+rem+i_fra+is_latn+ix_wdatap1448,#meta+rem+i_spa+is_latn+ix_wdatap1448
+1,Q1118366,Multiple species diseases,Maladies communes à plusieurs espèces,Enfermedades comunes a varias especies,Heartwater,Cowdriose,Cowdriosis
+2,Q777087,Multiple species diseases,Maladies communes à plusieurs espèces,Enfermedades comunes a varias especies,Echinococcosis/hydatidosis,Echinococcose/hydatidose,Equinococosis/hidatidosis
+3,Q129104,Multiple species diseases,Maladies communes à plusieurs espèces,Enfermedades comunes a varias especies,Anthrax,Fièvre charbonneuse,Carbunco bacteridiano
+4,Q164818,Multiple species diseases,Maladies communes à plusieurs espèces,Enfermedades comunes a varias especies,Q fever,Fièvre Q,Fiebre Q
+5,Q155098,Multiple species diseases,Maladies communes à plusieurs espèces,Enfermedades comunes a varias especies,Leptospirosis,Leptospirose,Leptospirosis
+6,Q316180,Multiple species diseases,Maladies communes à plusieurs espèces,Enfermedades comunes a varias especies,Aujeszky’s disease,Maladie d’Aujeszky,Enfermedad de Aujeszky
+7,Q3675989,Multiple species diseases,Maladies communes à plusieurs espèces,Enfermedades comunes a varias especies,Old world screwworm (Chrysomya bezziana),Myiase à Chrysomya bezziana,Miasis por Chrysomya bezziana
+8,Q526003,Multiple species diseases,Maladies communes à plusieurs espèces,Enfermedades comunes a varias especies,New world screwworm (Cochliomyia hominivorax),Myiase à Cochliomyia hominivorax,Miasis por Cochliomyia hominivorax
+9,Q707388,Multiple species diseases,Maladies communes à plusieurs espèces,Enfermedades comunes a varias especies,Paratuberculosis,Paratuberculose,Paratuberculosis
 10,Q39222,Multiple species diseases,Maladies communes à plusieurs espèces,Enfermedades comunes a varias especies,Rabies,Rage,Rabia
 11,,Multiple species diseases,Maladies communes à plusieurs espèces,Enfermedades comunes a varias especies,Trichinellosis,Trichinellose,Triquinelosis
 12,,Cattle diseases,Maladies des bovins,Enfermedades de los bovinos,Bovine anaplasmosis,Anaplasmose bovine,Anaplasmosis bovina
@@ -15,8 +15,8 @@
 14,,Cattle diseases,Maladies des bovins,Enfermedades de los bovinos,Bovine brucellosis,Brucellose bovine,Brucelosis bovina
 15,,Cattle diseases,Maladies des bovins,Enfermedades de los bovinos,Bovine cysticercosis,Campylobactériose génitale bovine,Campilobacteriosis genital bovina
 16,,Cattle diseases,Maladies des bovins,Enfermedades de los bovinos,Bovine genital campylobacteriosis,Coryza gangreneux,Cisticercosis bovina
-17,,Cattle diseases,Maladies des bovins,Enfermedades de los bovinos,Bovine spongiform encephalopathy,Cysticercose bovine,Dermatofilosis
-18,,Cattle diseases,Maladies des bovins,Enfermedades de los bovinos,Bovine tuberculosis,Dermatophilose,Encefalopatía espongiforme bovina
+17,,Cattle diseases,Maladies des bovins,Enfermedades de los bovinos,Bovine spongiform encephalopathy,Cysticercose bovine,Encefalopatía espongiforme bovina
+18,,Cattle diseases,Maladies des bovins,Enfermedades de los bovinos,Bovine tuberculosis,Dermatophilose,Dermatofilosis
 19,,Cattle diseases,Maladies des bovins,Enfermedades de los bovinos,Dermatophilosis,Encéphalopathie spongiforme bovine,Fiebre catarral maligna
 20,,Cattle diseases,Maladies des bovins,Enfermedades de los bovinos,Enzootic bovine leukosis,Leucose bovine enzootique,Leucosis bovina enzoótica
 21,,Cattle diseases,Maladies des bovins,Enfermedades de los bovinos,Haemorrhagic septicaemia,Rhinotrachéite infectieuse bovine/vulvovaginite pustuleuse infectieuse,Rinotraqueítis infecciosa bovina/vulvovaginitis pustular infecciosa
@@ -49,7 +49,7 @@
 48,,Equine diseases,Maladies des équidés,Enfermedades de los équidos,Horse mange,Morve,Piroplasmosis equina
 49,,Equine diseases,Maladies des équidés,Enfermedades de los équidos,Horse pox,Piroplasmose équine,Rinoneumonía equina
 50,,Equine diseases,Maladies des équidés,Enfermedades de los équidos,Japanese encephalitis,Rhinopneumonie équine,Sarna equina
-51,,Equine diseases,Maladies des équidés,Enfermedades de los équidos,Surra (Trypanosoma evansi),Surra (Trypanosoma evansi),Surra (Trypanosoma evansi)
+51,Q149264,Equine diseases,Maladies des équidés,Enfermedades de los équidos,Surra (Trypanosoma evansi),Surra (Trypanosoma evansi),Surra (Trypanosoma evansi)
 52,,Equine diseases,Maladies des équidés,Enfermedades de los équidos,Venezuelan equine encephalomyelitis,Variole équine,Viruela equina
 53,,Swine diseases,Maladies des suidés,Enfermedades de los suidos,Atrophic rhinitis of swine,Brucellose porcine,Brucelosis porcina
 54,,Swine diseases,Maladies des suidés,Enfermedades de los suidos,Enterovirus encephalomyelitis,Cysticercose porcine,Cisticercosis porcina
@@ -88,7 +88,7 @@
 87,,Mollusc diseases,Maladies des mollusques,Enfermedades de los moluscos,Mikrocytosis (Mikrocytos mackini),"Marteiliose (Marteilia refringens, M. sydneyi)","Marteiliosis (Marteilia refringens, M. sydneyi)"
 88,,Mollusc diseases,Maladies des mollusques,Enfermedades de los moluscos,MSX disease (Haplosporidium nelsoni),Mikrocytose (Mikrocytos mackini),Microcitosis (Mikrocytos mackini)
 89,,Mollusc diseases,Maladies des mollusques,Enfermedades de los moluscos,"Perkinsosis (Perkinsus marinus, P. olseni/atlanticus)","Perkinsose (Perkinsus marinus, P. olseni/atlanticus)","Perkinsosis (Perkinsus marinus, P. olseni/atlanticus)"
-90,,Crustacean diseases,Maladies des crustacés,Enfermedades de crustáceos,Taura syndrome,Maladie de la tête jaune,Enfermedad de la cabeza amarilla
-91,,Crustacean diseases,Maladies des crustacés,Enfermedades de crustáceos,White spot disease,Maladie des points blancs,Enfermedad de las manchas blancas
-92,,Crustacean diseases,Maladies des crustacés,Enfermedades de crustáceos,Yellowhead disease,Syndrome de Taura,Síndrome de Taura
+90,Q548495,Crustacean diseases,Maladies des crustacés,Enfermedades de crustáceos,Yellowhead disease,Maladie de la tête jaune,Enfermedad de la cabeza amarilla
+91,Q117394,Crustacean diseases,Maladies des crustacés,Enfermedades de crustáceos,White spot disease,Maladie des points blancs,Enfermedad de las manchas blancas
+92,Q3508707,Crustacean diseases,Maladies des crustacés,Enfermedades de crustáceos,Taura syndrome,Syndrome de Taura,Síndrome de Taura
 93,Q331283,Other List B diseases,Autres maladies de la liste B,Otras enfermedades de la Lista B,Leishmaniosis,Leishmaniose,Leishmaniosis

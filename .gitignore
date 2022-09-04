@@ -7,6 +7,10 @@ partials/temp/*
 !partials/temp/.gitkeep
 partials/raw/etc/whocc
 
+*.ods
+*.xlsx
+*.xls
+
 __pycache__
 node_modules
 package.json
