@@ -54,6 +54,18 @@
 
 <!--
 
+{% for item in site.i18n.mul.featured_compilations %}
+  {{ item | json }}
+  {{ item.name | t }}
+  {% for item2 in item.resources %}
+    {{ item2.name | t }}
+  {% endfor %}
+{% endfor %}
+
+{{ datapackage.name }}
+{{ datapackage.resource.biosafety_levels }}
+
+
 -->
 
 

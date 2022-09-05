@@ -918,6 +918,141 @@ class CSVRename:
             csvwriter.writerow(line)
 
 
+class DatafilesLoader:
+    """ _summary_
+
+    Allows mimic jekyll datafiles https://jekyllrb.com/docs/datafiles/
+    """
+
+    _site: dict = {}
+
+    def __init__(
+        self,
+        base_paths: list = None,
+        file_extensions: list = None,
+        strictness_level: int = -1
+    ) -> None:
+        if not base_paths:
+            base_paths = [
+                'data',
+                'i18n',
+                'partials'
+            ]
+
+        self.base_paths = base_paths
+
+        self.strictness_level = strictness_level
+
+        if not file_extensions:
+            # public/locales/{lng}/translation.json
+            file_extensions = [
+                'yml',
+                'yaml',
+                'json',
+            ]
+        self.file_extensions = tuple(file_extensions)
+
+        self.load_all_from_disk()
+
+    def get_data(self):
+        return self._site
+
+    def get_datapackage(self):
+        if exists('datapackage.json'):
+            datapackage = self.load_file('datapackage.json')
+            # raise NotImplementedError(datapackage)
+            # @TODO allow get by exact ID
+
+            datapackage['resource'] = {}
+            for resource in datapackage['resources']:
+
+                slug = resource['name'].lower().replace(
+                    '-', '_').replace(r'\s', '_')
+
+                datapackage['resource'][slug] = resource
+
+            return datapackage
+        # raise FileNotFoundError('datapackage.json')
+        return {}
+
+    def set_data(self, path: str, data_item: dict):
+        # Example: i18n/zxx/biosafety-level-4-facilities.meta.yml
+
+        base = path.split('.')[0].replace('-', '_')
+        # Example: i18n/zxx/biosafety_level_4_facilities
+        parts = base.split('/')
+
+        if len(parts) > 4:
+            raise NotImplementedError(
+                f'Too deep ({len(parts)}). Change-me if you need more levels')
+
+        # Maybe functools.reduce could be used here. But for now but verbose
+        if len(parts) == 0:
+            self._site = data_item
+            return self._site
+        if len(parts) == 1:
+            self._site[parts[0]] = data_item
+            return self._site
+
+        if parts[0] not in self._site:
+            self._site[parts[0]] = {}
+
+        if len(parts) == 2:
+            self._site[parts[0]][parts[1]] = data_item
+            return self._site
+
+        if parts[1] not in self._site[parts[0]]:
+            self._site[parts[0]][parts[1]] = {}
+
+        if len(parts) == 3:
+            self._site[parts[0]][parts[1]][parts[2]] = data_item
+            return self._site
+
+        if parts[2] not in self._site[parts[0]][parts[1]]:
+            self._site[parts[0]][parts[1]][parts[2]] = {}
+
+        if len(parts) == 4:
+            self._site[parts[0]][parts[1]][parts[2]][parts[3]] = data_item
+            return self._site
+
+    def load_all_from_disk(self):
+        """load_all_from_disk load only files targeted for use now
+
+        """
+        # matches = []
+        # current_lang = None
+        # current_namespace = None
+        for _base in self.base_paths:
+            for root, _dirnames, filenames in os.walk(_base):
+                for filename in fnmatch.filter(filenames, '*.*'):
+                    root_parts = root.split('/')
+
+                    if len(root_parts) > 4:
+                        # For now, we only search up to 4 levels
+                        continue
+
+                    if not filename.endswith(self.file_extensions):
+                        continue
+                    path_now = os.path.join(root, filename)
+                    loaded_data = self.load_file(path_now)
+
+                    if loaded_data:
+                        self.set_data(path_now, loaded_data)
+
+    def load_file(self, file: str) -> dict:
+        """load_file
+
+        Args:
+            file (str): path to file
+
+        Returns:
+            dict: return content of file as python dictionary
+        """
+        with open(file) as _file:
+            data = yaml.load(_file, Loader=yaml.SafeLoader)
+            return data
+
+
 class ExtractDataFromFiles:
 
     data_template: List[list] = []
@@ -1028,6 +1163,9 @@ class LiquidRenderer:
     bcp47_objetive: str = None
     bcp47_fallback: str = None
 
+    _site: dict = {}
+    _datapackage: dict = {}
+
     def __init__(
         self,
         bcp47_objetive: str = 'en',
@@ -1044,7 +1182,7 @@ class LiquidRenderer:
         globals = {'locale': self.bcp47_objetive}
         self.env = Environment(
             tolerance=Mode.STRICT,
-            undefined=StrictDefaultUndefined,
+            # undefined=StrictDefaultUndefined,
             # loader=FileSystemLoader("./templates/"),
             globals=globals
         )
@@ -1056,6 +1194,11 @@ class LiquidRenderer:
         )
         self.i18n_data = tloader.get_data()
         # print('self.i18n_data ', self.i18n_data)
+
+        dfloader = DatafilesLoader()
+
+        self._site = dfloader.get_data()
+        self._datapackage = dfloader.get_datapackage()
 
         # raise NotImplementedError
 
@@ -1076,6 +1219,11 @@ class LiquidRenderer:
 
         if 'locale' not in context:
             context['locale'] = self.bcp47_objetive
+
+        extra_context['site'] = self._site
+        extra_context['datapackage'] = self._datapackage
+
+        # raise NotImplementedError(extra_context['datapackage'])
 
         result = compiled_template.render(extra_context)
         return result

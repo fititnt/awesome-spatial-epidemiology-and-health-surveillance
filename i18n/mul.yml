@@ -1,0 +1,20 @@
+# i18n/mul
+# - https://iso639-3.sil.org/code/mul
+# - https://en.wikipedia.org/wiki/ISO_639-3
+#   - `mul` (multiple languages) is intended for cases where the data includes more than one language, and (for example) the database requires a single ISO code.
+
+# ______________________________________________________________________
+# @TODO move to i18n/mul/translation.yml
+featured_compilations:
+  - name: research-initiatives
+    resources:
+      - name: biosafety-level-4-laboratories
+      - name: who-collaborating-centres
+      - name: woah-reference-laboratories
+
+  - name: terminology-nomenclature-coding
+    resources:
+      - name: who-icd-crosswalk
+      - name: woah-cmn-a
+      - name: "{{ 'section_data_title' | t }}"
+      - name: section_data_title
