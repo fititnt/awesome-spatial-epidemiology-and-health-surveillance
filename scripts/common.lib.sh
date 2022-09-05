@@ -235,7 +235,7 @@ crawler_wikidata_who_icd() {
   # whoccregion="$1"
   # output="$2"
   printf "\n\t%40s\n" "${tty_blue}${FUNCNAME[0]} STARTED ${tty_normal}"
-  echo "TODO"
+  # echo "TODO"
 
   temporarium_hxltm="$BUILDTEMPDIR/P7329~P493+P494+P5806+P7329+P7807.tm.hxl.csv"
   temporarium_hxltm_data="$ROOTDIR/data/who-icd-crosswalk.tm.hxl.csv"
@@ -267,6 +267,71 @@ crawler_wikidata_who_icd() {
   head -n 11 "$temporarium_hxltm" >"$temporarium_hxltm_data"
 
   set +x
+  printf "\t%40s\n" "${tty_green}${FUNCNAME[0]} FINISHED OKAY ${tty_normal}"
+}
+
+#######################################
+# Build local copy of crosswalk
+#
+# Globals:
+#   ROOTDIR
+#   BUILDTEMPDIR
+# Arguments:
+#   repo        Repository to fetch the data
+#   savepath    (optional) Path to store the metadata
+# Returns
+#   None
+#######################################
+crawler_wikipedia_bsl4facilities() {
+  # whoccregion="$1"
+  # output="$2"
+  printf "\n\t%40s\n" "${tty_blue}${FUNCNAME[0]} STARTED ${tty_normal}"
+  echo "TODO"
+
+  # exit 1
+
+  source_url="https://en.wikipedia.org/wiki/Biosafety_level"
+  temporarium_csv="$ROOTDIR/partials/raw/wikipedia-table/biosafety-level-4-laboratories.csv"
+  temporarium_hxl="$BUILDTEMPDIR/biosafety-level-4-laboratories.hxl.csv"
+  frictionless_tempdir="$ROOTDIR/partials/raw/wikipedia-table/"
+  frictionless_tempdir_datapackage="biosafety-level-4-laboratories.datapackage.json"
+  frictionless_tempdir_datapackage="biosafety-level-4-laboratories.datapackage.json"
+  temporarium_hxltm_data="$ROOTDIR/partials/raw/wikipedia-table/biosafety-level-4-laboratories.csv"
+
+  _data_published="$ROOTDIR/data/biosafety-level-4-laboratories.hxl.csv"
+
+  set -x
+
+  PANDAS_READ_HTML__INDEXTABLE=1 ./scripts/readme-from-csv.py \
+    --method='extract-remote-html-table' \
+    "$source_url" >"$temporarium_csv"
+
+  head -n 2 "$temporarium_csv"
+
+  cd "$frictionless_tempdir"
+
+  # If something goes wrong, frictionless will warn us already at this point
+  frictionless validate "$frictionless_tempdir_datapackage"
+
+  cd "$ROOTDIR"
+
+  ./scripts/readme-from-csv.py \
+    --method=table-rename \
+    --table-meta=i18n/zxx/biosafety-level-4-facilities.meta.yml \
+    "$temporarium_csv" \
+    >"$temporarium_hxl"
+
+  head -n 2 "$temporarium_hxl"
+
+  frictionless validate "$temporarium_hxl"
+
+  set +x
+  if [ -f "$_data_published" ]; then
+    echo "deleting old [$_data_published]"
+    rm "$_data_published"
+  fi
+
+  cp "$temporarium_hxl" "$_data_published"
   printf "\t%40s\n" "${tty_green}${FUNCNAME[0]} FINISHED OKAY ${tty_normal}"
 }
 

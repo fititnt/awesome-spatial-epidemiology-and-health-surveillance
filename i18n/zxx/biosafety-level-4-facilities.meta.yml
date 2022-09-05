@@ -1,0 +1,22 @@
+# Data from https://en.wikipedia.org/wiki/Biosafety_level
+
+Country:
+  csv: Country
+  csvnorm: country
+  hxl: "#country+name"
+Location:
+  csv: Location
+  csvnorm: location
+  hxl: "#loc+name"
+Name:
+  csv: Name
+  csvnorm: laboratory_name
+  hxl: "#org+name"
+Dateestablished:
+  csv: Dateestablished
+  csvnorm: date_established
+  hxl: "#date+text"
+Description:
+  csv: Description
+  csvnorm: description
+  hxl: "#org+desc"

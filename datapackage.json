@@ -8,6 +8,106 @@
   },
   "resources": [
     {
+      "path": "data/biosafety-levels.hxl.tm.hxl.csv",
+      "name": "biosafety-levels",
+      "profile": "tabular-data-resource",
+      "scheme": "file",
+      "format": "csv",
+      "encoding": "utf-8",
+      "schema": {
+        "fields": [
+          {
+            "type": "string",
+            "name": "#item+conceptum+codicem"
+          },
+          {
+            "type": "string",
+            "name": "#item+rem+i_qcc+is_zxxx+ix_wikiq"
+          },
+          {
+            "type": "string",
+            "name": "#item+rem+i_mul+is_zxxx"
+          }
+        ]
+      }
+    },
+    {
+      "path": "data/biosafety-level-4-laboratories.hxl.csv",
+      "name": "biosafety-level-4-laboratories",
+      "profile": "tabular-data-resource",
+      "scheme": "file",
+      "format": "csv",
+      "encoding": "utf-8",
+      "schema": {
+        "fields": [
+          {
+            "type": "string",
+            "name": "#country+name"
+          },
+          {
+            "type": "string",
+            "name": "#loc+name"
+          },
+          {
+            "type": "string",
+            "name": "#org+name"
+          },
+          {
+            "type": "string",
+            "name": "#date+text"
+          },
+          {
+            "type": "string",
+            "name": "#org+desc"
+          }
+        ]
+      },
+      "sources": [
+        {
+          "title": "List of Biosafety level 4 facilities from Wikipedia (automated web scraping)",
+          "path": "https://en.wikipedia.org/wiki/Biosafety_level"
+        }
+      ]
+    },
+    {
+      "path": "data/oie-cmn-a.tm.hxl.csv",
+      "name": "oie-cmn-a",
+      "profile": "tabular-data-resource",
+      "scheme": "file",
+      "format": "csv",
+      "encoding": "utf-8",
+      "schema": {
+        "fields": [
+          {
+            "type": "string",
+            "name": "#item+conceptum+codicem"
+          },
+          {
+            "type": "string",
+            "name": "#item+rem+i_qcc+is_zxxx+ix_wikiq"
+          },
+          {
+            "type": "string",
+            "name": "#item+rem+i_eng+is_latn+ix_xywdatap1448"
+          },
+          {
+            "type": "string",
+            "name": "#item+rem+i_fra+is_latn+ix_xywdatap1448"
+          },
+          {
+            "type": "string",
+            "name": "#item+rem+i_spa+is_latn+ix_xywdatap1448"
+          }
+        ]
+      },
+      "sources": [
+        {
+          "title": "Old Classification of Diseases Notifiable to the OIE – List A (manual compilation)",
+          "path": "https://www.woah.org/en/what-we-do/animal-health-and-welfare/animal-diseases/old-classification-of-diseases-notifiable-to-the-oie-list-a/"
+        }
+      ]
+    },
+    {
       "path": "data/github-topics.hxl.csv",
       "name": "github-topics",
       "profile": "tabular-data-resource",
@@ -86,6 +186,100 @@
           }
         ]
       }
+    },
+    {
+      "path": "data/who-collaborating-centres.hxl.csv",
+      "name": "who-collaborating-centres",
+      "profile": "tabular-data-resource",
+      "scheme": "file",
+      "format": "csv",
+      "encoding": "utf-8",
+      "schema": {
+        "fields": [
+          {
+            "type": "string",
+            "name": "#org+code"
+          },
+          {
+            "type": "string",
+            "name": "#region+who"
+          },
+          {
+            "type": "string",
+            "name": "#country"
+          },
+          {
+            "type": "date",
+            "name": "#date+designation"
+          },
+          {
+            "type": "date",
+            "name": "#date+redesignation"
+          },
+          {
+            "type": "date",
+            "name": "#date+expiry"
+          },
+          {
+            "type": "string",
+            "name": "#status"
+          },
+          {
+            "type": "string",
+            "name": "#org+title"
+          },
+          {
+            "type": "string",
+            "name": "#org+site+url"
+          },
+          {
+            "type": "string",
+            "name": "#contact+director+name"
+          },
+          {
+            "type": "string",
+            "name": "#contact+head+name"
+          },
+          {
+            "type": "string",
+            "name": "#contact+director+email"
+          },
+          {
+            "type": "string",
+            "name": "#contact+head+email"
+          },
+          {
+            "type": "string",
+            "name": "#meta+desc+centre_terms_reference_1"
+          },
+          {
+            "type": "string",
+            "name": "#meta+desc+centre_terms_reference_2"
+          },
+          {
+            "type": "string",
+            "name": "#meta+desc+centre_terms_reference_3"
+          },
+          {
+            "type": "string",
+            "name": "#meta+desc+centre_types_activity_1"
+          },
+          {
+            "type": "string",
+            "name": "#meta+desc+centre_types_activity_2"
+          },
+          {
+            "type": "string",
+            "name": "#meta+desc+centre_types_activity_3"
+          }
+        ]
+      },
+      "sources": [
+        {
+          "title": "WHO Collaborating Centres Global database (automated web scraping)",
+          "path": "https://apps.who.int/whocc/Search.aspx"
+        }
+      ]
     }
   ]
 }

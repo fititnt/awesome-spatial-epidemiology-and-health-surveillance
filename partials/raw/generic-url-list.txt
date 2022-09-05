@@ -117,6 +117,7 @@ http://www.anlis.gov.ar/inei/
 http://www.anlis.gov.ar/inp
 http://www.anses.fr
 http://www.antibiotic.ru
+http://www.aphis.usda.gov/aphis/ourfocus/animalhealth/lab-info-services
 http://www.aravind.org
 http://www.arpansa.gov.au
 http://www.asugi.sanita.fvg.it
@@ -172,12 +173,14 @@ http://www.churabat.ma
 http://www.cidadessaudaveis.org.br/
 http://www.cideim.org.co/cideim/en/home.html
 http://www.cinbiose.uqam.ca
+http://www.cirad.fr
 http://www.clalitresearch.org
 http://www.clinhpcentre-sweden.org/
 http://www.cmc.cuk.ac.kr/cimc/
 http://www.cmch-vellore.edu/
 http://www.cmro.gov.hk
 http://www.cnic.org.cn
+http://www.copeg.org
 http://www.cpmh.org.za
 http://www.cpo.it
 http://www.crc.mui.ac.ir
@@ -192,7 +195,7 @@ http://www.dal.ca
 http://www.dap.org.pk/
 http://www.ddrc.ihr.chula.ac.th
 http://www.ddri.ir
-http://www.deakin.edu.au/research/cphr/our-research/who-collaborating-centres-obesity-prevention
+http://www.deakin.edu.au/research/cphr/our-research/who-collaborating-centre-obesity-prevention
 http://www.defence.gov.au/dpe/dhs/jhsa/ami
 http://www.deis.msal.gov.ar/index.php/cace-centro-argentino-de-clasificacion-de-enfermedades/
 http://www.dent.niigata-u.ac.jp
@@ -204,7 +207,7 @@ http://www.dmrgov.mm
 http://www.dmsc.moph.go.th/
 http://www.doherty.edu.au/
 http://www.doherty.edu.au/whoccvh
-http://www.douglas.qc.ca/section/who-collaborating-centres-133
+http://www.douglas.qc.ca/section/who-collaborating-centre-133
 http://www.e5413.com
 http://www.earscience.org.au/
 http://www.ebpi.uzh.ch/en.html
@@ -311,6 +314,9 @@ http://www.iss.it/
 http://www.itg.be/itg/
 http://www.iums.ac.ir/
 http://www.ivs.ku.dk
+http://www.izsler.it
+http://www.izsto.it
+http://www.izsvenezie.com
 http://www.jata.or.jp/eindex.htm
 http://www.jcu.edu.au
 http://www.jcu.edu.au/nursing
@@ -425,6 +431,7 @@ http://www.nuigalway.ie/hprc
 http://www.nurse.cmu.ac.th/
 http://www.nursing.upenn.edu/global-health/
 http://www.nus.edu.sg
+http://www.nvri.gov.tw
 http://www.nwhcc.gov.jo
 http://www.occupationalcancer.ca
 http://www.onep.ma
@@ -614,7 +621,7 @@ https://ncc.re.kr/indexEn.ncc
 https://ncpha.government.bg/index/68-koi-sme-nie.html
 https://nfsp.org.sa/en/Pages/default.aspx
 https://nimr.icmr.org.in
-https://nursing.mcmaster.ca/community/international-partnerships/paho-who-collaborating-centres
+https://nursing.mcmaster.ca/community/international-partnerships/paho-who-collaborating-centre
 https://nursing.unc.edu/
 https://obrieniph.ucalgary.ca/
 https://oneill.law.georgetown.edu/about/
@@ -689,7 +696,7 @@ https://www.tiho-hannover.de/ibei
 https://www.tjh.com.cn/tjh_en/
 https://www.tropicalmedicine.ox.ac.uk/about
 https://www.ukbonn.de/ihph
-https://www.umweltbundesamt.de/en/topics/water/drinking-water/who-collaborating-centres-for-research-on-drinking
+https://www.umweltbundesamt.de/en/topics/water/drinking-water/who-collaborating-centre-for-research-on-drinking
 https://www.unav.edu/web/observatorio-global-de-cuidados-paliativos-atlantes/
 https://www.unibs.it/it
 https://www.uvic.ca/research/centres/cisur/
