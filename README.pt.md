@@ -1,8 +1,8 @@
-# Incrível Epidemiologia Espacial e Vigilância em Saúde Pública
+# Incrível Epidemiologia Espacial e Vigilância em Saúde Pública/Saúde Animal
 [![Frictionless](https://github.com/fititnt/awesome-spatial-epidemiology-and-public-health-surveillance/actions/workflows/frictionless.yml/badge.svg)](https://repository.frictionlessdata.io/pages/dashboard.html?user=fititnt&repo=awesome-spatial-epidemiology-and-public-health-surveillance&flow=frictionless)
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
 
-![Incrível Epidemiologia Espacial e Vigilância em Saúde Pública Banner](partials/awesome-spatial-epidemiology.jpg)
+![Incrível Epidemiologia Espacial e Vigilância em Saúde Pública/Saúde Animal Banner](partials/awesome-spatial-epidemiology.jpg)
 
 **project_summary**
 
@@ -13,6 +13,7 @@
 > Tier 3 are related to the tooling (but not restricted to the scientific application).
 
 - **Tier 1**:
+  - [animal-health-surveillance](https://github.com/topics/animal-health-surveillance): 0 repositories
   - [disease-mapping](https://github.com/topics/disease-mapping): 3 repositories
   - [epidemic-simulations](https://github.com/topics/epidemic-simulations): 74 repositories
   - [spatial-epidemiology](https://github.com/topics/spatial-epidemiology): 4 repositories

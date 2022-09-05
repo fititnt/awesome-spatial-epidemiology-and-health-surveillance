@@ -1,8 +1,8 @@
-# Awesome Spatial Epidemiology and Public Health Surveillance
+# Awesome Spatial Epidemiology and Public/Aninal Health Surveillance
 [![Frictionless](https://github.com/fititnt/awesome-spatial-epidemiology-and-public-health-surveillance/actions/workflows/frictionless.yml/badge.svg)](https://repository.frictionlessdata.io/pages/dashboard.html?user=fititnt&repo=awesome-spatial-epidemiology-and-public-health-surveillance&flow=frictionless)
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
 
-![Awesome Spatial Epidemiology and Public Health Surveillance Banner](partials/awesome-spatial-epidemiology.jpg)
+![Awesome Spatial Epidemiology and Public/Aninal Health Surveillance Banner](partials/awesome-spatial-epidemiology.jpg)
 
 **Curated list of awesome spatial epidemiology data exchange concepts, data reference and tooling. Contributions are welcomed!**
 
@@ -13,6 +13,7 @@
 > Tier 3 are related to the tooling (but not restricted to the scientific application).
 
 - **Tier 1**:
+  - [animal-health-surveillance](https://github.com/topics/animal-health-surveillance): 0 repositories
   - [disease-mapping](https://github.com/topics/disease-mapping): 3 repositories
   - [epidemic-simulations](https://github.com/topics/epidemic-simulations): 74 repositories
   - [spatial-epidemiology](https://github.com/topics/spatial-epidemiology): 4 repositories

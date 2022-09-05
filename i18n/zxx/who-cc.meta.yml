@@ -22,7 +22,7 @@ textbox45:
   csv: textbox45
   csvnorm: designation_date
   hxl: "#date+designation"
-  hxltm_ix: 'ix_wdatap571' # inception (P571) https://www.wikidata.org/wiki/Property:P571
+  hxltm_ix: 'ix_xywdatap571' # inception (P571) https://www.wikidata.org/wiki/Property:P571
 textbox47:
   csv: textbox47
   csvnorm: redesignation_last_date

@@ -1,3 +1,4 @@
+  - [animal-health-surveillance](https://github.com/topics/animal-health-surveillance): 0 repositories
   - [disease-mapping](https://github.com/topics/disease-mapping): 3 repositories
   - [epidemic-simulations](https://github.com/topics/epidemic-simulations): 74 repositories
   - [spatial-epidemiology](https://github.com/topics/spatial-epidemiology): 4 repositories
