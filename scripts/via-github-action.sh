@@ -39,6 +39,9 @@ if [ "$OPERATION" = "build-readme" ]; then
   echo "$OPERATION"
   exit 0
 fi
+
+## WARNING: this part may have some timeouts; so try again 1 or 2 times if fail
+# OPERATION=crawler_who_cc ./scripts/via-github-action.sh
 if [ "$OPERATION" = "crawler_who_cc" ]; then
   crawler_who_cc
 fi

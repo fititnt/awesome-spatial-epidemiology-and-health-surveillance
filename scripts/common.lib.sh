@@ -82,7 +82,15 @@ crawler_woah_reflab() {
   outputs=()
   for lang in "${WHOA_LANGS[@]}"; do
     output="$BUILDTEMPDIR/woah_reflab_$lang.csv"
-    outputs+=("$output")
+    
+    # outputs+=("$output")
+    if [ "$lang" = 'FR' ]; then
+       outputs+=("$output")
+    else
+      echo "TODO is not possible to align translations, so we're using only \
+french instead of merge then"
+      continue
+    fi
     # crawler_woah_reflab "$lang" "$output"
     set -x
     node "$ROOTDIR/scripts/etc/woah-reflab-downloader.js" \
@@ -93,30 +101,32 @@ crawler_woah_reflab() {
     sleep 10
   done
 
-  set -x
+  echo "TODO is not possible to align translations, so we're using only french"
+
+  # set -x
   # shellcheck disable=SC2048,SC2086
   csvjoin ${outputs[*]} >"$BUILDTEMPDIR/woah_reflab_all.csv"
   frictionless validate "$BUILDTEMPDIR/woah_reflab_all.csv"
-  csvsort -c 1,2 "$BUILDTEMPDIR/woah_reflab_all.csv" >"$BUILDTEMPDIR/woah_reflab.csv"
+  csvsort -c 1,2 "$BUILDTEMPDIR/woah_reflab_all.csv" >"$BUILDTEMPDIR/whoa-reference-laboratories.csv"
   # csvsort -c 1,2 "$BUILDTEMPDIR/woah_reflab_.csv" >"$BUILDTEMPDIR/whocc.csv"
 
-  echo "@TODO"
+  # echo "@TODO"
 
-  exit 1
+  # exit 1
   ./scripts/readme-from-csv.py \
     --method=table-rename \
-    --table-meta=i18n/zxx/who-cc.meta.yml \
+    --table-meta=i18n/zxx/who-collaborating-centres.meta.yml \
     "$BUILDTEMPDIR/whoa-reference-laboratories.csv" \
     >"$BUILDTEMPDIR/whoa-reference-laboratories.hxl.csv"
 
-  frictionless validate "$BUILDTEMPDIR/whocc.hxl.csv"
+  frictionless validate "$BUILDTEMPDIR/woah_reflab.hxl.csv"
 
   if [ -f "$_data_published" ]; then
     echo "deleting old [$_data_published]"
     # rm "$_data_published"
   fi
 
-  cp "$BUILDTEMPDIR/whocc.hxl.csv" "$_data_published"
+  cp "$BUILDTEMPDIR/woah_reflab.hxl.csv" "$_data_published"
 
   set +x
   printf "\t%40s\n" "${tty_green}${FUNCNAME[0]} FINISHED OKAY ${tty_normal}"
@@ -139,7 +149,7 @@ crawler_who_cc() {
   # echo "${FUNCNAME[0]} TODO"
   printf "\n\t%40s\n" "${tty_blue}${FUNCNAME[0]} STARTED ${tty_normal}"
 
-  _data_published="$ROOTDIR/data/who-collaborating-centre.hxl.csv"
+  _data_published="$ROOTDIR/data/who-collaborating-centres.hxl.csv"
 
   outputs=()
   for region in "${WHO_REGIONS[@]}"; do
@@ -156,9 +166,11 @@ crawler_who_cc() {
   frictionless validate "$BUILDTEMPDIR/whocc_all.csv"
   csvsort -c 1,2 "$BUILDTEMPDIR/whocc_all.csv" >"$BUILDTEMPDIR/whocc.csv"
 
+  # @TODO: make this part more resilient to timeout errors
+
   ./scripts/readme-from-csv.py \
     --method=table-rename \
-    --table-meta=i18n/zxx/who-cc.meta.yml \
+    --table-meta=i18n/zxx/who-collaborating-centres.meta.yml \
     "$BUILDTEMPDIR/whocc.csv" \
     >"$BUILDTEMPDIR/whocc.hxl.csv"
 

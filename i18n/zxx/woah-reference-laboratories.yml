@@ -1,0 +1,67 @@
+# https://oie.int
+# https://www.woah.org/
+# https://wahis.woah.org/#/home
+
+# @TODO since since list-b is not aligned with languages, at least
+#       this PDF have line-by-line translations aligned like
+#       - African horse sickness – Peste équine – Peste equina
+#       - African swine fever – Peste porcine africaine – Peste porcina africana
+
+# @TODO incentive Portuguese translation at https://pt.wikipedia.org/wiki/Lista_de_doen%C3%A7as_de_notifica%C3%A7%C3%A3o_compuls%C3%B3ria_(OIE)
+
+# https://www.woah.org/en/what-we-do/animal-health-and-welfare/animal-diseases/old-classification-of-diseases-notifiable-to-the-oie-list-a/
+# https://www.woah.org/en/what-we-do/animal-health-and-welfare/animal-diseases/old-classification-of-diseases-notifiable-to-the-oie-list-b/
+
+# http://www.animalhealthsurveillance.agriculture.gov.ie/oielisteddiseases/
+
+# oie-cmn-a.tm.hxl.csv
+# Ancienne classification des maladies notifiables à l’OIE – Liste A
+
+## To clean extra '"' LibreOffice adds
+# csvformat data/oie-cmn-a.tm.hxl.csv > temp/oie-cmn-a.tm.hxl.csv
+# cat temp/oie-cmn-a.tm.hxl.csv > data/oie-cmn-a.tm.hxl.csv
+#
+# csvformat data/oie-cmn-b.tm.hxl.csv > temp/oie-cmn-b.tm.hxl.csv
+# cat temp/oie-cmn-b.tm.hxl.csv > data/oie-cmn-b.tm.hxl.csv
+
+# About tag classifiers
+# - class (P2308) https://www.wikidata.org/wiki/Property:P2308
+# - official name (P1448) https://www.wikidata.org/wiki/Property:P1448
+
+# >>> Multiple species diseases >>> Maladies communes à plusieurs espèces >>> Enfermedades comunes a varias especies
+
+# Manually download the file https://web.oie.int/delegateweb/fr/manuels/Template_Reference_data_English_French_Spanish.xlsx
+# Manually download the file https://www.oie.int/fileadmin/Home/eng/Solidarity/Prioritisation_v5.8_locked.xls
+# Manually download the file https://www.woah.org/fileadmin/Home/eng/Health_standards/tahm/XX_LIST_LAB.pdf
+
+#### Reference Laboratories ____________________________________________________
+# - https://www.woah.org/en/what-we-offer/expertise-network/reference-laboratories/
+#   - https://crm.oie.int/interconnexion/laboratoires.php?LANG=EN
+#   - https://crm.oie.int/interconnexion/laboratoires.php?LANG=FR
+#   - https://crm.oie.int/interconnexion/laboratoires.php?LANG=ES
+
+
+focus:
+  csv: focus
+  csvnorm: whoa_focus
+  hxl: "#org+whoa+focus"
+contact_name:
+  csv: contact_name
+  csvnorm: contact_name
+  hxl: "#contact+name"
+emails:
+  csv: emails
+  csvnorm: emails
+  hxl: "#contact+email"
+phones:
+  csv: phones
+  csvnorm: phones
+  hxl: "#contact+phone"
+websites:
+  csv: websites
+  csvnorm: websites
+  hxl: "#org+website"
+rest:
+  csv: rest
+  csvnorm: laboratory_data
+  hxl: "#org+info"

@@ -86,7 +86,7 @@ Merge data files in memory before render templated result . . . . . . . . . . .
 
 Rename CSV/Tabular data header . . . . . . . . . . . . . . . . . . . . . . . .
     {__file__} --method=table-rename \
---table-meta=i18n/zxx/who-cc.meta.yml \
+--table-meta=i18n/zxx/who-collaborating-centres.meta.yml \
 partials/temp/whocc.csv
 
 
@@ -304,7 +304,7 @@ class Cli:
             '--table-meta',
             help='With --method=table-rename this explain which file '
             'contains the metadata for conversion between formats. '
-            'Example: "i18n/zxx/who-cc.meta.yml"',
+            'Example: "i18n/zxx/who-collaborating-centres.meta.yml"',
             dest='table_meta',
             nargs='?',
             # required=True

@@ -208,7 +208,8 @@ async function clean_csv(project_tempdirdir, project_output) {
   await Promise.all([
     page.click('table[title=Export]'),
     // page.waitForNavigation(),
-    page.waitForSelector('a[title="CSV (comma delimited)"]', { visible: true })
+    // page.waitForSelector('a[title="CSV (comma delimited)"]', { visible: true }),
+    new Promise(r => setTimeout(r, 1000))
   ]).catch(function (err) {
     console.log(err.message);
     process.exit(1);

@@ -192,7 +192,7 @@ http://www.dal.ca
 http://www.dap.org.pk/
 http://www.ddrc.ihr.chula.ac.th
 http://www.ddri.ir
-http://www.deakin.edu.au/research/cphr/our-research/who-collaborating-centre-obesity-prevention
+http://www.deakin.edu.au/research/cphr/our-research/who-collaborating-centres-obesity-prevention
 http://www.defence.gov.au/dpe/dhs/jhsa/ami
 http://www.deis.msal.gov.ar/index.php/cace-centro-argentino-de-clasificacion-de-enfermedades/
 http://www.dent.niigata-u.ac.jp
@@ -204,7 +204,7 @@ http://www.dmrgov.mm
 http://www.dmsc.moph.go.th/
 http://www.doherty.edu.au/
 http://www.doherty.edu.au/whoccvh
-http://www.douglas.qc.ca/section/who-collaborating-centre-133
+http://www.douglas.qc.ca/section/who-collaborating-centres-133
 http://www.e5413.com
 http://www.earscience.org.au/
 http://www.ebpi.uzh.ch/en.html
@@ -614,7 +614,7 @@ https://ncc.re.kr/indexEn.ncc
 https://ncpha.government.bg/index/68-koi-sme-nie.html
 https://nfsp.org.sa/en/Pages/default.aspx
 https://nimr.icmr.org.in
-https://nursing.mcmaster.ca/community/international-partnerships/paho-who-collaborating-centre
+https://nursing.mcmaster.ca/community/international-partnerships/paho-who-collaborating-centres
 https://nursing.unc.edu/
 https://obrieniph.ucalgary.ca/
 https://oneill.law.georgetown.edu/about/
@@ -689,7 +689,7 @@ https://www.tiho-hannover.de/ibei
 https://www.tjh.com.cn/tjh_en/
 https://www.tropicalmedicine.ox.ac.uk/about
 https://www.ukbonn.de/ihph
-https://www.umweltbundesamt.de/en/topics/water/drinking-water/who-collaborating-centre-for-research-on-drinking
+https://www.umweltbundesamt.de/en/topics/water/drinking-water/who-collaborating-centres-for-research-on-drinking
 https://www.unav.edu/web/observatorio-global-de-cuidados-paliativos-atlantes/
 https://www.unibs.it/it
 https://www.uvic.ca/research/centres/cisur/

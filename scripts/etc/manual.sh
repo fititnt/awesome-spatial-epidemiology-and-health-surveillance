@@ -107,18 +107,18 @@ frictionless validate biosafety-level-4-laboratories.datapackage.json
 PANDAS_READ_HTML__INDEXTABLE=0 ./scripts/readme-from-csv.py --method='extract-remote-html-table' https://en.wikipedia.org/wiki/List_of_infectious_diseases > partials/temp/List_of_infectious_diseases.csv
 
 
-./scripts/readme-from-csv.py --method='extract-remote-html-table' 'https://apps.who.int/whocc/List.aspx?UHfehFaaKUEdGSfqs%2fFGLg=%3d' > partials/raw/who-ccg.csv
+./scripts/readme-from-csv.py --method='extract-remote-html-table' 'https://apps.who.int/whocc/List.aspx?UHfehFaaKUEdGSfqs%2fFGLg=%3d' > partials/raw/who-collaborating-centresg.csv
 
 ./scripts/readme-from-csv.py --method='extract-remote-html-table' https://en.wikipedia.org/wiki/Infections_associated_with_diseases > partials/temp/Infections_associated_with_diseases.csv
 
 
-# wc -l partials/temp/who-ccg/*.tsv
-#     30 partials/temp/who-ccg/who-ccg-chrome-scrapper_AFRO.tsv
-#    181 partials/temp/who-ccg/who-ccg-chrome-scrapper_AMRO.tsv
-#     55 partials/temp/who-ccg/who-ccg-chrome-scrapper_EMRO.tsv
-#    265 partials/temp/who-ccg/who-ccg-chrome-scrapper_EURO.tsv
-#     99 partials/temp/who-ccg/who-ccg-chrome-scrapper_SEARO.tsv
-#    197 partials/temp/who-ccg/who-ccg-chrome-scrapper_WPRO.tsv
+# wc -l partials/temp/who-collaborating-centresg/*.tsv
+#     30 partials/temp/who-collaborating-centresg/who-collaborating-centresg-chrome-scrapper_AFRO.tsv
+#    181 partials/temp/who-collaborating-centresg/who-collaborating-centresg-chrome-scrapper_AMRO.tsv
+#     55 partials/temp/who-collaborating-centresg/who-collaborating-centresg-chrome-scrapper_EMRO.tsv
+#    265 partials/temp/who-collaborating-centresg/who-collaborating-centresg-chrome-scrapper_EURO.tsv
+#     99 partials/temp/who-collaborating-centresg/who-collaborating-centresg-chrome-scrapper_SEARO.tsv
+#    197 partials/temp/who-collaborating-centresg/who-collaborating-centresg-chrome-scrapper_WPRO.tsv
 #    827 total
 
 

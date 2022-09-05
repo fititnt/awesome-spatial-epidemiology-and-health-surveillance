@@ -83,173 +83,6 @@ console.log(project_woahlang, project_woahlang_a3, project_output, program.args,
 const project_page_start = `https://crm.oie.int/interconnexion/laboratoires.php?LANG=` + project_woahlang;
 const project_name = 'woah';
 
-/**
- * Very ugly function done quickly just to parse URLS like
- * https://crm.oie.int/interconnexion/laboratoires.php?LANG=EN
- * know to work as 2022-09-05
- *
- * @param {*} document
- * @returns {Object}
- */
-function browser_whoa_reflabs(document) {
-  let data_obj = {}
-  let rl_focus = ''
-  let rl_email = ''
-  let rl_fulldesc = ''
-  let rl_group = {}
-
-  // https://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript
-  const hashCode = s => s.split('').reduce((a, b) => (((a << 5) - a) + b.charCodeAt(0)) | 0, 0)
-
-  function parse_raw(innerText, hint_region = '') {
-    parsed = {
-      'contact_name': '',
-      'emails': [],
-      'phones': [],
-      'rest': [],
-    }
-    parts = innerText.split('\n')
-    // parsed['contact_name'] = parts.pop(0)
-    parsed['contact_name'] = parts.splice(0, 1)[0]
-
-    if (parts.indexOf(hint_region) > -1) {
-      parsed['country'] = parts.splice(parts.indexOf(hint_region), 1)[0]
-      // parsed['country_hint'] = hint_region
-    }
-
-    for (let i = 0; i < parts.length; i++) {
-      // console.log(parts[i], parts[i].match(/Tel:\s?(\+.*)/))
-      if (parts[i].match(/Tel:\s?(\+.*)/)) {
-        parsed['phones'].push(parts[i].match(/Tel:\s?(\+.*)/)[1])
-      } else if (parts[i].match(/Email:\s?(.*)/)) {
-        parsed['emails'].push(parts[i].match(/Email:\s?(.*)/)[1])
-      } else {
-        if (parts[i] && parts[i].length > 0) {
-          parsed['rest'].push(parts[i])
-        }
-      }
-    }
-
-    // console.log(parts)
-    // return [parsed, parts]
-    return parsed
-  }
-
-  console.log(document)
-  console.log(document.querySelectorAll)
-
-  document.querySelectorAll('body > h3,ul').forEach(function (el) {
-    // console.log(el)
-    // rl_title = ''
-    // console.log(el)
-    if (el.nodeName == 'H3') {
-      // console.log('title', el.innerText)
-      rl_focus = el.innerText
-      if (!(rl_focus in data_obj)) {
-        data_obj[rl_focus] = []
-      }
-    }
-    if (el.nodeName == 'UL') {
-      // console.log('info', el.innerText)
-      // rl_fulldesc = el.innerText
-      el.querySelectorAll('li').forEach(function (el2) {
-        rl_group = {
-          'focus': rl_focus,
-          'emails': [],
-          'org_name': null,
-          'org_data': [],
-          'country': null,
-          'contact_name': null,
-          'fulldesc': el2.innerText,
-          'fulldesc_parsed': {},
-        }
-        // console.log('el2', el2)
-        // rl_email = el3.innerText
-        // data_obj[rl_title].push([rl_email, rl_fulldesc])
-        // Array.from(el2).forEach(function (el3) {
-        el2.querySelectorAll('*').forEach(function (el3) {
-          // console.log('el3', el3)
-
-          if (el3.nodeName == 'B') {
-            if (!rl_group['contact_name']) {
-              rl_group['contact_name'] = el3.innerText.trim()
-            } else if (!rl_group['country']) {
-              rl_group['country'] = el3.innerText.trim()
-            }
-          }
-          if (el3.nodeName == 'A') {
-            // if (!('emails' in rl_group)) {
-            //   rl_group['emails'] = []
-            // }
-            rl_group['emails'].push(el3.innerText)
-          }
-        });
-        // </li>
-
-        rl_group['fulldesc_parsed'] = parse_raw(el2.innerText, rl_group['country'])
-
-        data_obj[rl_focus].push([rl_group])
-      });
-    }
-  })
-  let data_table = []
-  // data_obj.forEach(function(line){
-  //   console.log(line)
-  //   // var desc = Object.getOwnPropertyDescriptor(o, name);
-  //   // Object.defineProperty(copy, name, desc);
-  // });
-  for (const key of Object.keys(data_obj)) {
-    // console.log(key, data_obj[key]);
-    // for (const key2 of Object.keys(data_obj[key])) {
-    //   console.log(key2, data_obj[key][key]);
-    // }
-    data_obj[key].forEach(function (line) {
-      // console.log(line);
-      data_table.push({
-        'focus': line[0]['focus'],
-        'contact_name': line[0]['contact_name'],
-        'country': line[0]['country'],
-        'emails': line[0]['fulldesc_parsed']['emails'],
-        'phones': line[0]['fulldesc_parsed']['phones'],
-        'rest': line[0]['fulldesc_parsed']['rest'],
-        'place_hash_uid': 'r' + hashCode(
-          line[0]['contact_name'] + line[0]['fulldesc_parsed']['emails'].toString()
-        ).toString(),
-        '__raw': line[0]
-      })
-    });
-  }
-  // return data_obj // Use this to debug
-  return data_table
-}
-
-function object_to_table(list_of_object, join_sep = '|') {
-  let data = []
-  let possible_header = Object.keys(list_of_object[0])
-  let headers = []
-  possible_header.forEach(function (item) {
-    if (!(item.startsWith('__'))) {
-      headers.push(item)
-    }
-  })
-  data.push(headers)
-  list_of_object.forEach(function (item) {
-    let new_line = []
-    headers.forEach(function (header) {
-      if (Array.isArray(item[header])) {
-        new_line.push(item[header].join(join_sep))
-      } else if (item[header]) {
-        new_line.push(item[header])
-      } else {
-        new_line.push('')
-      }
-    })
-    data.push(new_line)
-  })
-  return data
-}
-
-// object_to_table(browser_whoa_reflabs(document))
 
 (async () => {
   // console.log('started');
@@ -292,13 +125,184 @@ function object_to_table(list_of_object, join_sep = '|') {
   };
 
 
-  await page.exposeFunction("browser_whoa_reflabs", browser_whoa_reflabs);
+  // await page.exposeFunction("browser_whoa_reflabs", browser_whoa_reflabs);
 
-  // let data_parsed = await page.evaluate(() => {
-  //   console.log(document.querySelectorAll('body > h3,ul'))
-  //   let data_parsed_2 = browser_whoa_reflabs(document)
-  //   return data_parsed_2;
-  // });
+  let data_parsed = await page.evaluate(() => {
+    // console.log(document.querySelectorAll('body > h3,ul'))
+
+    function browser_whoa_reflabs(document) {
+      let data_obj = {}
+      let rl_focus = ''
+      // let rl_email = ''
+      // let rl_fulldesc = ''
+      let rl_group = {}
+
+      // https://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript
+      const hashCode = s => s.split('').reduce((a, b) => (((a << 5) - a) + b.charCodeAt(0)) | 0, 0)
+
+      function parse_raw(innerText, hint_region = '') {
+        parsed = {
+          'contact_name': '',
+          'emails': [],
+          'phones': [],
+          'websites': [],
+          'rest': [],
+        }
+        parts = innerText.split('\n')
+        // parsed['contact_name'] = parts.pop(0)
+        parsed['contact_name'] = parts.splice(0, 1)[0]
+
+        if (parts.indexOf(hint_region) > -1) {
+          parsed['country'] = parts.splice(parts.indexOf(hint_region), 1)[0]
+          // parsed['country_hint'] = hint_region
+        }
+
+        for (let i = 0; i < parts.length; i++) {
+          // console.log(parts[i], parts[i].match(/Tel:\s?(\+.*)/))
+          if (parts[i].match(/Tel:\s?(\+.*)/)) {
+            parsed['phones'].push(parts[i].match(/Tel:\s?(\+.*)/)[1])
+          } else if (parts[i].match(/Email:\s?(.*)/)) {
+            parsed['emails'].push(parts[i].match(/Email:\s?(.*)/)[1])
+          } else if (parts[i].match(/Web:\s?(\.*)/)) {
+            parsed['websites'].push(parts[i].match(/Web:\s?(\.*)/)[1])
+          } else {
+            if (parts[i] && parts[i].length > 0) {
+              parsed['rest'].push(parts[i])
+            }
+          }
+        }
+
+        // console.log(parts)
+        // return [parsed, parts]
+        return parsed
+      }
+
+      // console.log(document)
+      // console.log(document.querySelectorAll)
+
+      document.querySelectorAll('body > h3,ul').forEach(function (el) {
+        // console.log(el)
+        // rl_title = ''
+        // console.log(el)
+        if (el.nodeName == 'H3') {
+          // console.log('title', el.innerText)
+          rl_focus = el.innerText
+          if (!(rl_focus in data_obj)) {
+            data_obj[rl_focus] = []
+          }
+        }
+        if (el.nodeName == 'UL') {
+          // console.log('info', el.innerText)
+          // rl_fulldesc = el.innerText
+          el.querySelectorAll('li').forEach(function (el2) {
+            rl_group = {
+              'focus': rl_focus,
+              'emails': [],
+              'org_name': null,
+              'org_data': [],
+              'country': null,
+              'contact_name': null,
+              'fulldesc': el2.innerText,
+              'fulldesc_parsed': {},
+            }
+            // console.log('el2', el2)
+            // rl_email = el3.innerText
+            // data_obj[rl_title].push([rl_email, rl_fulldesc])
+            // Array.from(el2).forEach(function (el3) {
+            el2.querySelectorAll('*').forEach(function (el3) {
+              // console.log('el3', el3)
+
+              if (el3.nodeName == 'B') {
+                if (!rl_group['contact_name']) {
+                  rl_group['contact_name'] = el3.innerText.trim()
+                } else if (!rl_group['country']) {
+                  rl_group['country'] = el3.innerText.trim()
+                }
+              }
+              if (el3.nodeName == 'A') {
+                // if (!('emails' in rl_group)) {
+                //   rl_group['emails'] = []
+                // }
+                rl_group['emails'].push(el3.innerText)
+              }
+            });
+            // </li>
+
+            rl_group['fulldesc_parsed'] = parse_raw(el2.innerText, rl_group['country'])
+
+            data_obj[rl_focus].push([rl_group])
+          });
+        }
+      })
+      let data_table = []
+      // data_obj.forEach(function(line){
+      //   console.log(line)
+      //   // var desc = Object.getOwnPropertyDescriptor(o, name);
+      //   // Object.defineProperty(copy, name, desc);
+      // });
+      for (const key of Object.keys(data_obj)) {
+        // console.log(key, data_obj[key]);
+        // for (const key2 of Object.keys(data_obj[key])) {
+        //   console.log(key2, data_obj[key][key]);
+        // }
+        data_obj[key].forEach(function (line) {
+          // console.log(line);
+          data_table.push({
+            'focus': line[0]['focus'],
+            'contact_name': line[0]['contact_name'],
+            'country': line[0]['country'],
+            'emails': line[0]['fulldesc_parsed']['emails'],
+            'phones': line[0]['fulldesc_parsed']['phones'],
+            'websites': line[0]['fulldesc_parsed']['websites'],
+            'rest': line[0]['fulldesc_parsed']['rest'],
+            'place_hash_uid': 'r' + hashCode(
+              line[0]['contact_name'] + line[0]['fulldesc_parsed']['emails'].toString()
+            ).toString(),
+            '__raw': line[0]
+          })
+        });
+      }
+      // return data_obj // Use this to debug
+      return data_table
+    }
+
+    /**
+     * Convert object to table-like CSV item
+     * @param {*} list_of_object 
+     * @param {*} join_sep 
+     * @returns 
+     */
+    function object_to_table(list_of_object, join_sep = '|') {
+      let data = []
+      let possible_header = Object.keys(list_of_object[0])
+      let headers = []
+      possible_header.forEach(function (item) {
+        if (!(item.startsWith('__'))) {
+          headers.push(item)
+        }
+      })
+      data.push(headers)
+      list_of_object.forEach(function (item) {
+        let new_line = []
+        headers.forEach(function (header) {
+          if (Array.isArray(item[header])) {
+            new_line.push(item[header].join(join_sep))
+          } else if (item[header]) {
+            new_line.push(item[header])
+          } else {
+            new_line.push('')
+          }
+        })
+        data.push(new_line)
+      })
+      return data
+    }
+
+    let data_parsed_2 = browser_whoa_reflabs(document)
+    let data_parsed_as_csv_2 = object_to_table(data_parsed_2)
+    // return [data_parsed_2, data_parsed_as_csv_2];
+    return data_parsed_as_csv_2;
+  });
 
   // console.log('data_parsed', data_parsed)
 
@@ -314,20 +318,27 @@ function object_to_table(list_of_object, join_sep = '|') {
   // console.log(titles)
   // console.log(all_titles)
 
-  let data = []
-  data.push('#item+rem+i_' + project_woahlang_a3 + '+is_latn')
-  data = data.concat(all_titles)
+  // let data = []
+  // data.push('#item+rem+i_' + project_woahlang_a3 + '+is_latn')
+  // data = data.concat(all_titles)
 
   let dataToWrite = ''
 
   // Poor's man matrix to CSV string.
-  data.forEach((line) => {
+  // data.forEach((line) => {
+  data_parsed.forEach((line) => {
     line_items = []
     if (!Array.isArray(line)) {
       line = [line]
     }
+    // console.log('line', line)
     line.forEach((item) => {
       item = item.trim()
+      if (item.indexOf('"') > -1) {
+        // console.log('item', item)
+        item = item.replace(/\"/g, '""')
+        // item = item.replaceAll('"', '\'')
+      }
       if (item.indexOf(",") > -1) {
         line_items.push('"' + item + '"')
       } else {
