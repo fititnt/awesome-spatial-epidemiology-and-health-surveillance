@@ -7,7 +7,7 @@
 
 ## Datasets
 
-### Biosafety level 1 to 4
+### Biosafety level 1 to 4 (DONE)
 - https://en.wikipedia.org/wiki/Biosafety_level
 
 ### List_of_epidemics (two tables)
@@ -20,7 +20,7 @@
 ### Vaccines (Two tables)
 - https://en.wikipedia.org/wiki/List_of_vaccine_topics
 
-### Mine laboratories from data table on Wikipedia
+### Mine laboratories from data table on Wikipedia (DONE)
 - https://en.wikipedia.org/wiki/Biosafety_level
 
 ### WHO Collaborating Centres
@@ -30,6 +30,14 @@
 ### WHO priority diseases
 - https://www.who.int/activities/prioritizing-diseases-for-research-and-development-in-emergency-contexts
   - Likely will need manual review
+
+### Agriculture-like research centers
+- https://www.google.com/search?q=fao+research+centers
+  - https://www.fao.org/partnerships/academia/partner-showcase/en/?page=1&ipp=200
+- https://www.ifad.org/en/agricultural-research-for-development
+  - https://www.ifad.org/en/web/knowledge/communities?delta=125
+- https://www.cabi.org/
+  - https://www.cabdirect.org/globalhealth/infectious-diseases/
 
 ## Tooling
 

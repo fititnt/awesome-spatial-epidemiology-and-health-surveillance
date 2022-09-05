@@ -1,6 +1,6 @@
 {
-  "name": "awesome-spatial-epidemiology",
-  "title": "Curated list of awesome spatial epidemiology data exchange concepts, data reference and tooling",
+  "name": "awesome-spatial-epidemiology-and-health-surveillance",
+  "title": "Awesome Spatial Epidemiology and Public/Animal Health Surveillance",
   "format": "csv",
   "repository": {
     "type": "git",
@@ -66,44 +66,6 @@
         {
           "title": "List of Biosafety level 4 facilities from Wikipedia (automated web scraping)",
           "path": "https://en.wikipedia.org/wiki/Biosafety_level"
-        }
-      ]
-    },
-    {
-      "path": "data/oie-cmn-a.tm.hxl.csv",
-      "name": "oie-cmn-a",
-      "profile": "tabular-data-resource",
-      "scheme": "file",
-      "format": "csv",
-      "encoding": "utf-8",
-      "schema": {
-        "fields": [
-          {
-            "type": "string",
-            "name": "#item+conceptum+codicem"
-          },
-          {
-            "type": "string",
-            "name": "#item+rem+i_qcc+is_zxxx+ix_wikiq"
-          },
-          {
-            "type": "string",
-            "name": "#item+rem+i_eng+is_latn+ix_xywdatap1448"
-          },
-          {
-            "type": "string",
-            "name": "#item+rem+i_fra+is_latn+ix_xywdatap1448"
-          },
-          {
-            "type": "string",
-            "name": "#item+rem+i_spa+is_latn+ix_xywdatap1448"
-          }
-        ]
-      },
-      "sources": [
-        {
-          "title": "Old Classification of Diseases Notifiable to the OIE – List A (manual compilation)",
-          "path": "https://www.woah.org/en/what-we-do/animal-health-and-welfare/animal-diseases/old-classification-of-diseases-notifiable-to-the-oie-list-a/"
         }
       ]
     },
@@ -278,6 +240,137 @@
         {
           "title": "WHO Collaborating Centres Global database (automated web scraping)",
           "path": "https://apps.who.int/whocc/Search.aspx"
+        }
+      ]
+    },
+    {
+      "path": "data/who-icd-crosswalk.tm.hxl.csv",
+      "name": "who-icd-crosswalk",
+      "profile": "tabular-data-resource",
+      "scheme": "file",
+      "format": "csv",
+      "hashing": "md5",
+      "encoding": "utf-8",
+      "schema": {
+        "fields": [
+          {
+            "type": "integer",
+            "name": "#item+conceptum+codicem"
+          },
+          {
+            "type": "string",
+            "name": "#item+rem+i_qcc+is_zxxx+ix_wikiq"
+          },
+          {
+            "name": "#item+rem+i_qcc+is_zxxx+ix_xywdatap493",
+            "type": "any"
+          },
+          {
+            "name": "#item+rem+i_qcc+is_zxxx+ix_xywdatap494",
+            "type": "any"
+          },
+          {
+            "type": "integer",
+            "name": "#item+rem+i_qcc+is_zxxx+ix_xywdatap5806"
+          },
+          {
+            "type": "string",
+            "name": "#item+rem+i_qcc+is_zxxx+ix_xywdatap7329"
+          },
+          {
+            "type": "integer",
+            "name": "#item+rem+i_qcc+is_zxxx+ix_xywdatap7807"
+          }
+        ]
+      },
+      "sources": [
+        {
+          "title": "International Classification of Diseases (ICD) terminology crosswalks (automated wikidata compilation)",
+          "path": "https://www.wikidata.org/"
+        }
+      ]
+    },
+    {
+      "path": "data/woah-cmn-a.tm.hxl.csv",
+      "name": "woah-cmn-a",
+      "profile": "tabular-data-resource",
+      "scheme": "file",
+      "format": "csv",
+      "encoding": "utf-8",
+      "schema": {
+        "fields": [
+          {
+            "type": "string",
+            "name": "#item+conceptum+codicem"
+          },
+          {
+            "type": "string",
+            "name": "#item+rem+i_qcc+is_zxxx+ix_wikiq"
+          },
+          {
+            "type": "string",
+            "name": "#item+rem+i_eng+is_latn+ix_xywdatap1448"
+          },
+          {
+            "type": "string",
+            "name": "#item+rem+i_fra+is_latn+ix_xywdatap1448"
+          },
+          {
+            "type": "string",
+            "name": "#item+rem+i_spa+is_latn+ix_xywdatap1448"
+          }
+        ]
+      },
+      "sources": [
+        {
+          "title": "Old Classification of Diseases Notifiable to the OIE – List A (manual compilation)",
+          "path": "https://www.woah.org/en/what-we-do/animal-health-and-welfare/animal-diseases/old-classification-of-diseases-notifiable-to-the-oie-list-a/"
+        }
+      ]
+    },
+    {
+      "path": "data/woah-reference-laboratories.hxl.csv",
+      "name": "woah-reference-laboratories",
+      "profile": "tabular-data-resource",
+      "scheme": "file",
+      "format": "csv",
+      "encoding": "utf-8",
+      "schema": {
+        "fields": [
+          {
+            "type": "string",
+            "name": "#org+woah+focus"
+          },
+          {
+            "type": "string",
+            "name": "#country+name"
+          },
+          {
+            "type": "string",
+            "name": "#org+info"
+          },
+          {
+            "type": "string",
+            "name": "#contact+name"
+          },
+          {
+            "type": "string",
+            "name": "#contact+email"
+          },
+          {
+            "type": "string",
+            "name": "#contact+phone"
+          },
+          {
+            "name": "#org+website",
+            "type": "any"
+          }
+        ]
+      },
+      "sources": [
+        {
+          "title": "World Organisation for Animal Health Reference Laboratories (automated web scraping)",
+          "path": "https://www.woah.org/en/what-we-offer/expertise-network/reference-laboratories/"
         }
       ]
     }

@@ -124,12 +124,12 @@ const project_name = 'woah';
     all_titles.push(await title.evaluate(node => node.innerText));
   };
 
-  // await page.exposeFunction("browser_whoa_reflabs", browser_whoa_reflabs);
+  // await page.exposeFunction("browser_woah_reflabs", browser_woah_reflabs);
 
   let data_parsed = await page.evaluate(() => {
     // console.log(document.querySelectorAll('body > h3,ul'))
 
-    function browser_whoa_reflabs(document) {
+    function browser_woah_reflabs(document) {
       let data_obj = {}
       let rl_focus = ''
       // let rl_email = ''
@@ -311,9 +311,9 @@ const project_name = 'woah';
     }
 
     // To run on browser:
-    // object_to_table(browser_whoa_reflabs(document))
+    // object_to_table(browser_woah_reflabs(document))
 
-    let data_parsed_2 = browser_whoa_reflabs(document)
+    let data_parsed_2 = browser_woah_reflabs(document)
     let data_parsed_as_csv_2 = object_to_table(data_parsed_2)
     // return [data_parsed_2, data_parsed_as_csv_2];
     return data_parsed_as_csv_2;

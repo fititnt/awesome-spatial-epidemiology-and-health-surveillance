@@ -34,7 +34,7 @@ BUILDTEMPDIR="${BUILDTEMPDIR:-$__BUILDTEMPDIR}"
 
 #### Configurable variables  - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-WHOA_LANGS=("EN" "FR" "ES")
+woah_LANGS=("EN" "FR" "ES")
 # from https://apps.who.int/whocc/Search.aspx
 WHO_REGIONS=("AFRO" "AMRO" "EMRO" "EURO" "SEARO" "WPRO")
 LSF_REMOTE_GIT="https://github.com/EticaAI/lexicographi-sine-finibus.git"
@@ -66,7 +66,7 @@ tty_normal=$(tput sgr0)
 # Globals:
 #   ROOTDIR
 #   BUILDTEMPDIR
-#   WHOA_LANGS
+#   woah_LANGS
 # Arguments:
 #   repo        Repository to fetch the data
 #   savepath    (optional) Path to store the metadata
@@ -79,11 +79,11 @@ crawler_woah_reflab() {
 
   _temp_merged_csv="$BUILDTEMPDIR/woah_reflab_all.csv"
   _temp_merged_sorted_csv="$BUILDTEMPDIR/woah_reflab.csv"
-  _temp_merged_hxltm="$BUILDTEMPDIR/whoa-reference-laboratories.csv"
-  _data_published_hxltm="$ROOTDIR/data/whoa-reference-laboratories.hxl.csv"
+  _temp_merged_hxltm="$BUILDTEMPDIR/woah-reference-laboratories.csv"
+  _data_published_hxltm="$ROOTDIR/data/woah-reference-laboratories.hxl.csv"
 
   outputs=()
-  for lang in "${WHOA_LANGS[@]}"; do
+  for lang in "${woah_LANGS[@]}"; do
     output="$BUILDTEMPDIR/woah_reflab_$lang.csv"
 
     # outputs+=("$output")

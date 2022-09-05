@@ -1,6 +1,6 @@
 project_title: Awesome Spatial Epidemiology and Public/Animal Health Surveillance
 project_summary: >-
-  Curated list of awesome spatial epidemiology data exchange concepts,
+  [WORKING DRAFT] Curated list of awesome spatial epidemiology data exchange concepts,
   data reference and tooling.
   Contributions are welcomed!
 
@@ -8,3 +8,17 @@ section_github_topics_title: GitHub topics
 section_general_concepts_title: General concepts
 section_data_title: Data
 section_software_title: Software
+
+#### Temp ______________________________________________________________________
+# @TODO move to i18n/mul/translation.yml
+featured_compilations:
+  - name: research-initiatives
+    resources:
+      - name: biosafety-level-4-laboratories
+      - name: who-collaborating-centres
+      - name: woah-reference-laboratories
+
+  - name: terminology-nomenclature-coding
+    resources:
+      - name: who-icd-crosswalk
+      - name: woah-cmn-a

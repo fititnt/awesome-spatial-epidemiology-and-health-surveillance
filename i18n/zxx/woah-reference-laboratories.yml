@@ -14,15 +14,15 @@
 
 # http://www.animalhealthsurveillance.agriculture.gov.ie/oielisteddiseases/
 
-# oie-cmn-a.tm.hxl.csv
+# woah-cmn-a.tm.hxl.csv
 # Ancienne classification des maladies notifiables à l’OIE – Liste A
 
 ## To clean extra '"' LibreOffice adds
-# csvformat data/oie-cmn-a.tm.hxl.csv > temp/oie-cmn-a.tm.hxl.csv
-# cat temp/oie-cmn-a.tm.hxl.csv > data/oie-cmn-a.tm.hxl.csv
+# csvformat data/woah-cmn-a.tm.hxl.csv > temp/woah-cmn-a.tm.hxl.csv
+# cat temp/woah-cmn-a.tm.hxl.csv > data/woah-cmn-a.tm.hxl.csv
 #
-# csvformat data/oie-cmn-b.tm.hxl.csv > temp/oie-cmn-b.tm.hxl.csv
-# cat temp/oie-cmn-b.tm.hxl.csv > data/oie-cmn-b.tm.hxl.csv
+# csvformat data/woah-cmn-b.tm.hxl.csv > temp/woah-cmn-b.tm.hxl.csv
+# cat temp/woah-cmn-b.tm.hxl.csv > data/woah-cmn-b.tm.hxl.csv
 
 # About tag classifiers
 # - class (P2308) https://www.wikidata.org/wiki/Property:P2308
@@ -42,8 +42,8 @@
 
 focus:
   csv: focus
-  csvnorm: whoa_focus
-  hxl: "#org+whoa+focus"
+  csvnorm: woah_focus
+  hxl: "#org+woah+focus"
 country:
   csv: country
   csvnorm: country

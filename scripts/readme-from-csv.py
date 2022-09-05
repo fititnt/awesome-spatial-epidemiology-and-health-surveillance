@@ -64,9 +64,16 @@ __EPILOGUM__ = f"""
 ------------------------------------------------------------------------------
                             EXEMPLŌRUM GRATIĀ
 ------------------------------------------------------------------------------
-    {__file__} data/software.hxl.csv
 
+COMPILE FINAL README ==========================================================
+Simple, read file, apply generic liquid templating . . . . . . . . . . . . . . .
     {__file__} --method=compile-readme README.template.md
+
+Internationalization, read variables from i18n/locales . . . . . . . . . . . . .
+    {__file__} --method=compile-readme README.template.md \
+--natural-language-objective=en
+
+PROCESS / RE-PROCESS CSVs =====================================================
 
 Extract unique Wikidata Q items . . . . . . . . . . . . . . . . . . . . . . . .
     {__file__} --method=extract-wikidata-q 'data/*.csv'
