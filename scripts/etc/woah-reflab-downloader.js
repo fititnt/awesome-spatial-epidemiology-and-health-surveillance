@@ -124,7 +124,6 @@ const project_name = 'woah';
     all_titles.push(await title.evaluate(node => node.innerText));
   };
 
-
   // await page.exposeFunction("browser_whoa_reflabs", browser_whoa_reflabs);
 
   let data_parsed = await page.evaluate(() => {
@@ -146,6 +145,7 @@ const project_name = 'woah';
           'emails': [],
           'phones': [],
           'websites': [],
+          // 'websites_2': [],
           'rest': [],
         }
         parts = innerText.split('\n')
@@ -163,8 +163,14 @@ const project_name = 'woah';
             parsed['phones'].push(parts[i].match(/Tel:\s?(\+.*)/)[1])
           } else if (parts[i].match(/Email:\s?(.*)/)) {
             parsed['emails'].push(parts[i].match(/Email:\s?(.*)/)[1])
-          } else if (parts[i].match(/Web:\s?(\.*)/)) {
-            parsed['websites'].push(parts[i].match(/Web:\s?(\.*)/)[1])
+          } else if (parts[i].match(/Web:\s?(.*)/)) {
+            // console.log('web found!', parts[i])
+            let raw_website = parts[i].match(/Web:\s?(.*)/)[1]
+            if (!(raw_website.startsWith('http'))) {
+              raw_website = 'http://' + raw_website
+            }
+            parsed['websites'].push(raw_website)
+            // parsed['websites_2'].push(parts[i].match(/Web:\s?(\.*)/)[1])
           } else {
             if (parts[i] && parts[i].length > 0) {
               parsed['rest'].push(parts[i])
@@ -198,10 +204,11 @@ const project_name = 'woah';
             rl_group = {
               'focus': rl_focus,
               'emails': [],
-              'org_name': null,
-              'org_data': [],
+              // 'org_name': null,
+              // 'org_data': [],
               'country': null,
               'contact_name': null,
+              // 'websites': null,
               'fulldesc': el2.innerText,
               'fulldesc_parsed': {},
             }
@@ -228,7 +235,8 @@ const project_name = 'woah';
             });
             // </li>
 
-            rl_group['fulldesc_parsed'] = parse_raw(el2.innerText, rl_group['country'])
+            rl_group['fulldesc_parsed'] = parse_raw(
+              el2.innerText, rl_group['country'])
 
             data_obj[rl_focus].push([rl_group])
           });
@@ -247,6 +255,9 @@ const project_name = 'woah';
         // }
         data_obj[key].forEach(function (line) {
           // console.log(line);
+          if (line[0]['fulldesc_parsed']['websites']) {
+            console.log('websites', line[0]['fulldesc_parsed']['websites'])
+          }
           data_table.push({
             'focus': line[0]['focus'],
             'contact_name': line[0]['contact_name'],
@@ -254,6 +265,7 @@ const project_name = 'woah';
             'emails': line[0]['fulldesc_parsed']['emails'],
             'phones': line[0]['fulldesc_parsed']['phones'],
             'websites': line[0]['fulldesc_parsed']['websites'],
+            // 'websites_2': line[0]['fulldesc_parsed']['websites_2'],
             'rest': line[0]['fulldesc_parsed']['rest'],
             'place_hash_uid': 'r' + hashCode(
               line[0]['contact_name'] + line[0]['fulldesc_parsed']['emails'].toString()
@@ -297,6 +309,9 @@ const project_name = 'woah';
       })
       return data
     }
+
+    // To run on browser:
+    // object_to_table(browser_whoa_reflabs(document))
 
     let data_parsed_2 = browser_whoa_reflabs(document)
     let data_parsed_as_csv_2 = object_to_table(data_parsed_2)

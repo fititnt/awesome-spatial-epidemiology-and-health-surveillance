@@ -40,11 +40,18 @@
 #   - https://crm.oie.int/interconnexion/laboratoires.php?LANG=FR
 #   - https://crm.oie.int/interconnexion/laboratoires.php?LANG=ES
 
-
 focus:
   csv: focus
   csvnorm: whoa_focus
   hxl: "#org+whoa+focus"
+country:
+  csv: country
+  csvnorm: country
+  hxl: "#country+name"
+rest:
+  csv: rest
+  csvnorm: laboratory_data
+  hxl: "#org+info"
 contact_name:
   csv: contact_name
   csvnorm: contact_name
@@ -61,7 +68,3 @@ websites:
   csv: websites
   csvnorm: websites
   hxl: "#org+website"
-rest:
-  csv: rest
-  csvnorm: laboratory_data
-  hxl: "#org+info"

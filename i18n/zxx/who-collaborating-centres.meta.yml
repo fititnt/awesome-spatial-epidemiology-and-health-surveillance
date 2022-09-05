@@ -9,7 +9,7 @@
 textbox105:
   csv: textbox105
   csvnorm: code
-  hxl: "#item+code"
+  hxl: "#org+code"
 textbox20:
   csv: textbox20
   csvnorm: who_region

@@ -77,15 +77,18 @@ crawler_woah_reflab() {
   # echo "${FUNCNAME[0]} TODO"
   printf "\n\t%40s\n" "${tty_blue}${FUNCNAME[0]} STARTED ${tty_normal}"
 
-  _data_published="$ROOTDIR/data/whoa-reference-laboratories.hxl.csv"
+  _temp_merged_csv="$BUILDTEMPDIR/woah_reflab_all.csv"
+  _temp_merged_sorted_csv="$BUILDTEMPDIR/woah_reflab.csv"
+  _temp_merged_hxltm="$BUILDTEMPDIR/whoa-reference-laboratories.csv"
+  _data_published_hxltm="$ROOTDIR/data/whoa-reference-laboratories.hxl.csv"
 
   outputs=()
   for lang in "${WHOA_LANGS[@]}"; do
     output="$BUILDTEMPDIR/woah_reflab_$lang.csv"
-    
+
     # outputs+=("$output")
     if [ "$lang" = 'FR' ]; then
-       outputs+=("$output")
+      outputs+=("$output")
     else
       echo "TODO is not possible to align translations, so we're using only \
 french instead of merge then"
@@ -101,32 +104,36 @@ french instead of merge then"
     sleep 10
   done
 
-  echo "TODO is not possible to align translations, so we're using only french"
+  echo "NOTE is not possible to merge/align translations, so we're using only french"
 
-  # set -x
+  set -x
   # shellcheck disable=SC2048,SC2086
-  csvjoin ${outputs[*]} >"$BUILDTEMPDIR/woah_reflab_all.csv"
-  frictionless validate "$BUILDTEMPDIR/woah_reflab_all.csv"
-  csvsort -c 1,2 "$BUILDTEMPDIR/woah_reflab_all.csv" >"$BUILDTEMPDIR/whoa-reference-laboratories.csv"
-  # csvsort -c 1,2 "$BUILDTEMPDIR/woah_reflab_.csv" >"$BUILDTEMPDIR/whocc.csv"
+  csvjoin ${outputs[*]} >"$_temp_merged_csv"
+  head -n 2 "$_temp_merged_csv"
+  frictionless validate "$_temp_merged_csv"
+  csvsort -c 1,2 "$_temp_merged_csv" >"$_temp_merged_sorted_csv"
+  # # csvsort -c 1,2 "$BUILDTEMPDIR/woah_reflab_.csv" >"$BUILDTEMPDIR/whocc.csv"
 
   # echo "@TODO"
 
   # exit 1
   ./scripts/readme-from-csv.py \
     --method=table-rename \
-    --table-meta=i18n/zxx/who-collaborating-centres.meta.yml \
-    "$BUILDTEMPDIR/whoa-reference-laboratories.csv" \
-    >"$BUILDTEMPDIR/whoa-reference-laboratories.hxl.csv"
+    --table-meta=i18n/zxx/woah-reference-laboratories.yml \
+    "$_temp_merged_sorted_csv" \
+    >"$_temp_merged_hxltm"
 
-  frictionless validate "$BUILDTEMPDIR/woah_reflab.hxl.csv"
+  head -n 2 "$_temp_merged_hxltm"
 
-  if [ -f "$_data_published" ]; then
-    echo "deleting old [$_data_published]"
+  frictionless validate "$_temp_merged_hxltm"
+  set +x
+
+  if [ -f "$_data_published_hxltm" ]; then
+    echo "deleting old [$_data_published_hxltm]"
     # rm "$_data_published"
   fi
 
-  cp "$BUILDTEMPDIR/woah_reflab.hxl.csv" "$_data_published"
+  cp "$_temp_merged_hxltm" "$_data_published_hxltm"
 
   set +x
   printf "\t%40s\n" "${tty_green}${FUNCNAME[0]} FINISHED OKAY ${tty_normal}"
