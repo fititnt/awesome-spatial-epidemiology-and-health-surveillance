@@ -9,12 +9,13 @@
   <link rel="shortcut icon" href="./partials/favicon.ico" type="image/x-icon" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <link href="./scripts/html/base.css" rel="stylesheet">
 </head>
 
 <body>
-  <main class="container">
+  <main class="">
 
-    <head>
+    <header class="container">
       <div class="px-4 py-5 my-5 text-center">
         <!-- <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
         <h1 class="display-5 fw-bold">Awesome Spatial Epidemiology and Public/Animal Health Surveillance</h1>
@@ -30,83 +31,107 @@
         -->
         </div>
       </div>
-    </head>
+    </header>
 
     
     
     <section class="d-grid gap-6">
-      <h2>locum_scientificum_inquisitionis</h2>
+      <header class="container">
+        <h2>locum_scientificum_inquisitionis</h2>
+      </header>
       <article class="p-2" id="biosafety_level_4_laboratories">
-        <h3>biosafety-level-4-laboratories</h3>
-        <ul>
-          <li>
-            <a href="data/biosafety-level-4-laboratories.hxl.csv">data/biosafety-level-4-laboratories.hxl.csv</a>
-          </li>
-          
-          <li>
-            Sources:
-            <ul>
-              <li>
-                <a href="https://en.wikipedia.org/wiki/Biosafety_level">List of Biosafety level 4 facilities from Wikipedia (automated web scraping)</a>
-              </li>
-              
-            </ul>
-          </li>
-          
-        </ul>
-        <div id="biosafety_level_4_laboratories__table" data-datapackage-path="data/biosafety-level-4-laboratories.hxl.csv">
-          @TODO autoload this table data/biosafety-level-4-laboratories.hxl.csv
+        <header class="container">
+          <h3>biosafety-level-4-laboratories</h3>
+          <ul>
+            <li>
+              <a href="data/biosafety-level-4-laboratories.hxl.csv">data/biosafety-level-4-laboratories.hxl.csv</a>
+            </li>
+            
+            <li>
+              Sources:
+              <ul>
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/Biosafety_level">List of Biosafety level 4 facilities from Wikipedia (automated web scraping)</a>
+                </li>
+                
+              </ul>
+            </li>
+            
+          </ul>
+        </header>
+        <div class="container-fluid text-center overflow-hidden">
+          <div id="biosafety_level_4_laboratories__table" data-datapackage-path="data/biosafety-level-4-laboratories.hxl.csv"  class="table-responsive">
+            <button type="button" class="btn btn-secondary btn-sm"
+              data-datapackage-loader-id="biosafety_level_4_laboratories__table">Load table data/biosafety-level-4-laboratories.hxl.csv</button>
+            
+          </div>
         </div>
         <!--
         <pre>
-          {"name": "biosafety-level-4-laboratories", "id": "biosafety_level_4_laboratories", "autoload": true}
+          {"name": "biosafety-level-4-laboratories", "id": "biosafety_level_4_laboratories", "autoload": false}
         </pre>
         -->
       </article>
       <article class="p-2" id="who_collaborating_centres">
-        <h3>who-collaborating-centres</h3>
-        <ul>
-          <li>
-            <a href="data/who-collaborating-centres.hxl.csv">data/who-collaborating-centres.hxl.csv</a>
-          </li>
-          
-          <li>
-            Sources:
-            <ul>
-              <li>
-                <a href="https://apps.who.int/whocc/Search.aspx">WHO Collaborating Centres Global database (automated web scraping)</a>
-              </li>
-              
-            </ul>
-          </li>
-          
-        </ul>
-        
+        <header class="container">
+          <h3>who-collaborating-centres</h3>
+          <ul>
+            <li>
+              <a href="data/who-collaborating-centres.hxl.csv">data/who-collaborating-centres.hxl.csv</a>
+            </li>
+            
+            <li>
+              Sources:
+              <ul>
+                <li>
+                  <a href="https://apps.who.int/whocc/Search.aspx">WHO Collaborating Centres Global database (automated web scraping)</a>
+                </li>
+                
+              </ul>
+            </li>
+            
+          </ul>
+        </header>
+        <div class="container-fluid text-center overflow-hidden">
+          <div id="who_collaborating_centres__table" data-datapackage-path="data/who-collaborating-centres.hxl.csv"  class="table-responsive">
+            <button type="button" class="btn btn-secondary btn-sm"
+              data-datapackage-loader-id="who_collaborating_centres__table">Load table data/who-collaborating-centres.hxl.csv</button>
+            
+          </div>
+        </div>
         <!--
         <pre>
-          {"name": "who-collaborating-centres", "id": "who_collaborating_centres"}
+          {"name": "who-collaborating-centres", "id": "who_collaborating_centres", "autoload": false}
         </pre>
         -->
       </article>
       <article class="p-2" id="woah_reference_laboratories">
-        <h3>woah-reference-laboratories</h3>
-        <ul>
-          <li>
-            <a href="data/woah-reference-laboratories.hxl.csv">data/woah-reference-laboratories.hxl.csv</a>
-          </li>
-          
-          <li>
-            Sources:
-            <ul>
-              <li>
-                <a href="https://www.woah.org/en/what-we-offer/expertise-network/reference-laboratories/">World Organisation for Animal Health Reference Laboratories (automated web scraping)</a>
-              </li>
-              
-            </ul>
-          </li>
-          
-        </ul>
-        
+        <header class="container">
+          <h3>woah-reference-laboratories</h3>
+          <ul>
+            <li>
+              <a href="data/woah-reference-laboratories.hxl.csv">data/woah-reference-laboratories.hxl.csv</a>
+            </li>
+            
+            <li>
+              Sources:
+              <ul>
+                <li>
+                  <a href="https://www.woah.org/en/what-we-offer/expertise-network/reference-laboratories/">World Organisation for Animal Health Reference Laboratories (automated web scraping)</a>
+                </li>
+                
+              </ul>
+            </li>
+            
+          </ul>
+        </header>
+        <div class="container-fluid text-center overflow-hidden">
+          <div id="woah_reference_laboratories__table" data-datapackage-path="data/woah-reference-laboratories.hxl.csv"  class="table-responsive">
+            <button type="button" class="btn btn-secondary btn-sm"
+              data-datapackage-loader-id="woah_reference_laboratories__table">Load table data/woah-reference-laboratories.hxl.csv</button>
+            
+          </div>
+        </div>
         <!--
         <pre>
           {"name": "woah-reference-laboratories", "id": "woah_reference_laboratories"}
@@ -117,26 +142,36 @@
     </section>
     
     <section class="d-grid gap-6">
-      <h2>nomenclatura_et_vocabularium</h2>
+      <header class="container">
+        <h2>nomenclatura_et_vocabularium</h2>
+      </header>
       <article class="p-2" id="who_icd_crosswalk">
-        <h3>who-icd-crosswalk</h3>
-        <ul>
-          <li>
-            <a href="data/who-icd-crosswalk.tm.hxl.csv">data/who-icd-crosswalk.tm.hxl.csv</a>
-          </li>
-          
-          <li>
-            Sources:
-            <ul>
-              <li>
-                <a href="https://www.wikidata.org/">International Classification of Diseases (ICD) terminology crosswalks (automated wikidata compilation)</a>
-              </li>
-              
-            </ul>
-          </li>
-          
-        </ul>
-        
+        <header class="container">
+          <h3>who-icd-crosswalk</h3>
+          <ul>
+            <li>
+              <a href="data/who-icd-crosswalk.tm.hxl.csv">data/who-icd-crosswalk.tm.hxl.csv</a>
+            </li>
+            
+            <li>
+              Sources:
+              <ul>
+                <li>
+                  <a href="https://www.wikidata.org/">International Classification of Diseases (ICD) terminology crosswalks (automated wikidata compilation)</a>
+                </li>
+                
+              </ul>
+            </li>
+            
+          </ul>
+        </header>
+        <div class="container-fluid text-center overflow-hidden">
+          <div id="who_icd_crosswalk__table" data-datapackage-path="data/who-icd-crosswalk.tm.hxl.csv"  class="table-responsive">
+            <button type="button" class="btn btn-secondary btn-sm"
+              data-datapackage-loader-id="who_icd_crosswalk__table">Load table data/who-icd-crosswalk.tm.hxl.csv</button>
+            
+          </div>
+        </div>
         <!--
         <pre>
           {"name": "who-icd-crosswalk", "id": "who_icd_crosswalk"}
@@ -147,17 +182,23 @@
     </section>
     
     <section class="d-grid gap-6">
-      <h2>terminologia_multilinguae</h2>
+      <header class="container">
+        <h2>terminologia_multilinguae</h2>
+      </header>
       <article class="p-2" id="biosafety_levels">
-        <h3>biosafety_levels</h3>
-        <ul>
-          <li>
-            <a href="data/biosafety-levels.hxl.tm.hxl.csv">data/biosafety-levels.hxl.tm.hxl.csv</a>
-          </li>
-          
-        </ul>
-        <div id="biosafety_levels__table" data-datapackage-path="data/biosafety-levels.hxl.tm.hxl.csv">
-          @TODO autoload this table data/biosafety-levels.hxl.tm.hxl.csv
+        <header class="container">
+          <h3>biosafety_levels</h3>
+          <ul>
+            <li>
+              <a href="data/biosafety-levels.hxl.tm.hxl.csv">data/biosafety-levels.hxl.tm.hxl.csv</a>
+            </li>
+            
+          </ul>
+        </header>
+        <div class="container-fluid text-center overflow-hidden">
+          <div id="biosafety_levels__table" data-datapackage-path="data/biosafety-levels.hxl.tm.hxl.csv"  data-datapackage-autoload="1"  class="table-responsive">
+            
+          </div>
         </div>
         <!--
         <pre>
@@ -166,24 +207,32 @@
         -->
       </article>
       <article class="p-2" id="woah_cmn_a">
-        <h3>woah-cmn-a</h3>
-        <ul>
-          <li>
-            <a href="data/woah-cmn-a.tm.hxl.csv">data/woah-cmn-a.tm.hxl.csv</a>
-          </li>
-          
-          <li>
-            Sources:
-            <ul>
-              <li>
-                <a href="https://www.woah.org/en/what-we-do/animal-health-and-welfare/animal-diseases/old-classification-of-diseases-notifiable-to-the-oie-list-a/">Old Classification of Diseases Notifiable to the OIE – List A (manual compilation)</a>
-              </li>
-              
-            </ul>
-          </li>
-          
-        </ul>
-        
+        <header class="container">
+          <h3>woah-cmn-a</h3>
+          <ul>
+            <li>
+              <a href="data/woah-cmn-a.tm.hxl.csv">data/woah-cmn-a.tm.hxl.csv</a>
+            </li>
+            
+            <li>
+              Sources:
+              <ul>
+                <li>
+                  <a href="https://www.woah.org/en/what-we-do/animal-health-and-welfare/animal-diseases/old-classification-of-diseases-notifiable-to-the-oie-list-a/">Old Classification of Diseases Notifiable to the OIE – List A (manual compilation)</a>
+                </li>
+                
+              </ul>
+            </li>
+            
+          </ul>
+        </header>
+        <div class="container-fluid text-center overflow-hidden">
+          <div id="woah_cmn_a__table" data-datapackage-path="data/woah-cmn-a.tm.hxl.csv"  class="table-responsive">
+            <button type="button" class="btn btn-secondary btn-sm"
+              data-datapackage-loader-id="woah_cmn_a__table">Load table data/woah-cmn-a.tm.hxl.csv</button>
+            
+          </div>
+        </div>
         <!--
         <pre>
           {"name": "woah-cmn-a", "id": "woah_cmn_a"}
@@ -196,8 +245,8 @@
 
     <!-- JSON-LD, start -->
     
-    <!-- {"name": "biosafety-level-4-laboratories", "id": "biosafety_level_4_laboratories", "autoload": true}-->
-    <!-- {"name": "who-collaborating-centres", "id": "who_collaborating_centres"}-->
+    <!-- {"name": "biosafety-level-4-laboratories", "id": "biosafety_level_4_laboratories", "autoload": false}-->
+    <!-- {"name": "who-collaborating-centres", "id": "who_collaborating_centres", "autoload": false}-->
     <!-- {"name": "woah-reference-laboratories", "id": "woah_reference_laboratories"}-->
     
     
@@ -222,6 +271,8 @@
     integrity="sha256-s4TPC67sA6qeFEP9ZwzUHJ7JhN75p7Tb/XrS8ZfVtXM=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/d3-dsv@3.0.1/dist/d3-dsv.min.js"
     integrity="sha256-IrzYc2a3nTkfvgAyowm/WKmIGdVCMCcccPtz+Y2y6VI=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tablesorter@2.31.3/dist/js/jquery.tablesorter.combined.min.js"
+    integrity="sha256-ounC3wWwZ9iBUyF8x1+X+REppGjK+p6/+w+ky1MGoMM=" crossorigin="anonymous"></script>
   <script src="scripts/html/base.js"></script>
 </body>
 

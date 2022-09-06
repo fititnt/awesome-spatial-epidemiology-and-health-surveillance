@@ -1,0 +1,13 @@
+/* scripts/html/base.css */
+
+/* thead th {
+  word-break: break-word;
+} */
+
+.table-responsive {
+  max-width: 98vw;
+}
+
+thead th {
+  vertical-align: top;
+}

@@ -9,12 +9,13 @@
   <link rel="shortcut icon" href="./partials/favicon.ico" type="image/x-icon" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <link href="./scripts/html/base.css" rel="stylesheet">
 </head>
 
 <body>
-  <main class="container">
+  <main class="">
 
-    <head>
+    <header class="container">
       <div class="px-4 py-5 my-5 text-center">
         <!-- <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
         <h1 class="display-5 fw-bold">{{ 'project_title' | t }}</h1>
@@ -30,7 +31,7 @@
         -->
         </div>
       </div>
-    </head>
+    </header>
 
     {% comment %}
 
@@ -39,36 +40,44 @@
     {% endcomment %}
     {% for section in site.i18n.mul.featured_compilations %}
     <section class="d-grid gap-6">
-      <h2>{{ section.id | t }}</h2>
+      <header class="container">
+        <h2>{{ section.id | t }}</h2>
+      </header>
       {% for item in section.resources -%}
       <article class="p-2" id="{{ item.id }}">
-        <h3>{{ item.name | t }}</h3>
-        <ul>
-          <li>
-            <a href="{{ datapackage.id[item.id].path }}">
-              {{- datapackage.id[item.id].path -}}
-            </a>
-          </li>
-          {% if datapackage.id[item.id].sources %}
-          <li>
-            Sources:
-            <ul>
-              {% for source in datapackage.id[item.id].sources -%}
-              <li>
-                <a href="{{ source.path }}">
-                  {{- source.title -}}
-                </a>
-              </li>
-              {% endfor %}
-            </ul>
-          </li>
-          {% endif %}
-        </ul>
-        {% if item.autoload -%}
-        <div id="{{ item.id }}__table" data-datapackage-path="{{ datapackage.id[item.id].path }}">
-          @TODO autoload this table {{ datapackage.id[item.id].path }}
+        <header class="container">
+          <h3>{{ item.name | t }}</h3>
+          <ul>
+            <li>
+              <a href="{{ datapackage.id[item.id].path }}">
+                {{- datapackage.id[item.id].path -}}
+              </a>
+            </li>
+            {% if datapackage.id[item.id].sources %}
+            <li>
+              Sources:
+              <ul>
+                {% for source in datapackage.id[item.id].sources -%}
+                <li>
+                  <a href="{{ source.path }}">
+                    {{- source.title -}}
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+            </li>
+            {% endif %}
+          </ul>
+        </header>
+        <div class="container-fluid text-center overflow-hidden">
+          <div id="{{ item.id }}__table" data-datapackage-path="{{ datapackage.id[item.id].path }}" {% if item.autoload
+            %} data-datapackage-autoload="1" {% endif %} class="table-responsive">
+            {% unless item.autoload -%}
+            <button type="button" class="btn btn-secondary btn-sm"
+              data-datapackage-loader-id="{{ item.id }}__table">Load table {{ datapackage.id[item.id].path }}</button>
+            {% endunless %}
+          </div>
         </div>
-        {%- endif %}
         <!--
         <pre>
           {{ item | json }}
@@ -182,6 +191,8 @@
     integrity="sha256-s4TPC67sA6qeFEP9ZwzUHJ7JhN75p7Tb/XrS8ZfVtXM=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/d3-dsv@3.0.1/dist/d3-dsv.min.js"
     integrity="sha256-IrzYc2a3nTkfvgAyowm/WKmIGdVCMCcccPtz+Y2y6VI=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tablesorter@2.31.3/dist/js/jquery.tablesorter.combined.min.js"
+    integrity="sha256-ounC3wWwZ9iBUyF8x1+X+REppGjK+p6/+w+ky1MGoMM=" crossorigin="anonymous"></script>
   <script src="scripts/html/base.js"></script>
 </body>
 

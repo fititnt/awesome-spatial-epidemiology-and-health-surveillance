@@ -7,12 +7,26 @@ function tabulate(data, columns, container_node) {
   var thead = table.append('thead')
   var tbody = table.append('tbody')
 
+  // Documentation on Boostrap table classes
+  // https://getbootstrap.com/docs/5.2/content/tables/#table-borders
+  // table.attr('class', 'table table-striped table-hover tablesorter')
+  // @TODO add pager
+  table.attr('class', 'table table-striped table-hover table-sm tablesorter')
+  tbody.attr('class', 'table-group-divider')
+
   thead.append('tr')
     .selectAll('th')
     .data(columns)
     .enter()
-    .append('th')
-    .text(function (d) { return d })
+    .append('th').attr('scope', 'col')
+    .text(function (d) {
+      // This gives change to HTML version break long hashtags
+      if (d.startsWith('#')) {
+        return d.replace(/(\+)/g, ' +')
+      } else {
+        return d
+      }
+    })
 
   var rows = tbody.selectAll('tr')
     .data(data)
@@ -35,7 +49,10 @@ function tabulate(data, columns, container_node) {
 
 function autoload_tables() {
   // http://bl.ocks.org/ndarville/7075823
-  document.querySelectorAll('[data-datapackage-path]').forEach(function (el) {
+  // document.querySelectorAll('[data-datapackage-path]').forEach(function (el) {
+
+  const loader = function (el) {
+    console.log('loader', el)
     let data_csv = []
     let header_csv = []
     d3.csv(el.dataset.datapackagePath, function (data) {
@@ -45,9 +62,31 @@ function autoload_tables() {
     }).then(function () {
       header_csv = Object.keys(data_csv[0])
       tabulate(data_csv, header_csv, el)
+
+      jQuery(function () {
+        jQuery(el.querySelector('table')).tablesorter({
+          // Show debugging info only for the filter and columnSelector widgets
+          // include "core" to only show the core debugging info
+          // debug : "filter columnSelector"
+          // debug : true
+          debug: false
+        });
+      });
     })
-    
+  }
+
+
+  document.querySelectorAll('[data-datapackage-autoload]').forEach(function (el) {
+    loader(el)
   })
+  document.querySelectorAll('[data-datapackage-loader-id]').forEach(box =>
+    box.addEventListener("click", function (el) {
+      console.log(el.target)
+      loader(document.getElementById(el.target.dataset.datapackageLoaderId))
+      // box.target.remove()
+      box.remove()
+    }, false)
+  )
 }
 
 // console.log('TODO scripts/html/base.js')
