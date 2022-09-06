@@ -35,7 +35,11 @@ ROOTDIR="${ROOTDIR:-$__ROOTDIR}"
 
 #### Main ______________________________________________________________________
 
-
+# OPERATION=compile_html_only ./scripts/via-github-action.sh
+if [ "$OPERATION" = "compile_html_only" ]; then
+  compile_html_only
+  exit 0
+fi
 # OPERATION=compile_readme_only ./scripts/via-github-action.sh
 if [ "$OPERATION" = "compile_readme_only" ]; then
   compile_readme_only

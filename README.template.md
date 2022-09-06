@@ -23,41 +23,6 @@
 
 <!--
 
-## {{ 'section_general_concepts_title' | t }}
-
-{% include_relative partials/general-concepts.md %}
-
-### Concepts reference from software or APIs
-
-#### OpenStreetMap
-- https://www.openstreetmap.org/key
-- https://wiki.openstreetmap.org/wiki/Map_features
-  - https://wiki.openstreetmap.org/wiki/Map_features#Healthcare_2
-
-## {{ 'section_data_title' | t }}
-
-> Note: at the moment, most data here are references to be used as reference for Synthetic Data.
-
-### UN WPP - World Population Prospects
-
-- https://population.un.org/wpp/Download/Standard/Population/
-
-## {{ 'section_software_title' | t }}
-
-### Synthetic Data
-> Trivia: the initial reference here is based on [Top 10 Python Packages For Creating Synthetic Data](https://www.activestate.com/blog/top-10-python-packages-for-creating-synthetic-data/)
-
-{% include_relative partials/software_synthetic-data.md %}
-
-## To dos
-
-- tabular format
-- OWL/TTL format
-
--->
-
-<!--
-
 {% for item in site.i18n.mul.featured_compilations %}
   {{ item | json }}
   {{ item.name | t }}

@@ -10,6 +10,7 @@ partials/raw/etc/whocc
 *.ods
 *.xlsx
 *.xls
+.liquidrc
 
 __pycache__
 node_modules
@@ -17,6 +18,8 @@ package.json
 yarn.lock
 temp/
 .~lock*
+
+# spatial-epidemiology-and-health-surveillance.html
 
 
 # https://github.com/EticaAI/lexicographi-sine-finibus is cloned here
