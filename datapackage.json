@@ -331,8 +331,59 @@
       },
       "sources": [
         {
-          "title": "Old Classification of Diseases Notifiable to the OIE – List A (manual compilation)",
-          "path": "https://www.woah.org/en/what-we-do/animal-health-and-welfare/animal-diseases/old-classification-of-diseases-notifiable-to-the-oie-list-a/"
+          "title": "Ancienne classification des maladies notifiables à l’OIE – Liste A (manual compilation)",
+          "path": "https://www.woah.org/fr/ce-que-nous-faisons/sante-et-bien-etre-animale/maladies-animales/ancienne-classification-des-maladies-notifiables-a-loie-liste-a/"
+        }
+      ]
+    },
+    {
+      "path": "data/woah-cmn-b.tm.hxl.csv",
+      "name": "woah-cmn-b",
+      "profile": "tabular-data-resource",
+      "scheme": "file",
+      "format": "csv",
+      "encoding": "utf-8",
+      "id": "woah_cmn_b",
+      "schema": {
+        "fields": [
+          {
+            "type": "string",
+            "name": "#item+conceptum+codicem"
+          },
+          {
+            "type": "string",
+            "name": "#item+rem+i_qcc+is_zxxx+ix_wikiq"
+          },
+          {
+            "type": "string",
+            "name": "#item+rem+i_eng+is_latn+ix_xywdatap2308"
+          },
+          {
+            "type": "string",
+            "name": "#item+rem+i_fra+is_latn+ix_xywdatap2308"
+          },
+          {
+            "type": "string",
+            "name": "#item+rem+i_spa+is_latn+ix_xywdatap2308"
+          },
+          {
+            "type": "string",
+            "name": "#meta+rem+i_eng+is_latn+ix_xywdatap1448"
+          },
+          {
+            "type": "string",
+            "name": "#item+rem+i_fra+is_latn+ix_xywdatap1448"
+          },
+          {
+            "type": "string",
+            "name": "#meta+rem+i_spa+is_latn+ix_xywdatap1448"
+          }
+        ]
+      },
+      "sources": [
+        {
+          "title": "Ancienne classification des maladies notifiables à l’OIE – Liste B (manual compilation)",
+          "path": "https://www.woah.org/fr/ce-que-nous-faisons/sante-et-bien-etre-animale/maladies-animales/ancienne-classification-des-maladies-notifiables-a-loie-liste-b/"
         }
       ]
     },

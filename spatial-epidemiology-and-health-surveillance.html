@@ -218,7 +218,7 @@
               Sources:
               <ul>
                 <li>
-                  <a href="https://www.woah.org/en/what-we-do/animal-health-and-welfare/animal-diseases/old-classification-of-diseases-notifiable-to-the-oie-list-a/">Old Classification of Diseases Notifiable to the OIE – List A (manual compilation)</a>
+                  <a href="https://www.woah.org/fr/ce-que-nous-faisons/sante-et-bien-etre-animale/maladies-animales/ancienne-classification-des-maladies-notifiables-a-loie-liste-a/">Ancienne classification des maladies notifiables à l’OIE – Liste A (manual compilation)</a>
                 </li>
                 
               </ul>
@@ -227,15 +227,46 @@
           </ul>
         </header>
         <div class="container-fluid text-center overflow-hidden">
-          <div id="woah_cmn_a__table" data-datapackage-path="data/woah-cmn-a.tm.hxl.csv"  class="table-responsive">
-            <button type="button" class="btn btn-secondary btn-sm"
-              data-datapackage-loader-id="woah_cmn_a__table">Load table data/woah-cmn-a.tm.hxl.csv</button>
+          <div id="woah_cmn_a__table" data-datapackage-path="data/woah-cmn-a.tm.hxl.csv"  data-datapackage-autoload="1"  class="table-responsive">
             
           </div>
         </div>
         <!--
         <pre>
-          {"name": "woah-cmn-a", "id": "woah_cmn_a"}
+          {"name": "woah-cmn-a", "id": "woah_cmn_a", "autoload": true}
+        </pre>
+        -->
+      </article>
+      <article class="p-2" id="woah_cmn_b">
+        <header class="container">
+          <h3>woah-cmn-b</h3>
+          <ul>
+            <li>
+              <a href="data/woah-cmn-b.tm.hxl.csv">data/woah-cmn-b.tm.hxl.csv</a>
+            </li>
+            
+            <li>
+              Sources:
+              <ul>
+                <li>
+                  <a href="https://www.woah.org/fr/ce-que-nous-faisons/sante-et-bien-etre-animale/maladies-animales/ancienne-classification-des-maladies-notifiables-a-loie-liste-b/">Ancienne classification des maladies notifiables à l’OIE – Liste B (manual compilation)</a>
+                </li>
+                
+              </ul>
+            </li>
+            
+          </ul>
+        </header>
+        <div class="container-fluid text-center overflow-hidden">
+          <div id="woah_cmn_b__table" data-datapackage-path="data/woah-cmn-b.tm.hxl.csv"  class="table-responsive">
+            <button type="button" class="btn btn-secondary btn-sm"
+              data-datapackage-loader-id="woah_cmn_b__table">Load table data/woah-cmn-b.tm.hxl.csv</button>
+            
+          </div>
+        </div>
+        <!--
+        <pre>
+          {"name": "woah-cmn-b", "id": "woah_cmn_b"}
         </pre>
         -->
       </article>
@@ -254,7 +285,8 @@
     
     
     <!-- {"name": "biosafety_levels", "id": "biosafety_levels", "autoload": true}-->
-    <!-- {"name": "woah-cmn-a", "id": "woah_cmn_a"}-->
+    <!-- {"name": "woah-cmn-a", "id": "woah_cmn_a", "autoload": true}-->
+    <!-- {"name": "woah-cmn-b", "id": "woah_cmn_b"}-->
     
     
     
@@ -271,8 +303,12 @@
     integrity="sha256-s4TPC67sA6qeFEP9ZwzUHJ7JhN75p7Tb/XrS8ZfVtXM=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/d3-dsv@3.0.1/dist/d3-dsv.min.js"
     integrity="sha256-IrzYc2a3nTkfvgAyowm/WKmIGdVCMCcccPtz+Y2y6VI=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/tablesorter@2.31.3/dist/js/jquery.tablesorter.combined.min.js"
-    integrity="sha256-ounC3wWwZ9iBUyF8x1+X+REppGjK+p6/+w+ky1MGoMM=" crossorigin="anonymous"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/tablesorter@2.31.3/dist/js/jquery.tablesorter.combined.min.js"
+    integrity="sha256-ounC3wWwZ9iBUyF8x1+X+REppGjK+p6/+w+ky1MGoMM=" crossorigin="anonymous"></script> -->
+  <script src="https://mottie.github.io/tablesorter/js/jquery.tablesorter.js"></script>
+  <script src="https://mottie.github.io/tablesorter/js/jquery.tablesorter.widgets.js"></script>
+  <script src="https://mottie.github.io/tablesorter/js/widgets/widget-pager.js"></script>
+  <script src="https://mottie.github.io/tablesorter/js/widgets/widget-chart.js"></script>
   <script src="scripts/html/base.js"></script>
 </body>
 

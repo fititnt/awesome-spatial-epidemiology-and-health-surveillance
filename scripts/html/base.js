@@ -60,16 +60,35 @@ function autoload_tables() {
     }).catch(function (e) {
       console.log(e); // "Ah, não!"
     }).then(function () {
-      header_csv = Object.keys(data_csv[0])
+      header_csv = Object.keys(data_csv[0]).filter(function(item) {
+        return !(item.startsWith('#meta'))
+      })
       tabulate(data_csv, header_csv, el)
 
+      let table_widgets = []
+      if (data_csv.length > 30) {
+        table_widgets.push('filter')
+        // table_widgets.push('chart')
+        // table_widgets.push('pager')
+        // table_widgets.push('columnSelector')
+        // table_widgets.push('cssStickyHeaders')
+        // table_widgets.push('pager')
+      }
+
+      // Examples
+      // - https://mottie.github.io/tablesorter/docs/example-widget-chart.html
+      // - https://jsfiddle.net/Mottie/rc9b4pkm/
       jQuery(function () {
         jQuery(el.querySelector('table')).tablesorter({
+          // widgets: ['zebra', 'filter', 'pager'],
+          widgets: table_widgets,
           // Show debugging info only for the filter and columnSelector widgets
           // include "core" to only show the core debugging info
           // debug : "filter columnSelector"
-          // debug : true
-          debug: false
+          theme: 'bootstrap',
+          debug : true
+          // debug: false
+          
         });
       });
     })

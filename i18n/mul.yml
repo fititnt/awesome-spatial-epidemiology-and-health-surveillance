@@ -31,5 +31,8 @@ featured_compilations:
         autoload: true
       - name: woah-cmn-a
         id: woah_cmn_a
+        autoload: true
+      - name: woah-cmn-b
+        id: woah_cmn_b
       # - name: "{{ 'section_data_title' | t }}"
       #   id: woah_cmn_a
