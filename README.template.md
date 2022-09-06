@@ -21,6 +21,8 @@
 - **Tier 3**:
 {% include_relative partials/github-topics_3.md %}
 
+<!--
+
 ## {{ 'section_general_concepts_title' | t }}
 
 {% include_relative partials/general-concepts.md %}
@@ -51,6 +53,8 @@
 
 - tabular format
 - OWL/TTL format
+
+-->
 
 <!--
 

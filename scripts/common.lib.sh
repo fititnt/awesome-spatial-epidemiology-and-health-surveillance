@@ -60,6 +60,37 @@ tty_normal=$(tput sgr0)
 #### Fancy colors constants - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 #######################################
+# Used by crawler_who_cc to fetch region per region
+#
+# Globals:
+#   ROOTDIR
+#   BUILDTEMPDIR
+# Arguments:
+#
+# Returns
+#   None
+#######################################
+compile_readme_only() {
+  printf "\n\t%40s\n" "${tty_blue}${FUNCNAME[0]} STARTED ${tty_normal}"
+  set -x
+
+  ./scripts/readme-from-csv.py \
+    --method=compile-readme \
+    --natural-language-objective=en \
+    "${ROOTDIR}/README.template.md" \
+    >"${ROOTDIR}/README.md"
+
+  ./scripts/readme-from-csv.py \
+    --method=compile-readme \
+    --natural-language-objective=pt \
+    "${ROOTDIR}/README.template.md" \
+    >"${ROOTDIR}/README.pt.md"
+
+  set +x
+  printf "\t%40s\n" "${tty_green}${FUNCNAME[0]} FINISHED OKAY ${tty_normal}"
+}
+
+#######################################
 # crawler_who_cc fetch reference laboratories from
 # World Organisation for Animal Health (WOAH, founded as OIE)
 #

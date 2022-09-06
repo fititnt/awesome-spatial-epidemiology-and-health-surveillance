@@ -6,7 +6,7 @@
 ![Awesome Spatial Epidemiology and Public/Animal Health Surveillance Banner](partials/awesome-spatial-epidemiology.jpg)
 -->
 
-**Curated list of awesome spatial epidemiology data exchange concepts, data reference and tooling. Contributions are welcomed!**
+**[WORKING DRAFT] Curated list of awesome spatial epidemiology data exchange concepts, data reference and tooling. Contributions are welcomed!**
 
 
 ## GitHub topics
@@ -29,6 +29,8 @@
 - **Tier 3**:
   - [spatial-analysis](https://github.com/topics/spatial-analysis): 459 repositories
   - [geospatial-analysis](https://github.com/topics/geospatial-analysis): 222 repositories
+
+<!--
 
 ## General concepts
 
@@ -132,6 +134,41 @@ pip install zpy-zumo
 
 - tabular format
 - OWL/TTL format
+
+-->
+
+<!--
+
+
+  {"name": "research-initiatives", "resources": [{"name": "biosafety-level-4-laboratories"}, {"name": "who-collaborating-centres"}, {"name": "woah-reference-laboratories"}]}
+  research-initiatives
+  
+    biosafety-level-4-laboratories
+  
+    who-collaborating-centres
+  
+    woah-reference-laboratories
+  
+
+  {"name": "terminology-nomenclature-coding", "resources": [{"name": "who-icd-crosswalk"}, {"name": "woah-cmn-a"}, {"name": "{{ 'section_data_title' | t }}"}, {"name": "section_data_title"}]}
+  terminology-nomenclature-coding
+  
+    who-icd-crosswalk
+  
+    woah-cmn-a
+  
+    Data
+  
+    Data
+  
+
+
+awesome-spatial-epidemiology-and-health-surveillance
+{'path': 'data/biosafety-levels.hxl.tm.hxl.csv', 'name': 'biosafety-levels', 'profile': 'tabular-data-resource', 'scheme': 'file', 'format': 'csv', 'encoding': 'utf-8', 'schema': {'fields': [{'type': 'string', 'name': '#item+conceptum+codicem'}, {'type': 'string', 'name': '#item+rem+i_qcc+is_zxxx+ix_wikiq'}, {'type': 'string', 'name': '#item+rem+i_mul+is_zxxx'}]}}
+
+
+-->
+
 
 ## License
 

@@ -35,8 +35,10 @@ ROOTDIR="${ROOTDIR:-$__ROOTDIR}"
 
 #### Main ______________________________________________________________________
 
-if [ "$OPERATION" = "build-readme" ]; then
-  echo "$OPERATION"
+
+# OPERATION=compile_readme_only ./scripts/via-github-action.sh
+if [ "$OPERATION" = "compile_readme_only" ]; then
+  compile_readme_only
   exit 0
 fi
 

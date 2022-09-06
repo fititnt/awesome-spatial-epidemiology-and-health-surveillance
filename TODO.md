@@ -39,6 +39,14 @@
 - https://www.cabi.org/
   - https://www.cabdirect.org/globalhealth/infectious-diseases/
 
+## Display tabular format
+
+### On preview site
+- https://wpmanageninja.com/10-best-free-jquery-table-plugins/
+  - https://datatables.net/
+  - https://stackoverflow.com/questions/7431268/how-to-read-data-from-csv-file-using-javascript
+  - https://www.js-tutorials.com/jquery-tutorials/reading-csv-file-using-jquery/
+
 ## Tooling
 
 ### Command-line relelated scrapping (for fetch new data tables)
