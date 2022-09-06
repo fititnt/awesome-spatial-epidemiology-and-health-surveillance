@@ -10,6 +10,7 @@ featured_compilations:
     resources:
       - name: biosafety-level-4-laboratories
         id: biosafety_level_4_laboratories
+        autoload: true
       - name: who-collaborating-centres
         id: who_collaborating_centres
       - name: woah-reference-laboratories

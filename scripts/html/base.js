@@ -36,80 +36,20 @@ function tabulate(data, columns, container_node) {
 function autoload_tables() {
   // http://bl.ocks.org/ndarville/7075823
   document.querySelectorAll('[data-datapackage-path]').forEach(function (el) {
-    console.log(el)
-    console.log(el.id)
-    console.log('the path3', el.dataset.datapackagePath)
-
-
-    // d3.csv(el.dataset.datapackagePath, function(data) {
-    //   // console.log(data)
-    //   for (var i = 0; i < data.length; i++) {
-    //       console.log(data[i].Name);
-    //       console.log(data[i].Age);
-    //   }
-    // });
-
+    let data_csv = []
+    let header_csv = []
     d3.csv(el.dataset.datapackagePath, function (data) {
-      // const columns = Object.keys(data[0])
-      // const columns = Object.keys(data)
-      const columns = ['#item+conceptum+codicem']
-      console.log('item now...', el.dataset.datapackagePath)
-
-      // var columns = ['variable','aror','asd','maxdd']
-      tabulate(data, columns, el)
+      data_csv.push(data)
+    }).catch(function (e) {
+      console.log(e); // "Ah, não!"
+    }).then(function () {
+      header_csv = Object.keys(data_csv[0])
+      tabulate(data_csv, header_csv, el)
     })
-
-    // d3.text("data.csv", function(data) {
-    d3.text(el.dataset.datapackagePath, function (data) {
-      console.log('d3 generating table...', el.dataset.datapackagePath)
-      var parsedCSV = d3.csv.parseRows(data);
-
-      // var container = d3.select("body")
-      var container = d3.select('#' + el.id)
-        .append("table")
-
-      .selectAll("tr")
-          .data(parsedCSV).enter()
-          .append("tr")
-
-      .selectAll("td")
-          .data(function(d) { return d; }).enter()
-          .append("td")
-          .text(function(d) { return d; });
-    });
+    
   })
 }
 
-console.log('TODO scripts/html/base.js')
+// console.log('TODO scripts/html/base.js')
 
 autoload_tables()
-
-// d3.text("http://git.workspace.localhost/fititnt/awesome-spatial-epidemiology/data/biosafety-levels.hxl.tm.hxl.csv", function(data) {
-//   var parsedCSV = d3.csv.parseRows(data);
-
-//   console.log('data2', data)
-//   var container = d3.select("body")
-//       .append("table")
-
-//       .selectAll("tr")
-//           .data(parsedCSV).enter()
-//           .append("tr")
-
-//       .selectAll("td")
-//           .data(function(d) { return d; }).enter()
-//           .append("td")
-//           .text(function(d) { return d; });
-// });
-
-// mydata=
-// d3.csv("http://git.workspace.localhost/fititnt/awesome-spatial-epidemiology/data/biosafety-levels.hxl.tm.hxl.csv",function(d){
-// return {col1: d.col1, col2: d.col2}}
-
-// ).then(function(data) {
-//   return data;
-// });
-
-
-// d3.csv("http://git.workspace.localhost/fititnt/awesome-spatial-epidemiology/data/biosafety-levels.hxl.tm.hxl.csv")
-//     .row(function(d) { return {key: d.key, value: +d.value}; })
-//     .get(function(error, rows) { console.log(rows); });
