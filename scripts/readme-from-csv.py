@@ -963,13 +963,16 @@ class DatafilesLoader:
             # raise NotImplementedError(datapackage)
             # @TODO allow get by exact ID
 
-            datapackage['resource'] = {}
+            datapackage['id'] = {}
             for resource in datapackage['resources']:
 
-                slug = resource['name'].lower().replace(
-                    '-', '_').replace(r'\s', '_')
+                if 'id' in resource:
+                    datapackage['id'][resource['id']] = resource
+                else:
+                    slug = resource['name'].lower().replace(
+                        '-', '_').replace(r'\s', '_')
 
-                datapackage['resource'][slug] = resource
+                    datapackage['id'][slug] = resource
 
             return datapackage
         # raise FileNotFoundError('datapackage.json')

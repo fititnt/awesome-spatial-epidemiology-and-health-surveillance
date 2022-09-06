@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ 'project_title' | t }}</title>
   <meta name="description" content="{{ 'project_summary' | t }}">
+  <link rel="shortcut icon" href="./partials/favicon.ico" type="image/x-icon" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
@@ -31,23 +32,150 @@
       </div>
     </head>
 
-    {% for item in site.i18n.mul.featured_compilations %}
+    {% comment %}
+
+    @TODO https://developers.google.com/search/docs/advanced/structured-data/dataset
+
+    {% endcomment %}
+    {% for section in site.i18n.mul.featured_compilations %}
     <section class="d-grid gap-6">
-      <h2>{{ item.name | t }}</h2>
-      {% for item2 in item.resources -%}
-      <article class="p-2">
-        <h3>{{ item2.name | t }}</h3>
+      <h2>{{ section.id | t }}</h2>
+      {% for item in section.resources -%}
+      <article class="p-2" id="{{ item.id }}">
+        <h3>{{ item.name | t }}</h3>
+        <p>
+        <ul>
+          <li>
+            <a href="{{ datapackage.id[item.id].path }}">
+              {{- datapackage.id[item.id].path -}}
+            </a>
+          </li>
+          {% if datapackage.id[item.id].sources %}
+          <li>
+            Sources:
+            <ul>
+              {% for source in datapackage.id[item.id].sources -%}
+              <li>
+                <a href="{{ source.path }}">
+                  {{- source.title -}}
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </li>
+          {% endif %}
+        </ul>
+        </p>
+        <!--
         <pre>
-          {{ item2 | json }}
+          {{ item | json }}
         </pre>
+        -->
       </article>
       {% endfor %}
     </section>
     {% endfor %}
+
+    <!-- JSON-LD, start -->
+    {% for section in site.i18n.mul.featured_compilations %}
+    {% for item in section.resources -%}
+    <!-- {{ item | json }}-->
+    {% endfor %}
+    {% endfor %}
+    {% comment %}
+    <script type="application/ld+json">
+      {
+        "@context":"https://schema.org/",
+        "@type":"Dataset",
+        "name":"NCDC Storm Events Database",
+        "description":"Storm Data is provided by the National Weather Service (NWS) and contain statistics on...",
+        "url":"https://catalog.data.gov/dataset/ncdc-storm-events-database",
+        "sameAs":"https://gis.ncdc.noaa.gov/geoportal/catalog/search/resource/details.page?id=gov.noaa.ncdc:C00510",
+        "identifier": ["https://doi.org/10.1000/182",
+                        "https://identifiers.org/ark:/12345/fk1234"],
+        "keywords":[
+            "ATMOSPHERE > ATMOSPHERIC PHENOMENA > CYCLONES",
+            "ATMOSPHERE > ATMOSPHERIC PHENOMENA > DROUGHT",
+            "ATMOSPHERE > ATMOSPHERIC PHENOMENA > FOG",
+            "ATMOSPHERE > ATMOSPHERIC PHENOMENA > FREEZE"
+        ],
+        "license" : "https://creativecommons.org/publicdomain/zero/1.0/",
+        "isAccessibleForFree" : true,
+        "hasPart" : [
+          {
+            "@type": "Dataset",
+            "name": "Sub dataset 01",
+            "description": "Informative description of the first subdataset...",
+            "license" : "https://creativecommons.org/publicdomain/zero/1.0/",
+            "creator":{
+                "@type":"Organization",
+                "name": "Sub dataset 01 creator"
+            }
+          },
+          {
+            "@type": "Dataset",
+            "name": "Sub dataset 02",
+            "description": "Informative description of the second subdataset...",
+            "license" : "https://creativecommons.org/publicdomain/zero/1.0/",
+            "creator":{
+                "@type":"Organization",
+                "name": "Sub dataset 02 creator"
+            }
+          }
+        ],
+        "creator":{
+            "@type":"Organization",
+            "url": "https://www.ncei.noaa.gov/",
+            "name":"OC/NOAA/NESDIS/NCEI > National Centers for Environmental Information, NESDIS, NOAA, U.S. Department of Commerce",
+            "contactPoint":{
+              "@type":"ContactPoint",
+              "contactType": "customer service",
+              "telephone":"+1-828-271-4800",
+              "email":"ncei.orders@noaa.gov"
+            }
+        },
+        "funder":{
+            "@type": "Organization",
+            "sameAs": "https://ror.org/00tgqzw13",
+            "name": "National Weather Service"
+        },
+        "includedInDataCatalog":{
+            "@type":"DataCatalog",
+            "name":"data.gov"
+        },
+        "distribution":[
+            {
+              "@type":"DataDownload",
+              "encodingFormat":"CSV",
+              "contentUrl":"http://www.ncdc.noaa.gov/stormevents/ftp.jsp"
+            },
+            {
+              "@type":"DataDownload",
+              "encodingFormat":"XML",
+              "contentUrl":"http://gis.ncdc.noaa.gov/all-records/catalog/search/resource/details.page?id=gov.noaa.ncdc:C00510"
+            }
+        ],
+        "temporalCoverage":"1950-01-01/2013-12-18",
+        "spatialCoverage":{
+            "@type":"Place",
+            "geo":{
+              "@type":"GeoShape",
+              "box":"18.0 -65.0 72.0 172.0"
+            }
+        }
+      }
+      </script>
+    {% endcomment %}
+    <!-- JSON-LD, END -->
+
+
   </main>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
     crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src="scripts/html/base.js"></script>
 </body>
 
 </html>

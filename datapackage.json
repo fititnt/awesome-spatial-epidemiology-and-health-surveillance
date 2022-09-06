@@ -14,6 +14,7 @@
       "scheme": "file",
       "format": "csv",
       "encoding": "utf-8",
+      "id": "biosafety_levels",
       "schema": {
         "fields": [
           {
@@ -38,6 +39,7 @@
       "scheme": "file",
       "format": "csv",
       "encoding": "utf-8",
+      "id": "biosafety_level_4_laboratories",
       "schema": {
         "fields": [
           {
@@ -76,6 +78,7 @@
       "scheme": "file",
       "format": "csv",
       "encoding": "utf-8",
+      "id": "github_topics",
       "schema": {
         "fields": [
           {
@@ -100,6 +103,7 @@
       "scheme": "file",
       "format": "csv",
       "encoding": "utf-8",
+      "id": "general_concepts",
       "schema": {
         "fields": [
           {
@@ -124,6 +128,7 @@
       "scheme": "file",
       "format": "csv",
       "encoding": "utf-8",
+      "id": "software",
       "schema": {
         "fields": [
           {
@@ -156,6 +161,7 @@
       "scheme": "file",
       "format": "csv",
       "encoding": "utf-8",
+      "id": "who_collaborating_centres",
       "schema": {
         "fields": [
           {
@@ -251,6 +257,7 @@
       "format": "csv",
       "hashing": "md5",
       "encoding": "utf-8",
+      "id": "who_icd_crosswalk",
       "schema": {
         "fields": [
           {
@@ -297,6 +304,7 @@
       "scheme": "file",
       "format": "csv",
       "encoding": "utf-8",
+      "id": "woah_cmn_a",
       "schema": {
         "fields": [
           {
@@ -335,6 +343,7 @@
       "scheme": "file",
       "format": "csv",
       "encoding": "utf-8",
+      "id": "woah_reference_laboratories",
       "schema": {
         "fields": [
           {
