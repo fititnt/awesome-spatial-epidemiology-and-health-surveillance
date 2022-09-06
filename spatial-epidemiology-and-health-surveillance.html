@@ -38,7 +38,6 @@
       <h2>locum_scientificum_inquisitionis</h2>
       <article class="p-2" id="biosafety_level_4_laboratories">
         <h3>biosafety-level-4-laboratories</h3>
-        <p>
         <ul>
           <li>
             <a href="data/biosafety-level-4-laboratories.hxl.csv">data/biosafety-level-4-laboratories.hxl.csv</a>
@@ -55,7 +54,7 @@
           </li>
           
         </ul>
-        </p>
+        
         <!--
         <pre>
           {"name": "biosafety-level-4-laboratories", "id": "biosafety_level_4_laboratories"}
@@ -64,7 +63,6 @@
       </article>
       <article class="p-2" id="who_collaborating_centres">
         <h3>who-collaborating-centres</h3>
-        <p>
         <ul>
           <li>
             <a href="data/who-collaborating-centres.hxl.csv">data/who-collaborating-centres.hxl.csv</a>
@@ -81,7 +79,7 @@
           </li>
           
         </ul>
-        </p>
+        
         <!--
         <pre>
           {"name": "who-collaborating-centres", "id": "who_collaborating_centres"}
@@ -90,7 +88,6 @@
       </article>
       <article class="p-2" id="woah_reference_laboratories">
         <h3>woah-reference-laboratories</h3>
-        <p>
         <ul>
           <li>
             <a href="data/woah-reference-laboratories.hxl.csv">data/woah-reference-laboratories.hxl.csv</a>
@@ -107,7 +104,7 @@
           </li>
           
         </ul>
-        </p>
+        
         <!--
         <pre>
           {"name": "woah-reference-laboratories", "id": "woah_reference_laboratories"}
@@ -121,7 +118,6 @@
       <h2>nomenclatura_et_vocabularium</h2>
       <article class="p-2" id="who_icd_crosswalk">
         <h3>who-icd-crosswalk</h3>
-        <p>
         <ul>
           <li>
             <a href="data/who-icd-crosswalk.tm.hxl.csv">data/who-icd-crosswalk.tm.hxl.csv</a>
@@ -138,7 +134,7 @@
           </li>
           
         </ul>
-        </p>
+        
         <!--
         <pre>
           {"name": "who-icd-crosswalk", "id": "who_icd_crosswalk"}
@@ -150,9 +146,25 @@
     
     <section class="d-grid gap-6">
       <h2>terminologia_multilinguae</h2>
+      <article class="p-2" id="biosafety_levels">
+        <h3>biosafety_levels</h3>
+        <ul>
+          <li>
+            <a href="data/biosafety-levels.hxl.tm.hxl.csv">data/biosafety-levels.hxl.tm.hxl.csv</a>
+          </li>
+          
+        </ul>
+        <div id="biosafety_levels__table" data-datapackage-path="data/biosafety-levels.hxl.tm.hxl.csv">
+          @TODO autoload this table data/biosafety-levels.hxl.tm.hxl.csv
+        </div>
+        <!--
+        <pre>
+          {"name": "biosafety_levels", "id": "biosafety_levels", "autoload": true}
+        </pre>
+        -->
+      </article>
       <article class="p-2" id="woah_cmn_a">
         <h3>woah-cmn-a</h3>
-        <p>
         <ul>
           <li>
             <a href="data/woah-cmn-a.tm.hxl.csv">data/woah-cmn-a.tm.hxl.csv</a>
@@ -169,7 +181,7 @@
           </li>
           
         </ul>
-        </p>
+        
         <!--
         <pre>
           {"name": "woah-cmn-a", "id": "woah_cmn_a"}
@@ -190,6 +202,7 @@
     <!-- {"name": "who-icd-crosswalk", "id": "who_icd_crosswalk"}-->
     
     
+    <!-- {"name": "biosafety_levels", "id": "biosafety_levels", "autoload": true}-->
     <!-- {"name": "woah-cmn-a", "id": "woah_cmn_a"}-->
     
     
@@ -203,6 +216,9 @@
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"
     integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.6.1/dist/d3.min.js"
+    integrity="sha256-s4TPC67sA6qeFEP9ZwzUHJ7JhN75p7Tb/XrS8ZfVtXM=" crossorigin="anonymous"></script>
+
   <script src="scripts/html/base.js"></script>
 </body>
 

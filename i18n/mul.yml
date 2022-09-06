@@ -24,6 +24,9 @@ featured_compilations:
 
   - id: terminologia_multilinguae
     resources:
+      - name: biosafety_levels
+        id: biosafety_levels
+        autoload: true
       - name: woah-cmn-a
         id: woah_cmn_a
       # - name: "{{ 'section_data_title' | t }}"
