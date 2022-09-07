@@ -244,14 +244,14 @@
       },
       "sources": [
         {
-          "title": "WHO Collaborating Centres Global database (automated web scraping)",
+          "title": "WHO Collaborating Centres (automated web scraping)",
           "path": "https://apps.who.int/whocc/Search.aspx"
         }
       ]
     },
     {
       "path": "data/who-icd-crosswalk.tm.hxl.csv",
-      "name": "who-icd-crosswalk",
+      "name": "who_icd_crosswalk",
       "profile": "tabular-data-resource",
       "scheme": "file",
       "format": "csv",
@@ -299,7 +299,7 @@
     },
     {
       "path": "data/woah-cmn-a.tm.hxl.csv",
-      "name": "woah-cmn-a",
+      "name": "woah_cmn_a",
       "profile": "tabular-data-resource",
       "scheme": "file",
       "format": "csv",

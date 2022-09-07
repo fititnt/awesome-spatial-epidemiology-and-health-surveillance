@@ -37,6 +37,12 @@ function tabulate(data, columns, container_node) {
     .data(function (row) {
       return columns.map(function (column) {
         // console.log('line', columns)
+        // TODO: maybe implement some extra logic here
+        // if (column.endsWith('wikiq')) {
+        //   let with_link = '<a href="https://www.wikidata.org/wiki/' + row[column] + '">' + row[column] + '</a>'
+        //   // return { column: column, value: row[column] }
+        //   return { column: column, value: with_link }
+        // }
         return { column: column, value: row[column] }
       })
     })

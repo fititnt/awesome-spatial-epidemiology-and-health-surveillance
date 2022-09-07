@@ -10,3 +10,36 @@ section_general_concepts_title: General concepts
 section_data_title: Data
 section_software_title: Software
 
+# TO DO: to organize later
+
+compilatio:
+  # General sections
+  software: "Software"
+  software__descriptioni: >-
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Maecenas molestie tellus quis magna luctus, a consectetur eros dictum.
+  locum_scientificum_inquisitionis: "Research"
+  locum_scientificum_inquisitionis__descriptioni: >-
+    Research centers and laboratories by place
+  nomenclatura_et_vocabularium: "Nomenclature, controlled vocabularies and referential codes"
+  nomenclatura_et_vocabularium__descriptioni: >-
+    <!-- @TODO add description -->
+  terminologia_multilinguae: "Multilingual terminologies"
+  terminologia_multilinguae__descriptioni: >-
+    <!-- @TODO add description -->
+  # The dataset compilations
+  github_topics: GitHub Topics
+  biosafety_levels: Biosafety levels
+  biosafety_level_4_laboratories: Biosafety level 4 facilities
+  who_collaborating_centres: World Health Organization Collaborating Centres
+  who_icd_crosswalk: International Classification of Diseases (ICD) terminology crosswalks
+  woah_cmn_a: Old Classification of Diseases Notifiable to the OIE – List A
+  woah_cmn_b: Old Classification of Diseases Notifiable to the OIE – List B
+  woah_reference_laboratories: World Organisation for Animal Health Reference Laboratories
+# TODOs
+# - https://gitlab.com/explore/projects/topics/bioinformatics
+# - https://gitlab.com/explore/projects/topics/syndromic-surveillance
+# - https://gitee.com/explore/topic/bioinformatics
+# - https://gitee.com/explore/topic/syndromic-surveillance
+# - https://www.demo2s.com/javascript/jquery-make-an-xmlhttprequest-on-wikidata.html
+# - https://www.wikidata.org/wiki/Wikidata:Data_access

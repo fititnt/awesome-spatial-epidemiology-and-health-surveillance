@@ -31,6 +31,30 @@
         -->
         </div>
       </div>
+      <div class="col-lg-8 mx-auto">
+        <nav>
+          <h2>Index</h2>
+          <ol>
+            {% for section in site.i18n.mul.featured_compilations %}
+            <li>
+              <a href="#{{ section.id }}">
+                {{ section.id | prepend: 'compilatio.' | t }}
+              </a>
+              {% for item in section.resources -%}
+              <ol>
+                <li>
+                  <a href="#{{ item.id }}">
+                    {{ item.id | prepend: 'compilatio.' | t }}
+                  </a>
+                </li>
+              </ol>
+              {% endfor %}
+            </li>
+            {% endfor %}
+          </ol>
+        </nav>
+      </div>
+
     </header>
 
     {% comment %}
@@ -39,14 +63,33 @@
 
     {% endcomment %}
     {% for section in site.i18n.mul.featured_compilations %}
-    <section class="d-grid gap-6">
+    <div class="b-example-divider"></div>
+    <section class="d-grid gap-6" id="{{ section.id }}">
       <header class="container">
-        <h2>{{ section.id | t }}</h2>
+        <!-- <h2>{{ section.name | prepend: 'compilatio.' | t }}</h2> -->
+        <div class="container col-xxl-8 px-4 py-5">
+          <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+            <div class="col-10 col-sm-8 col-lg-6">
+              <img src="https://via.placeholder.com/700x500" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes"
+                width="700" height="500" loading="lazy">
+            </div>
+            <div class="col-lg-6">
+              <h2 class="display-5 fw-bold lh-1 mb-3">{{ section.name | prepend: 'compilatio.' | t }}</h2>
+              <p class="lead">
+                {{ section.id | prepend: 'compilatio.' | append: '__descriptioni' | t }}
+              </p>
+              <!-- <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+                <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+              </div> -->
+            </div>
+          </div>
+        </div>
       </header>
       {% for item in section.resources -%}
       <article class="p-2" id="{{ item.id }}">
         <header class="container">
-          <h3>{{ item.name | t }}</h3>
+          <h3>{{ item.id | prepend: 'compilatio.' | t }}</h3>
           <ul>
             <li>
               <a href="{{ datapackage.id[item.id].path }}">

@@ -6,7 +6,8 @@ bcp47: mul
 # ______________________________________________________________________
 # @TODO move to i18n/mul/translation.yml
 featured_compilations:
-  - id: locum_scientificum_inquisitionis # Trigger warning: dog latin
+  - name: locum_scientificum_inquisitionis
+    id: locum_scientificum_inquisitionis # Trigger warning: dog latin
     resources:
       - name: biosafety-level-4-laboratories
         id: biosafety_level_4_laboratories
@@ -17,14 +18,16 @@ featured_compilations:
       - name: woah-reference-laboratories
         id: woah_reference_laboratories
 
-  - id: nomenclatura_et_vocabularium
+  - name: nomenclatura_et_vocabularium
+    id: nomenclatura_et_vocabularium
     resources:
       - name: who-icd-crosswalk
         id: who_icd_crosswalk
       # - name: "{{ 'section_data_title' | t }}"
       #   id: woah_cmn_a
 
-  - id: terminologia_multilinguae
+  - name: terminologia_multilinguae
+    id: terminologia_multilinguae
     resources:
       - name: biosafety_levels
         id: biosafety_levels
@@ -36,3 +39,9 @@ featured_compilations:
         id: woah_cmn_b
       # - name: "{{ 'section_data_title' | t }}"
       #   id: woah_cmn_a
+
+  - name: software
+    id: software # Trigger warning: dog latin
+    resources:
+      - name: github_topics
+        id: github_topics
