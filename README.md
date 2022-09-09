@@ -57,7 +57,7 @@
 
 
 awesome-spatial-epidemiology-and-health-surveillance
-{'path': 'data/biosafety-levels.hxl.tm.hxl.csv', 'name': 'biosafety-levels', 'profile': 'tabular-data-resource', 'scheme': 'file', 'format': 'csv', 'encoding': 'utf-8', 'schema': {'fields': [{'type': 'string', 'name': '#item+conceptum+codicem'}, {'type': 'string', 'name': '#item+rem+i_qcc+is_zxxx+ix_wikiq'}, {'type': 'string', 'name': '#item+rem+i_mul+is_zxxx'}]}}
+{'path': 'data/biosafety-levels.tm.hxl.csv', 'name': 'biosafety-levels', 'profile': 'tabular-data-resource', 'scheme': 'file', 'format': 'csv', 'encoding': 'utf-8', 'schema': {'fields': [{'type': 'string', 'name': '#item+conceptum+codicem'}, {'type': 'string', 'name': '#item+rem+i_qcc+is_zxxx+ix_wikiq'}, {'type': 'string', 'name': '#item+rem+i_mul+is_zxxx'}]}}
 
 
 -->

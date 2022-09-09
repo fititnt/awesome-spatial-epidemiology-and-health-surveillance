@@ -8,7 +8,7 @@
   },
   "resources": [
     {
-      "path": "data/biosafety-levels.hxl.tm.hxl.csv",
+      "path": "data/biosafety-levels.tm.hxl.csv",
       "name": "biosafety-levels",
       "profile": "tabular-data-resource",
       "scheme": "file",
