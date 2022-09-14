@@ -33,8 +33,8 @@
 <!--
 
 
-  {"name": "research-initiatives", "resources": [{"name": "biosafety-level-4-laboratories"}, {"name": "who-collaborating-centres"}, {"name": "woah-reference-laboratories"}]}
-  research-initiatives
+  {"name": "locum_scientificum_inquisitionis", "id": "locum_scientificum_inquisitionis", "resources": [{"name": "biosafety-level-4-laboratories", "id": "biosafety_level_4_laboratories", "autoload": false}, {"name": "who-collaborating-centres", "id": "who_collaborating_centres", "autoload": false}, {"name": "woah-reference-laboratories", "id": "woah_reference_laboratories"}]}
+  locum_scientificum_inquisitionis
   
     biosafety-level-4-laboratories
   
@@ -43,30 +43,31 @@
     woah-reference-laboratories
   
 
-  {"name": "terminology-nomenclature-coding", "resources": [{"name": "who-icd-crosswalk"}, {"name": "woah-cmn-a"}, {"name": "{{ 'section_data_title' | t }}"}, {"name": "section_data_title"}]}
-  terminology-nomenclature-coding
+  {"name": "nomenclatura_et_vocabularium", "id": "nomenclatura_et_vocabularium", "resources": [{"name": "who-icd-crosswalk", "id": "who_icd_crosswalk"}]}
+  nomenclatura_et_vocabularium
   
     who-icd-crosswalk
   
+
+  {"name": "terminologia_multilinguae", "id": "terminologia_multilinguae", "resources": [{"name": "biosafety_levels", "id": "biosafety_levels", "autoload": true}, {"name": "woah-cmn-a", "id": "woah_cmn_a", "autoload": true}, {"name": "woah-cmn-b", "id": "woah_cmn_b"}]}
+  terminologia_multilinguae
+  
+    biosafety_levels
+  
     woah-cmn-a
   
-    Data
+    woah-cmn-b
   
-    Data
+
+  {"name": "software", "id": "software", "resources": [{"name": "github_topics", "id": "github_topics"}]}
+  software
+  
+    github_topics
   
 
 
 awesome-spatial-epidemiology-and-health-surveillance
-{'path': 'data/biosafety-levels.tm.hxl.csv', 'name': 'biosafety-levels', 'profile': 'tabular-data-resource', 'scheme': 'file', 'format': 'csv', 'encoding': 'utf-8', 'schema': {'fields': [{'type': 'string', 'name': '#item+conceptum+codicem'}, {'type': 'string', 'name': '#item+rem+i_qcc+is_zxxx+ix_wikiq'}, {'type': 'string', 'name': '#item+rem+i_mul+is_zxxx'}]}}
+
 
 
 -->
-
-
-## License
-
-[![Public Domain](partials/public-domain.png)](UNLICENSE)
-
-To the extent possible under law, [Emerson Rocha](https://github.com/fititnt)
-has waived all copyright and related or neighboring rights to this work to
-[Public Domain](UNLICENSE).
