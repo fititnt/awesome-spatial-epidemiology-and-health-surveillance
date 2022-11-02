@@ -58,15 +58,15 @@ function autoload_tables() {
   // document.querySelectorAll('[data-datapackage-path]').forEach(function (el) {
 
   const loader = function (el) {
-    console.log('loader', el)
+    // console.log('loader', el)
     let data_csv = []
     let header_csv = []
     d3.csv(el.dataset.datapackagePath, function (data) {
       data_csv.push(data)
     }).catch(function (e) {
-      console.log(e); // "Ah, não!"
+      console.log(e);
     }).then(function () {
-      header_csv = Object.keys(data_csv[0]).filter(function(item) {
+      header_csv = Object.keys(data_csv[0]).filter(function (item) {
         return !(item.startsWith('#meta'))
       })
       tabulate(data_csv, header_csv, el)
@@ -92,9 +92,9 @@ function autoload_tables() {
           // include "core" to only show the core debugging info
           // debug : "filter columnSelector"
           theme: 'bootstrap',
-          debug : true
-          // debug: false
-          
+          // debug: true
+          debug: false
+
         });
       });
     })
@@ -116,4 +116,16 @@ function autoload_tables() {
 
 // console.log('TODO scripts/html/base.js')
 
-autoload_tables()
+// autoload_tables()
+
+// document.querySelectorAll('table tbody tr').forEach(function (el) {
+//   console.log(el)
+//   // el.target.addEventListener("hover", function (el2) {
+//   el.addEventListener("hover", function (el2) {
+//     console.log(el2.target)
+//     console.log(el2)
+//     // loader(document.getElementById(el.target.dataset.datapackageLoaderId))
+//     // // box.target.remove()
+//     // box.remove()
+//   }, false)
+// })

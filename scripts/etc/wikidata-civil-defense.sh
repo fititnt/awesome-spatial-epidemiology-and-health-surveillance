@@ -58,6 +58,11 @@ tty_normal=$(tput sgr0)
 #######################################
 wikidata_civil_defense() {
   printf "\n\t%40s\n" "${tty_blue}${FUNCNAME[0]} STARTED ${tty_normal}"
+
+
+  objectivum_archivum="${ROOTDIR}/data/3/wikidata-civil-defense.hxl.csv"
+  objectivum_archivum_temporarium_csv="${BUILDTEMPDIR}/wikidata_civil_defense.TEMP.csv"
+
   set -x
 
   # ./scripts/readme-from-csv.py \
@@ -71,6 +76,25 @@ wikidata_civil_defense() {
   # #   --natural-language-objective=pt \
   # #   "${ROOTDIR}/README.template.md" \
   # #   >"${ROOTDIR}/README.pt.md"
+
+  curl --header "Accept: text/csv" --silent --show-error \
+    --get https://query.wikidata.org/sparql --data-urlencode query='
+SELECT ?country ?unm49 ?iso3166n ?iso3166p1a2 ?iso3166p1a3 ?osmrelid ?unescot ?usciafb ?usfips4 ?gadm
+WHERE
+{
+  ?country wdt:P31 wd:Q6256 ;
+  OPTIONAL { ?country wdt:P2082 ?unm49. }
+  OPTIONAL { ?country wdt:P299 ?iso3166n. }
+  OPTIONAL { ?country wdt:P297 ?iso3166p1a2. }
+  OPTIONAL { ?country wdt:P298 ?iso3166p1a3. }
+  OPTIONAL { ?country wdt:P402 ?osmrelid. }
+  OPTIONAL { ?country wdt:P3916 ?unescot. }
+  OPTIONAL { ?country wdt:P9948 ?usciafb. }
+  OPTIONAL { ?country wdt:P901 ?usfips4. }
+  OPTIONAL { ?country wdt:P8714 ?gadm. }   
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }
+}
+' >"$objectivum_archivum_temporarium_csv"
 
   set +x
   printf "\t%40s\n" "${tty_green}${FUNCNAME[0]} FINISHED OKAY ${tty_normal}"
