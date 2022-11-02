@@ -21,6 +21,24 @@
  *      REVISION:  ---
 **/
 
+/**
+ * Enforce path for files like data/file.csv if already not absolute
+ *
+ * @param   {string} absolute_or_relative 
+ * @returns {string}
+ */
+function file_with_base(absolute_or_relative) {
+  if (absolute_or_relative.startsWith('http')) {
+    return absolute_or_relative;
+  }
+  if (document.location.href.endsWith('/')) {
+    return document.location.href + absolute_or_relative
+  }
+  let base_new = document.location.href.split('/');
+  base_new.pop();
+
+  return base_new.join('/') + '/' + absolute_or_relative
+}
 
 /**
  *
@@ -274,7 +292,8 @@ function hxltm_ui_loadtable(remote_csv, conteiner_id) {
 // hxltm_fetch("http://git.workspace.localhost/fititnt/awesome-spatial-reference-data/data/cod_ab.hxl.csv", console.log)
 
 document.querySelectorAll('[data-datapackage-autoload]').forEach(function (el) {
-  let remote_csv = el.dataset.datapackagePath
+  // let remote_csv = el.dataset.datapackagePath
+  let remote_csv = file_with_base(el.dataset.datapackagePath)
   // console.log('autoloader', el, remote_csv, el.id)
   hxltm_ui_loadtable(remote_csv, el.id)
 })
@@ -282,7 +301,8 @@ document.querySelectorAll('[data-datapackage-autoload]').forEach(function (el) {
 document.querySelectorAll('[data-datapackage-loader-id]').forEach(box =>
   box.addEventListener("click", function (el) {
     let container = document.getElementById(el.target.dataset.datapackageLoaderId)
-    let remote_csv = container.dataset.datapackagePath
+    // let remote_csv = container.dataset.datapackagePath
+    let remote_csv = file_with_base(el.dataset.datapackagePath)
     hxltm_ui_loadtable(remote_csv, container.id)
     box.parent().remove()
   }, false)
