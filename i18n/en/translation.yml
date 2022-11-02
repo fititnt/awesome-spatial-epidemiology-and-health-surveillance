@@ -16,8 +16,10 @@ compilatio:
   # General sections
   software: "Software"
   software__descriptioni: >-
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Maecenas molestie tellus quis magna luctus, a consectetur eros dictum.
+    Software related compilations
+  # software__descriptioni: >-
+  #   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  #   Maecenas molestie tellus quis magna luctus, a consectetur eros dictum.
   locum_scientificum_inquisitionis: "Research"
   locum_scientificum_inquisitionis__descriptioni: >-
     Research centers and laboratories by place

@@ -302,7 +302,7 @@ document.querySelectorAll('[data-datapackage-loader-id]').forEach(box =>
   box.addEventListener("click", function (el) {
     let container = document.getElementById(el.target.dataset.datapackageLoaderId)
     // let remote_csv = container.dataset.datapackagePath
-    let remote_csv = file_with_base(el.dataset.datapackagePath)
+    let remote_csv = file_with_base(container.dataset.datapackagePath)
     hxltm_ui_loadtable(remote_csv, container.id)
     box.parent().remove()
   }, false)
